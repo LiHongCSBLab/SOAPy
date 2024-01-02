@@ -1,5 +1,5 @@
 # Required
-version: 2
+version: main
 
 # Set the version of Python and other tools you might need
 build:
