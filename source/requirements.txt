@@ -1,0 +1,5 @@
+Sphinx==7.6.2
+jupyter_sphinx
+nbsphinx
+sphinx_rtd_theme
+recommonmark
