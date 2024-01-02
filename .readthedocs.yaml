@@ -8,10 +8,10 @@ build:
     python: "3.9"
 
 sphinx:
-    builder: html
-    configuration: source/conf.py
-    fail_on_warning: false
+  builder: html
+  configuration: source/conf.py
+  fail_on_warning: false
 
- python:
-   install:
-   - requirements: source/requirements.txt
+python:
+  install:
+  - requirements: source/requirements.txt
