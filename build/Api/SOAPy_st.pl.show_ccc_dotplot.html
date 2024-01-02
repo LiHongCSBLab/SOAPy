@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOAPy_st.pl.show_ccc_dotplot &mdash; SOAPy 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SOAPy_st.pl.show_ccc_embedding" href="SOAPy_st.pl.show_ccc_embedding.html" />
+    <link rel="prev" title="SOAPy_st.pl.show_ccc_netplot" href="SOAPy_st.pl.show_ccc_netplot.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #FF8C00" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SOAPy
+              <img src="../_static/logo_soapy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">pp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tool.html">tl</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="plot.html">pl</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plot.html#module-SOAPy_st.pl">Spatial network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot.html#module-0">Spatial domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot.html#module-1">Spatial tendency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot.html#module-2">Cell type proximity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot.html#module-3">Niche composition</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="plot.html#module-4">Spatial communication</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_ccc_netplot.html">SOAPy_st.pl.show_ccc_netplot</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SOAPy_st.pl.show_ccc_dotplot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_ccc_embedding.html">SOAPy_st.pl.show_ccc_embedding</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="plot.html#module-5">Tensor decomposition</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #FF8C00" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SOAPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API</a></li>
+          <li class="breadcrumb-item"><a href="plot.html">pl</a></li>
+      <li class="breadcrumb-item active">SOAPy_st.pl.show_ccc_dotplot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Api/SOAPy_st.pl.show_ccc_dotplot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="soapy-st-pl-show-ccc-dotplot">
+<h1>SOAPy_st.pl.show_ccc_dotplot<a class="headerlink" href="#soapy-st-pl-show-ccc-dotplot" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="SOAPy_st.pl.show_ccc_dotplot">
+<span class="sig-prename descclassname"><span class="pre">SOAPy_st.pl.</span></span><span class="sig-name descname"><span class="pre">show_ccc_dotplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AnnData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'contact'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'secretory'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'contact'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">affinity_cutoff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strength_cutoff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lrs_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cts_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_top_lrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_top_cts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(7,</span> <span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Colormap</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Spectral_r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strength_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strength_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'#000000'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Axes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Axes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#SOAPy_st.pl.show_ccc_dotplot" title="Link to this definition"></a></dt>
+<dd><p>Dotplot for cell communication analysis are presented, either specifying the cell type pairs and ligand-receptor
+pairs to be presented or showing the most significant cell type pairs and ligand-receptor pairs after ranking by
+significance level.</p>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>adata<span class="classifier">anndata.Anndata</span></dt><dd><p>An AnnData object containing spatial omics data and spatial information.</p>
+</dd>
+<dt>sample<span class="classifier">Union[str, list]</span></dt><dd><p>Name of sample.</p>
+</dd>
+<dt>lr_type<span class="classifier">Literal[‘contact’, ‘secretory’]</span></dt><dd><p>Types of ligand-receptor pairs.</p>
+</dd>
+<dt>affinity_cutoff<span class="classifier">float</span></dt><dd><p>The threshold at which affinity was significant, and affinity below this threshold were considered significant.</p>
+</dd>
+<dt>strength_cutoff<span class="classifier">float</span></dt><dd><p>The threshold at which strength was significant, and strength above this threshold were considered significant.</p>
+</dd>
+<dt>lrs_name<span class="classifier">Optional[list]</span></dt><dd><p>Ligand-receptor pairs that need to be show.
+e.g. [‘Endothelial cell,Macrophage’, ‘Macrophage,Endothelial cell’]</p>
+</dd>
+<dt>cts_name<span class="classifier">Optional[list]</span></dt><dd><p>cell type pairs that need to be show.
+e.g. [‘FGF2:FGFR1’, ‘WNT3A:FZD7&amp;LRP5’]</p>
+</dd>
+<dt>n_top_lrs<span class="classifier">int</span></dt><dd><p>Maximum number of ligand-receptor pairs presented, ordered according to the number of cell type pairs for which
+a ligand-receptor pair was significant.</p>
+</dd>
+<dt>n_top_cts<span class="classifier">int</span></dt><dd><p>The maximum number of cell type pairs shown, ordered according to the number of significant ligand-receptor
+pairs for a cell type pair.</p>
+</dd>
+<dt>figsize<span class="classifier">Tuple[Any, Any]</span></dt><dd><p>The size of format figure.(width, height)</p>
+</dd>
+<dt>cmap<span class="classifier">Union[Colormap, str]</span></dt><dd><p>Color map of dotplot.</p>
+</dd>
+<dt>strength_min, strength_max<span class="classifier">Optional[float]</span></dt><dd><dl class="simple">
+<dt>The extreme value of the strength that is displayed, the value that is not in the range will be displayed in the</dt><dd><p>same color as the corresponding extreme value.</p>
+</dd>
+</dl>
+</dd>
+<dt>size<span class="classifier">int</span></dt><dd><p>Size of the points in figure.</p>
+</dd>
+<dt>sig_color<span class="classifier">str</span></dt><dd><p>Points that were considered significant were highlighted by the color.</p>
+</dd>
+<dt>ax<span class="classifier">matplotlib.figure.Axes</span></dt><dd><p>A matplotlib.axes object.</p>
+</dd>
+<dt>show<span class="classifier">str</span></dt><dd><p>Show this plot.</p>
+</dd>
+<dt>save<span class="classifier">Optional[str]</span></dt><dd><p>The path where the image is stored.</p>
+</dd>
+<dt>kwargs: Any, optional</dt><dd><p>Other params of ax.scatter()</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h2>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>If show==False, return Axes</p>
+</div></blockquote>
+</section>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SOAPy_st.pl.show_ccc_netplot.html" class="btn btn-neutral float-left" title="SOAPy_st.pl.show_ccc_netplot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SOAPy_st.pl.show_ccc_embedding.html" class="btn btn-neutral float-right" title="SOAPy_st.pl.show_ccc_embedding" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Heqi Wang.
+      <span class="lastupdated">Last updated on Jan 02, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

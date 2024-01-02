@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOAPy_st.pp.read_visium2adata &mdash; SOAPy 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SOAPy_st.pp.read_dsp2adata" href="SOAPy_st.pp.read_dsp2adata.html" />
+    <link rel="prev" title="SOAPy_st.pp.read_mult_image2adata" href="SOAPy_st.pp.read_mult_image2adata.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #FF8C00" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SOAPy
+              <img src="../_static/logo_soapy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="preprocessing.html">pp</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="preprocessing.html#module-SOAPy_st.pp">Read</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pp.read_csv2adata.html">SOAPy_st.pp.read_csv2adata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pp.read_mult_image2adata.html">SOAPy_st.pp.read_mult_image2adata</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SOAPy_st.pp.read_visium2adata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pp.read_dsp2adata.html">SOAPy_st.pp.read_dsp2adata</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="preprocessing.html#module-0">Seurat to Anndata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preprocessing.html#module-1">Spatial network</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tool.html">tl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot.html">pl</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #FF8C00" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SOAPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API</a></li>
+          <li class="breadcrumb-item"><a href="preprocessing.html">pp</a></li>
+      <li class="breadcrumb-item active">SOAPy_st.pp.read_visium2adata</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Api/SOAPy_st.pp.read_visium2adata.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="soapy-st-pp-read-visium2adata">
+<h1>SOAPy_st.pp.read_visium2adata<a class="headerlink" href="#soapy-st-pp-read-visium2adata" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="SOAPy_st.pp.read_visium2adata">
+<span class="sig-prename descclassname"><span class="pre">SOAPy_st.pp.</span></span><span class="sig-name descname"><span class="pre">read_visium2adata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">PathLike</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'filtered_feature_bc_matrix.h5'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filtered_feature_bc_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'filtered_feature_bc_matrix'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AnnData</span></span></span><a class="headerlink" href="#SOAPy_st.pp.read_visium2adata" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Read spatial transcriptomics data of 10X Visium.</dt><dd><p>If an h5 file exists, the read_visium() method in scanpy is called by default,
+otherwise it is read through the filtered_feature_bc_matrix file.</p>
+</dd>
+<dt>filtered_feature_bc_matrix file need include:</dt><dd><p>features.tsv.gz;
+barcodes.tsv.gz;
+matrix.mtx.gz.</p>
+</dd>
+</dl>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>path :</dt><dd><p>Path of Visium root directory folder.</p>
+</dd>
+<dt>count_file :</dt><dd><p>Which file in the passed directory to use as the count file.
+Typically either filtered_feature_bc_matrix.h5 or raw_feature_bc_matrix.h5.</p>
+</dd>
+<dt>filtered_feature_bc_matrix :</dt><dd><p>The folder containing the counts information in the root directory.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h2>Returns<a class="headerlink" href="#returns" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>anndata.Anndata object</p>
+</div></blockquote>
+</section>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SOAPy_st.pp.read_mult_image2adata.html" class="btn btn-neutral float-left" title="SOAPy_st.pp.read_mult_image2adata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SOAPy_st.pp.read_dsp2adata.html" class="btn btn-neutral float-right" title="SOAPy_st.pp.read_dsp2adata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Heqi Wang.
+      <span class="lastupdated">Last updated on Jan 02, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

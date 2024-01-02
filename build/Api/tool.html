@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tl &mdash; SOAPy 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SOAPy_st.tl.domain_from_STAGATE" href="SOAPy_st.tl.domain_from_STAGATE.html" />
+    <link rel="prev" title="SOAPy_st.pp.make_network" href="SOAPy_st.pp.make_network.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #FF8C00" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SOAPy
+              <img src="../_static/logo_soapy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">pp</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">tl</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-SOAPy_st.tl">Spatial domain</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.domain_from_STAGATE.html">SOAPy_st.tl.domain_from_STAGATE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.cal_aucell.html">SOAPy_st.tl.cal_aucell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.domain_from_local_moran.html">SOAPy_st.tl.domain_from_local_moran</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.global_moran.html">SOAPy_st.tl.global_moran</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-0">Mask</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.adata_from_mask.html">SOAPy_st.tl.adata_from_mask</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.get_mask_from_domain.html">SOAPy_st.tl.get_mask_from_domain</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-1">Spatial tendency</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.ANOVA.html">SOAPy_st.tl.ANOVA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.wilcoxon_test.html">SOAPy_st.tl.wilcoxon_test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.spearman_correlation.html">SOAPy_st.tl.spearman_correlation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.spatial_tendency.html">SOAPy_st.tl.spatial_tendency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.gene_cluster.html">SOAPy_st.tl.gene_cluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.cal_spatialDE.html">SOAPy_st.tl.cal_spatialDE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.cal_sparkX.html">SOAPy_st.tl.cal_sparkX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.cal_spark.html">SOAPy_st.tl.cal_spark</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-2">Cell type proximity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.neighborhood_analysis.html">SOAPy_st.tl.neighborhood_analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.infiltration_analysis.html">SOAPy_st.tl.infiltration_analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-3">Niche composition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.get_c_niche.html">SOAPy_st.tl.get_c_niche</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-4">Spatial communication</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.lr_pairs.html">SOAPy_st.tl.lr_pairs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.cell_level_communications.html">SOAPy_st.tl.cell_level_communications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.cell_type_level_communication.html">SOAPy_st.tl.cell_type_level_communication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-5">Tensor decomposition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.tl.TensorDecomposition.html">SOAPy_st.tl.TensorDecomposition</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="plot.html">pl</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #FF8C00" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SOAPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API</a></li>
+      <li class="breadcrumb-item active">tl</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Api/tool.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tl">
+<span id="module-SOAPy_st"></span><h1>tl<a class="headerlink" href="#tl" title="Link to this heading"></a></h1>
+<section id="module-SOAPy_st.tl">
+<span id="spatial-domain"></span><h2>Spatial domain<a class="headerlink" href="#module-SOAPy_st.tl" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.tl.domain_from_STAGATE.html#SOAPy_st.tl.domain_from_STAGATE" title="SOAPy_st.tl.domain_from_STAGATE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.domain_from_STAGATE</span></code></a>(adata[, ...])</p></td>
+<td><p>Using the STAGATE method generate the spatial domain.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.tl.cal_aucell.html#SOAPy_st.tl.cal_aucell" title="SOAPy_st.tl.cal_aucell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.cal_aucell</span></code></a>(adata, signatures[, ...])</p></td>
+<td><p>AUCell scores were calculated for given gene lists.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.tl.domain_from_local_moran.html#SOAPy_st.tl.domain_from_local_moran" title="SOAPy_st.tl.domain_from_local_moran"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.domain_from_local_moran</span></code></a>(adata, score_key)</p></td>
+<td><p>Using the local moran method generate the spatial domain.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.tl.global_moran.html#SOAPy_st.tl.global_moran" title="SOAPy_st.tl.global_moran"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.global_moran</span></code></a>(adata[, score_labels, k, ...])</p></td>
+<td><p>The global Moran index is calculated based on selected genes or indicators such as AUCell score.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-0">
+<span id="mask"></span><h2>Mask<a class="headerlink" href="#module-0" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.tl.adata_from_mask.html#SOAPy_st.tl.adata_from_mask" title="SOAPy_st.tl.adata_from_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.adata_from_mask</span></code></a>(adata, mask[, location, ...])</p></td>
+<td><p>Generate a new adata object through the selected mask region.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.tl.get_mask_from_domain.html#SOAPy_st.tl.get_mask_from_domain" title="SOAPy_st.tl.get_mask_from_domain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.get_mask_from_domain</span></code></a>(adata, clusters, KSize)</p></td>
+<td><p>A mask image is generated according to the selected category, and the mask can be processed using morphological methods such as dilation and erosion, removal of holes, and removal of small connected components</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-1">
+<span id="spatial-tendency"></span><h2>Spatial tendency<a class="headerlink" href="#module-1" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.tl.ANOVA.html#SOAPy_st.tl.ANOVA" title="SOAPy_st.tl.ANOVA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.ANOVA</span></code></a>(adata, score_label[, cluster_label])</p></td>
+<td><p>Anova of genes or other metrics</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.tl.wilcoxon_test.html#SOAPy_st.tl.wilcoxon_test" title="SOAPy_st.tl.wilcoxon_test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.wilcoxon_test</span></code></a>(adata, mask, radius[, ...])</p></td>
+<td><p>Wilcoxon tests were performed using the distance from each spot(cell) to the mask boundary and the expression of a gene(protein) at each spot.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.tl.spearman_correlation.html#SOAPy_st.tl.spearman_correlation" title="SOAPy_st.tl.spearman_correlation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.spearman_correlation</span></code></a>(adata, mask, radius)</p></td>
+<td><p>Spearman test was performed on the expression levels of genes in each class after the samples were classified equally by distance</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.tl.spatial_tendency.html#SOAPy_st.tl.spatial_tendency" title="SOAPy_st.tl.spatial_tendency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.spatial_tendency</span></code></a>(adata, mask, radius[, ...])</p></td>
+<td><p>We used two regression methods, Loess regression, and Polynomial regression, to study the variation of the expression with the min distance from its location to the pixel of boundary.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.tl.gene_cluster.html#SOAPy_st.tl.gene_cluster" title="SOAPy_st.tl.gene_cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.gene_cluster</span></code></a>(adata, k[, norm, method, ...])</p></td>
+<td><p>The regression curves of multiple genes are clustered, and the curves can be screened by adjusting a variety of indicators</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.tl.cal_spatialDE.html#SOAPy_st.tl.cal_spatialDE" title="SOAPy_st.tl.cal_spatialDE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.cal_spatialDE</span></code></a>(adata[, gene_name, ...])</p></td>
+<td><p>Calculate SpatialDE analysis on spatial omics data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.tl.cal_sparkX.html#SOAPy_st.tl.cal_sparkX" title="SOAPy_st.tl.cal_sparkX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.cal_sparkX</span></code></a>(adata[, gene_name, num_core, ...])</p></td>
+<td><p>Calculate SPARK-X analysis on spatial omics data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.tl.cal_spark.html#SOAPy_st.tl.cal_spark" title="SOAPy_st.tl.cal_spark"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.cal_spark</span></code></a>(adata[, gene_name, method, ...])</p></td>
+<td><p>Perform SPARK analysis on spatial omics data.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-2">
+<span id="cell-type-proximity"></span><h2>Cell type proximity<a class="headerlink" href="#module-2" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.tl.neighborhood_analysis.html#SOAPy_st.tl.neighborhood_analysis" title="SOAPy_st.tl.neighborhood_analysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.neighborhood_analysis</span></code></a>(adata[, method, ...])</p></td>
+<td><p>Compute neighborhood enrichment Z-score by permutation test.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.tl.infiltration_analysis.html#SOAPy_st.tl.infiltration_analysis" title="SOAPy_st.tl.infiltration_analysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.infiltration_analysis</span></code></a>(adata[, ...])</p></td>
+<td><p>The infiltration score was calculated by the infiltration of non-parenchymal cells into parenchymal cells.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-3">
+<span id="niche-composition"></span><h2>Niche composition<a class="headerlink" href="#module-3" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.tl.get_c_niche.html#SOAPy_st.tl.get_c_niche" title="SOAPy_st.tl.get_c_niche"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.get_c_niche</span></code></a>(adata, k_max[, niche_key, ...])</p></td>
+<td><p>Parameters
+
+adata
+
+anndata.AnnData
+
+An AnnData object containing spatial omics data and spatial information.
+
+k_max:
+
+If sdbw is true, k_max is the maximum number of c-niche; If sdbw is false, it represents the number of c-niche
+
+niche_key
+
+str, optional
+
+Add the keyword of niche in adata.obs.columns.
+
+celltype_key
+
+str, optional
+
+The keyword of spot cluster in adata.obs.columns.
+
+sample_key
+
+str, optional
+
+The keyword of sample id in adata.obs.columns.
+
+sample: Union[str, list, None],
+
+The samples involved in calculating the niche.
+
+sdbw
+
+bool, optional
+
+Automated cluster number screening using sdbw.
+
+inplace
+
+bool, optional
+
+Whether to change the original adata.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-4">
+<span id="spatial-communication"></span><h2>Spatial communication<a class="headerlink" href="#module-4" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.tl.lr_pairs.html#SOAPy_st.tl.lr_pairs" title="SOAPy_st.tl.lr_pairs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.lr_pairs</span></code></a>(lr_data[, Annotation_key, ...])</p></td>
+<td><p>Class for ligand and receptor pairs</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.tl.cell_level_communications.html#SOAPy_st.tl.cell_level_communications" title="SOAPy_st.tl.cell_level_communications"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.cell_level_communications</span></code></a>(adata, lr_pairs)</p></td>
+<td><p>A permutation test of ligand-receptor expression across every spot.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.tl.cell_type_level_communication.html#SOAPy_st.tl.cell_type_level_communication" title="SOAPy_st.tl.cell_type_level_communication"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.cell_type_level_communication</span></code></a>(adata, lr_pairs)</p></td>
+<td><p>Cell type ligand-receptor algorithm composed of two indexes: affinity and strength.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-5">
+<span id="tensor-decomposition"></span><h2>Tensor decomposition<a class="headerlink" href="#module-5" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.tl.TensorDecomposition.html#SOAPy_st.tl.TensorDecomposition" title="SOAPy_st.tl.TensorDecomposition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tl.TensorDecomposition</span></code></a>()</p></td>
+<td><p>Function:</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SOAPy_st.pp.make_network.html" class="btn btn-neutral float-left" title="SOAPy_st.pp.make_network" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SOAPy_st.tl.domain_from_STAGATE.html" class="btn btn-neutral float-right" title="SOAPy_st.tl.domain_from_STAGATE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Heqi Wang.
+      <span class="lastupdated">Last updated on Jan 02, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

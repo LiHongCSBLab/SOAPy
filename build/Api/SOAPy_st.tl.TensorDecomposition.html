@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOAPy_st.tl.TensorDecomposition &mdash; SOAPy 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pl" href="plot.html" />
+    <link rel="prev" title="SOAPy_st.tl.cell_type_level_communication" href="SOAPy_st.tl.cell_type_level_communication.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #FF8C00" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SOAPy
+              <img src="../_static/logo_soapy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">pp</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="tool.html">tl</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tool.html#module-SOAPy_st.tl">Spatial domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tool.html#module-0">Mask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tool.html#module-1">Spatial tendency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tool.html#module-2">Cell type proximity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tool.html#module-3">Niche composition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tool.html#module-4">Spatial communication</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="tool.html#module-5">Tensor decomposition</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SOAPy_st.tl.TensorDecomposition</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="plot.html">pl</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #FF8C00" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SOAPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API</a></li>
+          <li class="breadcrumb-item"><a href="tool.html">tl</a></li>
+      <li class="breadcrumb-item active">SOAPy_st.tl.TensorDecomposition</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Api/SOAPy_st.tl.TensorDecomposition.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="soapy-st-tl-tensordecomposition">
+<h1>SOAPy_st.tl.TensorDecomposition<a class="headerlink" href="#soapy-st-tl-tensordecomposition" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="SOAPy_st.tl.TensorDecomposition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SOAPy_st.tl.</span></span><span class="sig-name descname"><span class="pre">TensorDecomposition</span></span><a class="headerlink" href="#SOAPy_st.tl.TensorDecomposition" title="Link to this definition"></a></dt>
+<dd><p>Function:</p>
+<p>The data of anndata type is assembled tensor and tensor decomposition is carried out</p>
+<p>It supports the construction of high-dimensional tensors in count form using attributes in obs and the construction
+of high-dimensional tensors in expression value form using attributes in obs matching genes</p>
+<p>The constructed tensor can use Z-score, 0-1 regularization or proportional form for data balancing</p>
+<p>Tensor decomposition provides two forms of CP decomposition and tucker decomposition, both of which can choose the
+non-negative form of decomposition to assemble tensors of anndata type and conduct tensor decomposition</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="SOAPy_st.tl.TensorDecomposition.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SOAPy_st.tl.TensorDecomposition.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize the tensorDecomposition object.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CP_decomposition</span></code>(rank[, non_negative])</p></td>
+<td><p>Perform CP decomposition on the tensor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#SOAPy_st.tl.TensorDecomposition.__init__" title="SOAPy_st.tl.TensorDecomposition.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</p></td>
+<td><p>Initialize the tensorDecomposition object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">highly_variable</span></code>(factor_name, top_num)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_tensor</span></code>(tensor, factor_name, ticks_list)</p></td>
+<td><p>Set the input tensor, factor names, and supporting dictionary.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalization</span></code>(factor_name[, method])</p></td>
+<td><p>Normalize the tensor along a specified factor.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tensor_with_gene</span></code>(adata, obs_factor[, ...])</p></td>
+<td><p>Construct a tensor using observation factors and gene expression values from an AnnData object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tensor_with_obs</span></code>(adata, obs_factor)</p></td>
+<td><p>Construct a tensor using observation factors from an AnnData object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tucker_decomposition</span></code>(rank[, non_negative])</p></td>
+<td><p>Perform Tucker decomposition on the tensor.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_tensor</span></code></p></td>
+<td><p>Get the current tensor.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SOAPy_st.tl.cell_type_level_communication.html" class="btn btn-neutral float-left" title="SOAPy_st.tl.cell_type_level_communication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plot.html" class="btn btn-neutral float-right" title="pl" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Heqi Wang.
+      <span class="lastupdated">Last updated on Jan 02, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

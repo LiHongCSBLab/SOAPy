@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pl &mdash; SOAPy 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SOAPy_st.pl.show_network" href="SOAPy_st.pl.show_network.html" />
+    <link rel="prev" title="SOAPy_st.tl.TensorDecomposition" href="SOAPy_st.tl.TensorDecomposition.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #FF8C00" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SOAPy
+              <img src="../_static/logo_soapy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">pp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tool.html">tl</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pl</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-SOAPy_st.pl">Spatial network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_network.html">SOAPy_st.pl.show_network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_voronoi.html">SOAPy_st.pl.show_voronoi</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-0">Spatial domain</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_moran_scatterplot.html">SOAPy_st.pl.show_moran_scatterplot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-1">Spatial tendency</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_tendency.html">SOAPy_st.pl.show_tendency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_curves_cluster.html">SOAPy_st.pl.show_curves_cluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_box_plot.html">SOAPy_st.pl.show_box_plot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-2">Cell type proximity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_neighborhood_analysis.html">SOAPy_st.pl.show_neighborhood_analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_infiltration_analysis.html">SOAPy_st.pl.show_infiltration_analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-3">Niche composition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_niche_environment.html">SOAPy_st.pl.show_niche_environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_niche_sample_heatmap.html">SOAPy_st.pl.show_niche_sample_heatmap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_celltype_niche_heatmap.html">SOAPy_st.pl.show_celltype_niche_heatmap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_celltype_sample_heatmap.html">SOAPy_st.pl.show_celltype_sample_heatmap</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-4">Spatial communication</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_ccc_netplot.html">SOAPy_st.pl.show_ccc_netplot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_ccc_dotplot.html">SOAPy_st.pl.show_ccc_dotplot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_ccc_embedding.html">SOAPy_st.pl.show_ccc_embedding</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-5">Tensor decomposition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_factor_matrix_in_CP_tensor.html">SOAPy_st.pl.show_factor_matrix_in_CP_tensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_factor_matrix_in_tucker_tensor.html">SOAPy_st.pl.show_factor_matrix_in_tucker_tensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_proportion_in_tucker.html">SOAPy_st.pl.show_proportion_in_tucker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SOAPy_st.pl.show_proportion_in_CP.html">SOAPy_st.pl.show_proportion_in_CP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #FF8C00" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SOAPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API</a></li>
+      <li class="breadcrumb-item active">pl</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Api/plot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pl">
+<span id="module-SOAPy_st"></span><h1>pl<a class="headerlink" href="#pl" title="Link to this heading"></a></h1>
+<section id="module-SOAPy_st.pl">
+<span id="spatial-network"></span><h2>Spatial network<a class="headerlink" href="#module-SOAPy_st.pl" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.pl.show_network.html#SOAPy_st.pl.show_network" title="SOAPy_st.pl.show_network"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_network</span></code></a>(adata[, sample_key, ...])</p></td>
+<td><p>Show the spatial network.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.pl.show_voronoi.html#SOAPy_st.pl.show_voronoi" title="SOAPy_st.pl.show_voronoi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_voronoi</span></code></a>(adata, cluster_key[, ...])</p></td>
+<td><p>Draw a Voronoi plot of the cell distribution.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-0">
+<span id="spatial-domain"></span><h2>Spatial domain<a class="headerlink" href="#module-0" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.pl.show_moran_scatterplot.html#SOAPy_st.pl.show_moran_scatterplot" title="SOAPy_st.pl.show_moran_scatterplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_moran_scatterplot</span></code></a>(adata[, palette, ...])</p></td>
+<td><p>Show a Moran scatter plot.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-1">
+<span id="spatial-tendency"></span><h2>Spatial tendency<a class="headerlink" href="#module-1" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.pl.show_tendency.html#SOAPy_st.pl.show_tendency" title="SOAPy_st.pl.show_tendency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_tendency</span></code></a>(adata, gene_name[, method, ...])</p></td>
+<td><p>Plot the tendency curve of the genes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.pl.show_curves_cluster.html#SOAPy_st.pl.show_curves_cluster" title="SOAPy_st.pl.show_curves_cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_curves_cluster</span></code></a>(adata[, method, ...])</p></td>
+<td><p>Plot the tendency curve of the gene clusters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.pl.show_box_plot.html#SOAPy_st.pl.show_box_plot" title="SOAPy_st.pl.show_box_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_box_plot</span></code></a>(adata, cluster_key, score_key)</p></td>
+<td><p>Boxplot of gene expression for each cluster is shown</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-2">
+<span id="cell-type-proximity"></span><h2>Cell type proximity<a class="headerlink" href="#module-2" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.pl.show_neighborhood_analysis.html#SOAPy_st.pl.show_neighborhood_analysis" title="SOAPy_st.pl.show_neighborhood_analysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_neighborhood_analysis</span></code></a>(adata[, ...])</p></td>
+<td><p>Use heatmap to display the results of neighbor analysis</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.pl.show_infiltration_analysis.html#SOAPy_st.pl.show_infiltration_analysis" title="SOAPy_st.pl.show_infiltration_analysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_infiltration_analysis</span></code></a>(adata, ...[, ...])</p></td>
+<td><p>Use barplot to display infiltration scores and the number of non-parenchymal cells.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-3">
+<span id="niche-composition"></span><h2>Niche composition<a class="headerlink" href="#module-3" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.pl.show_niche_environment.html#SOAPy_st.pl.show_niche_environment" title="SOAPy_st.pl.show_niche_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_niche_environment</span></code></a>(adata, niche[, ...])</p></td>
+<td><p>Show the environment composition of a niche.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.pl.show_niche_sample_heatmap.html#SOAPy_st.pl.show_niche_sample_heatmap" title="SOAPy_st.pl.show_niche_sample_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_niche_sample_heatmap</span></code></a>(adata[, ...])</p></td>
+<td><p>The heatmap shows the niche composition in each sample, and the bar plot shows the total number of each niche and the total number of cells in each sample, respectively.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.pl.show_celltype_niche_heatmap.html#SOAPy_st.pl.show_celltype_niche_heatmap" title="SOAPy_st.pl.show_celltype_niche_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_celltype_niche_heatmap</span></code></a>(adata[, ...])</p></td>
+<td><p>The heatmap shows the cell composition of each niche, and the bar plot graph shows the number of each niche in all samples.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.pl.show_celltype_sample_heatmap.html#SOAPy_st.pl.show_celltype_sample_heatmap" title="SOAPy_st.pl.show_celltype_sample_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_celltype_sample_heatmap</span></code></a>(adata[, ...])</p></td>
+<td><p>Heatmap show the cell composition of each sample.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-4">
+<span id="spatial-communication"></span><h2>Spatial communication<a class="headerlink" href="#module-4" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.pl.show_ccc_netplot.html#SOAPy_st.pl.show_ccc_netplot" title="SOAPy_st.pl.show_ccc_netplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_ccc_netplot</span></code></a>(adata[, sample_id, ...])</p></td>
+<td><p>Visualize ligand-receptor interactions between two cell types in spatial omics data using network plot.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.pl.show_ccc_dotplot.html#SOAPy_st.pl.show_ccc_dotplot" title="SOAPy_st.pl.show_ccc_dotplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_ccc_dotplot</span></code></a>(adata[, sample, ...])</p></td>
+<td><p>Dotplot for cell communication analysis are presented, either specifying the cell type pairs and ligand-receptor pairs to be presented or showing the most significant cell type pairs and ligand-receptor pairs after ranking by significance level.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.pl.show_ccc_embedding.html#SOAPy_st.pl.show_ccc_embedding" title="SOAPy_st.pl.show_ccc_embedding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_ccc_embedding</span></code></a>(adata, ligand, ...[, ...])</p></td>
+<td><p>To map the distribution of ligands and receptors expression of different cell type in a situ map of tissue.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-5">
+<span id="tensor-decomposition"></span><h2>Tensor decomposition<a class="headerlink" href="#module-5" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.pl.show_factor_matrix_in_CP_tensor.html#SOAPy_st.pl.show_factor_matrix_in_CP_tensor" title="SOAPy_st.pl.show_factor_matrix_in_CP_tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_factor_matrix_in_CP_tensor</span></code></a>(tensor, ...)</p></td>
+<td><p>Visualizes a factor in the CP decomposition tensor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.pl.show_factor_matrix_in_tucker_tensor.html#SOAPy_st.pl.show_factor_matrix_in_tucker_tensor" title="SOAPy_st.pl.show_factor_matrix_in_tucker_tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_factor_matrix_in_tucker_tensor</span></code></a>(...)</p></td>
+<td><p>Visualizes a factor in the Tucker decomposition tensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="SOAPy_st.pl.show_proportion_in_tucker.html#SOAPy_st.pl.show_proportion_in_tucker" title="SOAPy_st.pl.show_proportion_in_tucker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_proportion_in_tucker</span></code></a>(tensor, module)</p></td>
+<td><p>Visualizes the proportion in a Tucker decomposition.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SOAPy_st.pl.show_proportion_in_CP.html#SOAPy_st.pl.show_proportion_in_CP" title="SOAPy_st.pl.show_proportion_in_CP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pl.show_proportion_in_CP</span></code></a>(tensor, module[, ...])</p></td>
+<td><p>Visualizes the proportion in a CP decomposition.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SOAPy_st.tl.TensorDecomposition.html" class="btn btn-neutral float-left" title="SOAPy_st.tl.TensorDecomposition" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SOAPy_st.pl.show_network.html" class="btn btn-neutral float-right" title="SOAPy_st.pl.show_network" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Heqi Wang.
+      <span class="lastupdated">Last updated on Jan 02, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
