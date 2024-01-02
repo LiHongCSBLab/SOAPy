@@ -12,4 +12,6 @@ sphinx:
     configuration: source/conf.py
     fail_on_warning: false
 
-
+ python:
+   install:
+   - requirements: source/requirements.txt
