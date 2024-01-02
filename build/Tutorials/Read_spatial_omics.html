@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Read spatial omics &mdash; SOAPy 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Spatial domain" href="Spatial%20domain.html" />
+    <link rel="prev" title="Tutorials" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #FF8C00" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SOAPy
+              <img src="../_static/logo_soapy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#examples-data">Examples data</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#major-tutorials">Major tutorials</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Read spatial omics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Read-Visium">Read Visium</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Read-GeoMx-DSP">Read GeoMx DSP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Read-other-barcode-based-data">Read other barcode-based data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Read-imaged-based-data">Read imaged-based data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20domain.html">Spatial domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20tendency.html">Spatial tendency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cell%20type%20proximity.html">Spatial architecture - cell type proximity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Tutorial 5: Spatial architecture - niche composition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20communications.html">Spatial communications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatiotemporal%20pattern.html">Spatiotemporal pattern</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-tutorials">Other tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #FF8C00" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SOAPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Read spatial omics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/Read_spatial_omics.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Read-spatial-omics">
+<h1>Read spatial omics<a class="headerlink" href="#Read-spatial-omics" title="Link to this heading"></a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SOAPy_st</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\numpy\_distributor_init.py:30: UserWarning: loaded more than 1 DLL from .libs:
+C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\numpy\.libs\libopenblas.EL2C6PLE4ZYW3ECEVIV3OXXGRN2NRFM2.gfortran-win_amd64.dll
+C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\numpy\.libs\libopenblas.GK7GX5KEQ4F6UYO3P26ULGBQYHGQO7J4.gfortran-win_amd64.dll
+  warnings.warn(&#34;loaded more than 1 DLL from .libs:&#34;
+</pre></div></div>
+</div>
+<section id="Read-Visium">
+<h2>Read Visium<a class="headerlink" href="#Read-Visium" title="Link to this heading"></a></h2>
+<p>Using the h5 file to load the data:</p>
+<p>Download from <a class="reference external" href="https://spatial-dlpfc.s3.us-east-2.amazonaws.com/h5/151676_filtered_feature_bc_matrix.h5">https://spatial-dlpfc.s3.us-east-2.amazonaws.com/h5/151676_filtered_feature_bc_matrix.h5</a>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_visium</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">read_visium2adata</span><span class="p">(</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;D:\data\mouse_brain\151676\151676&#39;</span><span class="p">,</span>
+    <span class="n">count_file</span> <span class="o">=</span> <span class="s1">&#39;151676_filtered_feature_bc_matrix.h5&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\anndata\_core\anndata.py:1832: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+  utils.warn_names_duplicates(&#34;var&#34;)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_visium</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 3460 × 33538
+    obs: &#39;in_tissue&#39;, &#39;array_row&#39;, &#39;array_col&#39;
+    var: &#39;gene_ids&#39;, &#39;feature_types&#39;, &#39;genome&#39;
+    uns: &#39;spatial&#39;
+    obsm: &#39;spatial&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="Read-GeoMx-DSP">
+<h2>Read GeoMx DSP<a class="headerlink" href="#Read-GeoMx-DSP" title="Link to this heading"></a></h2>
+<p>Read spatial transcriptomics data of NanoString GeoMx DSP. Mouse embryonic development samples are used as examples.</p>
+<p>Download from <a class="reference external" href="https://nanostring.com/products/geomx-digital-spatial-profiler/spatial-organ-atlas/mouse-development/">https://nanostring.com/products/geomx-digital-spatial-profiler/spatial-organ-atlas/mouse-development/</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_dsp</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">read_dsp2adata</span><span class="p">(</span>
+    <span class="n">xml_file</span><span class="o">=</span><span class="p">{</span>
+        <span class="c1"># Using the xml file for two samples as an example,</span>
+        <span class="c1"># you can add key-value pairs to the dictionary if you need information about sample points for more samples.</span>
+        <span class="s1">&#39;mu_dev_E13_006&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;D:\data\nanostring_growth\mu_dev_E13_006.ome.xml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mu_dev_E13_011&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;D:\data\nanostring_growth\mu_dev_E13_011.ome.xml&#39;</span>
+    <span class="p">},</span>
+    <span class="n">information_file</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;D:\data\nanostring_growth\Export4_NormalizationQ3.xlsx&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">adata</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_dsp</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SlideName</th>
+      <th>ScanLabel</th>
+      <th>ROILabel</th>
+      <th>SegmentLabel</th>
+      <th>QCFlags</th>
+      <th>AOISurfaceArea</th>
+      <th>AOINucleiCount</th>
+      <th>ROICoordinateX</th>
+      <th>ROICoordinateY</th>
+      <th>RawReads</th>
+      <th>...</th>
+      <th>Timepoint</th>
+      <th>ROIID</th>
+      <th>SegmentID</th>
+      <th>ScanWidth</th>
+      <th>ScanHeight</th>
+      <th>ScanOffsetX</th>
+      <th>ScanOffsetY</th>
+      <th>LOQ (Mouse NGS Whole Transcriptome Atlas RNA)</th>
+      <th>NormalizationFactor</th>
+      <th>ExpressionFilteringThreshold (Mouse NGS Whole Transcriptome Atlas RNA)</th>
+    </tr>
+    <tr>
+      <th>SegmentDisplayName</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mu_dev_E13_006 | 001 | Full ROI</th>
+      <td>mu_dev_E13_006</td>
+      <td>mu_dev_E13_006</td>
+      <td>1</td>
+      <td>Full ROI</td>
+      <td>Low Negative Probe Count for Probe Kit Mouse N...</td>
+      <td>18903.649637</td>
+      <td>232</td>
+      <td>13045</td>
+      <td>10716</td>
+      <td>4562764</td>
+      <td>...</td>
+      <td>E13</td>
+      <td>06500829-4ffd-4113-a99d-12b07ce7cfe5</td>
+      <td>aea467c9-b2cd-4e35-8e3a-89046af25c70</td>
+      <td>17027.785156</td>
+      <td>24236.730469</td>
+      <td>7870</td>
+      <td>4265</td>
+      <td>17.933519</td>
+      <td>0.568844</td>
+      <td>17.933519</td>
+    </tr>
+    <tr>
+      <th>mu_dev_E13_006 | 002 | Full ROI</th>
+      <td>mu_dev_E13_006</td>
+      <td>mu_dev_E13_006</td>
+      <td>2</td>
+      <td>Full ROI</td>
+      <td>NaN</td>
+      <td>40862.261776</td>
+      <td>535</td>
+      <td>13043</td>
+      <td>10716</td>
+      <td>10734759</td>
+      <td>...</td>
+      <td>E13</td>
+      <td>20713d4a-ce80-4763-b7d0-42314d03fc00</td>
+      <td>fe759caf-f932-480e-acf8-dcf3b9f78a92</td>
+      <td>17027.785156</td>
+      <td>24236.730469</td>
+      <td>7870</td>
+      <td>4265</td>
+      <td>26.548776</td>
+      <td>0.295223</td>
+      <td>26.548776</td>
+    </tr>
+    <tr>
+      <th>mu_dev_E13_006 | 003 | Full ROI</th>
+      <td>mu_dev_E13_006</td>
+      <td>mu_dev_E13_006</td>
+      <td>3</td>
+      <td>Full ROI</td>
+      <td>Low Negative Probe Count for Probe Kit Mouse N...</td>
+      <td>16132.074042</td>
+      <td>294</td>
+      <td>13222</td>
+      <td>10694</td>
+      <td>3592371</td>
+      <td>...</td>
+      <td>E13</td>
+      <td>0988206b-12a2-40b2-a991-3a02c9c76e86</td>
+      <td>e96dbf28-0185-41a3-947f-957e29fac866</td>
+      <td>17027.785156</td>
+      <td>24236.730469</td>
+      <td>7870</td>
+      <td>4265</td>
+      <td>13.964632</td>
+      <td>0.696197</td>
+      <td>13.964632</td>
+    </tr>
+    <tr>
+      <th>mu_dev_E13_006 | 004 | Full ROI</th>
+      <td>mu_dev_E13_006</td>
+      <td>mu_dev_E13_006</td>
+      <td>4</td>
+      <td>Full ROI</td>
+      <td>Low Nuclei Count,Low Surface Area,Low Negative...</td>
+      <td>12612.492573</td>
+      <td>195</td>
+      <td>12767</td>
+      <td>10561</td>
+      <td>2428801</td>
+      <td>...</td>
+      <td>E13</td>
+      <td>15275e09-2eb7-49f8-a31e-98f34b3c7e46</td>
+      <td>03fef82c-61a1-46b6-b9bb-48a9812d75ec</td>
+      <td>17027.785156</td>
+      <td>24236.730469</td>
+      <td>7870</td>
+      <td>4265</td>
+      <td>11.636453</td>
+      <td>0.951943</td>
+      <td>11.636453</td>
+    </tr>
+    <tr>
+      <th>mu_dev_E13_006 | 005 | Full ROI</th>
+      <td>mu_dev_E13_006</td>
+      <td>mu_dev_E13_006</td>
+      <td>5</td>
+      <td>Full ROI</td>
+      <td>Low Nuclei Count,Low Surface Area,Low Negative...</td>
+      <td>14701.099267</td>
+      <td>158</td>
+      <td>11930</td>
+      <td>9360</td>
+      <td>4720222</td>
+      <td>...</td>
+      <td>E13</td>
+      <td>9e72c37e-efb0-4bab-9dfb-8a4dafe24353</td>
+      <td>1565b22e-8e8a-4c2f-8a90-8ca122c66323</td>
+      <td>17027.785156</td>
+      <td>24236.730469</td>
+      <td>7870</td>
+      <td>4265</td>
+      <td>13.668204</td>
+      <td>0.613752</td>
+      <td>13.668204</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>mu_dev_E13_006 | 070 | Full ROI</th>
+      <td>mu_dev_E13_006</td>
+      <td>mu_dev_E13_006</td>
+      <td>70</td>
+      <td>Full ROI</td>
+      <td>Low Nuclei Count,Low Negative Probe Count for ...</td>
+      <td>30408.415712</td>
+      <td>199</td>
+      <td>14315</td>
+      <td>15570</td>
+      <td>4182247</td>
+      <td>...</td>
+      <td>E13</td>
+      <td>df847b31-150e-453e-9655-4637cbe0bf6b</td>
+      <td>d8981b38-1fb1-4140-a227-84899ad187b0</td>
+      <td>17027.785156</td>
+      <td>24236.730469</td>
+      <td>7870</td>
+      <td>4265</td>
+      <td>18.082137</td>
+      <td>0.914612</td>
+      <td>18.082137</td>
+    </tr>
+    <tr>
+      <th>mu_dev_E13_006 | 071 | Full ROI</th>
+      <td>mu_dev_E13_006</td>
+      <td>mu_dev_E13_006</td>
+      <td>71</td>
+      <td>Full ROI</td>
+      <td>Low Negative Probe Count for Probe Kit Mouse N...</td>
+      <td>43689.030037</td>
+      <td>337</td>
+      <td>11946</td>
+      <td>14451</td>
+      <td>6504157</td>
+      <td>...</td>
+      <td>E13</td>
+      <td>a37d80b8-ca4c-47ef-8242-ed57deba194e</td>
+      <td>a80f9727-dc6e-4fdb-a6ac-22489910d9f3</td>
+      <td>17027.785156</td>
+      <td>24236.730469</td>
+      <td>7870</td>
+      <td>4265</td>
+      <td>21.958678</td>
+      <td>0.568844</td>
+      <td>21.958678</td>
+    </tr>
+    <tr>
+      <th>mu_dev_E13_006 | 072 | Full ROI</th>
+      <td>mu_dev_E13_006</td>
+      <td>mu_dev_E13_006</td>
+      <td>72</td>
+      <td>Full ROI</td>
+      <td>Low Negative Probe Count for Probe Kit Mouse N...</td>
+      <td>33598.777767</td>
+      <td>283</td>
+      <td>11676</td>
+      <td>14877</td>
+      <td>4043511</td>
+      <td>...</td>
+      <td>E13</td>
+      <td>70160960-3b85-40a3-a202-ae324eeba07b</td>
+      <td>fa57381b-c138-44db-a1f9-9f82be221b26</td>
+      <td>17027.785156</td>
+      <td>24236.730469</td>
+      <td>7870</td>
+      <td>4265</td>
+      <td>18.827867</td>
+      <td>0.790596</td>
+      <td>18.827867</td>
+    </tr>
+    <tr>
+      <th>mu_dev_E13_006 | 073 | Full ROI</th>
+      <td>mu_dev_E13_006</td>
+      <td>mu_dev_E13_006</td>
+      <td>73</td>
+      <td>Full ROI</td>
+      <td>Low Negative Probe Count for Probe Kit Mouse N...</td>
+      <td>39661.579208</td>
+      <td>300</td>
+      <td>11678</td>
+      <td>15824</td>
+      <td>2236827</td>
+      <td>...</td>
+      <td>E13</td>
+      <td>a7f48d52-f3ca-4494-8ff4-92d298bc61bc</td>
+      <td>1ce02e44-021f-4f81-83e6-f22c6c485eab</td>
+      <td>17027.785156</td>
+      <td>24236.730469</td>
+      <td>7870</td>
+      <td>4265</td>
+      <td>14.253218</td>
+      <td>1.048207</td>
+      <td>14.253218</td>
+    </tr>
+    <tr>
+      <th>mu_dev_E13_006 | 074 | Full ROI</th>
+      <td>mu_dev_E13_006</td>
+      <td>mu_dev_E13_006</td>
+      <td>74</td>
+      <td>Full ROI</td>
+      <td>Low Nuclei Count,Low Negative Probe Count for ...</td>
+      <td>17689.572357</td>
+      <td>113</td>
+      <td>12746</td>
+      <td>15388</td>
+      <td>1856400</td>
+      <td>...</td>
+      <td>E13</td>
+      <td>b77a64cb-7f65-4be2-95d8-e8b027ef9e3d</td>
+      <td>b73f5930-c1b8-4217-8af5-0ca0e0c0728f</td>
+      <td>17027.785156</td>
+      <td>24236.730469</td>
+      <td>7870</td>
+      <td>4265</td>
+      <td>10.774001</td>
+      <td>1.554840</td>
+      <td>10.774001</td>
+    </tr>
+  </tbody>
+</table>
+<p>74 rows × 35 columns</p>
+</div></div>
+</div>
+<p>The sampling points corresponding to each ROI is stored in.uns.point.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_dsp</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;point&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>slide</th>
+      <th>roi</th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>mu_dev_E13_006</td>
+      <td>1</td>
+      <td>13011.793535</td>
+      <td>10484.417086</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mu_dev_E13_006</td>
+      <td>1</td>
+      <td>13109.708338</td>
+      <td>10499.139178</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mu_dev_E13_006</td>
+      <td>1</td>
+      <td>13184.708338</td>
+      <td>10547.123928</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>mu_dev_E13_006</td>
+      <td>1</td>
+      <td>13242.708338</td>
+      <td>10642.093747</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>mu_dev_E13_006</td>
+      <td>1</td>
+      <td>13261.840745</td>
+      <td>10730.656697</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>4171</th>
+      <td>mu_dev_E13_011</td>
+      <td>58</td>
+      <td>4548.893838</td>
+      <td>10387.159712</td>
+    </tr>
+    <tr>
+      <th>4172</th>
+      <td>mu_dev_E13_011</td>
+      <td>58</td>
+      <td>4477.882657</td>
+      <td>10362.799483</td>
+    </tr>
+    <tr>
+      <th>4173</th>
+      <td>mu_dev_E13_011</td>
+      <td>58</td>
+      <td>4437.660936</td>
+      <td>10371.299021</td>
+    </tr>
+    <tr>
+      <th>4174</th>
+      <td>mu_dev_E13_011</td>
+      <td>58</td>
+      <td>4487.202775</td>
+      <td>10425.060315</td>
+    </tr>
+    <tr>
+      <th>4175</th>
+      <td>mu_dev_E13_011</td>
+      <td>58</td>
+      <td>4636.188087</td>
+      <td>10423.920083</td>
+    </tr>
+  </tbody>
+</table>
+<p>4176 rows × 4 columns</p>
+</div></div>
+</div>
+</section>
+<section id="Read-other-barcode-based-data">
+<h2>Read other barcode-based data<a class="headerlink" href="#Read-other-barcode-based-data" title="Link to this heading"></a></h2>
+<p>In most cases, the raw data of barcode-based spatial omics technology can be expressed in <strong>two tables</strong>: the coordinate information of each cell (spot) and the expression of each cell (spot). This <code class="docutils literal notranslate"><span class="pre">sp.pp.read_csv2adata()</span></code> generates the Anndata format by providing the two tables by the user.</p>
+<p>Here we use slide-seqV2 data from the mouse olfactory bulb as a demonstration. Download from <a class="reference external" href="https://singlecell.broadinstitute.org/single_cell/study/SCP815">https://singlecell.broadinstitute.org/single_cell/study/SCP815</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">express</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;D:\data\Slide_seqV2_ofactory_bulb\Puck_200127_15.digital_expression.txt&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;D:\data\Slide_seqV2_ofactory_bulb\Puck_200127_15_bead_locations.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_csv</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">read_csv2adata</span><span class="p">(</span><span class="n">express</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">location</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_csv</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 21724 × 21220
+    obs: &#39;xcoord&#39;, &#39;ycoord&#39;
+    obsm: &#39;spatial&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="Read-imaged-based-data">
+<h2>Read imaged-based data<a class="headerlink" href="#Read-imaged-based-data" title="Link to this heading"></a></h2>
+<p>The image-based spatial omics technology needs to perform cell segmentation first, and quantitatively generate anndata format through the results of cell segmentation. Users are required to provide images of cell segmentation and staining images for each marker.</p>
+<p>Here we use one (sample 4) of breast cancer MIBI-TOF dataests as an example. Download from <a class="reference external" href="https://mibi-share.ionpath.com">https://mibi-share.ionpath.com</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tifffile</span> <span class="k">as</span> <span class="nn">tiff</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">tiff</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;D:/data/soapy_test_data/mibi/TA459_multipleCores2_Run-4_Point4.tiff&#39;</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">tiff</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;D:/data/soapy_test_data/mibi/Point4_binarymask.tiff&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Read_spatial_omics_20_0.png" src="../_images/Tutorials_Read_spatial_omics_20_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Read_spatial_omics_21_0.png" src="../_images/Tutorials_Read_spatial_omics_21_0.png" />
+</div>
+</div>
+<p>Determine the name of each channel and the channel that needs to be removed to obtain the quantitative Anndata.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">channel_names</span><span class="o">=</span><span class="p">[</span>
+    <span class="s1">&#39;Au&#39;</span><span class="p">,</span><span class="s1">&#39;Background&#39;</span><span class="p">,</span><span class="s1">&#39;Beta_catenin&#39;</span><span class="p">,</span><span class="s1">&#39;Ca&#39;</span><span class="p">,</span><span class="s1">&#39;CD11b&#39;</span><span class="p">,</span><span class="s1">&#39;CD11c&#39;</span><span class="p">,</span><span class="s1">&#39;CD138&#39;</span><span class="p">,</span><span class="s1">&#39;CD16&#39;</span><span class="p">,</span><span class="s1">&#39;CD20&#39;</span><span class="p">,</span><span class="s1">&#39;CD209&#39;</span><span class="p">,</span><span class="s1">&#39;CD3&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CD31&#39;</span><span class="p">,</span><span class="s1">&#39;CD4&#39;</span><span class="p">,</span><span class="s1">&#39;CD45&#39;</span><span class="p">,</span><span class="s1">&#39;CD45RO&#39;</span><span class="p">,</span><span class="s1">&#39;CD56&#39;</span><span class="p">,</span><span class="s1">&#39;CD63&#39;</span><span class="p">,</span><span class="s1">&#39;CD68&#39;</span><span class="p">,</span><span class="s1">&#39;CD8&#39;</span><span class="p">,</span><span class="s1">&#39;dsDNA&#39;</span><span class="p">,</span><span class="s1">&#39;EGFR&#39;</span><span class="p">,</span><span class="s1">&#39;Fe&#39;</span><span class="p">,</span><span class="s1">&#39;FoxP3&#39;</span><span class="p">,</span><span class="s1">&#39;H3K27me3&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;H3K9ac&#39;</span><span class="p">,</span><span class="s1">&#39;HLA-DR&#39;</span><span class="p">,</span><span class="s1">&#39;HLA-I&#39;</span><span class="p">,</span><span class="s1">&#39;IDO&#39;</span><span class="p">,</span><span class="s1">&#39;CK17&#39;</span><span class="p">,</span><span class="s1">&#39;CK6&#39;</span><span class="p">,</span><span class="s1">&#39;Ki67&#39;</span><span class="p">,</span><span class="s1">&#39;Lag3&#39;</span><span class="p">,</span><span class="s1">&#39;MPO&#39;</span><span class="p">,</span><span class="s1">&#39;Na&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="s1">&#39;p53&#39;</span><span class="p">,</span><span class="s1">&#39;PanCK&#39;</span><span class="p">,</span><span class="s1">&#39;PD-L1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PD-1&#39;</span><span class="p">,</span><span class="s1">&#39;pS6&#39;</span><span class="p">,</span><span class="s1">&#39;Si&#39;</span><span class="p">,</span><span class="s1">&#39;SMA&#39;</span><span class="p">,</span><span class="s1">&#39;Ta&#39;</span><span class="p">,</span><span class="s1">&#39;Vimentin&#39;</span>
+<span class="p">]</span>
+
+<span class="n">exp_removed</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">21</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">42</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_img</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">read_mult_image2adata</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="n">image</span><span class="p">,</span>
+    <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span>
+    <span class="n">channel_names</span><span class="o">=</span><span class="n">channel_names</span><span class="p">,</span>
+    <span class="n">remove_channels</span><span class="o">=</span><span class="n">exp_removed</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_img</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 6667 × 44
+    uns: &#39;img&#39;, &#39;mask&#39;, &#39;var_for_analysis&#39;, &#39;spatial&#39;, &#39;SOAPy&#39;
+    obsm: &#39;spatial&#39;
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Spatial%20domain.html" class="btn btn-neutral float-right" title="Spatial domain" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Heqi Wang.
+      <span class="lastupdated">Last updated on Jan 02, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

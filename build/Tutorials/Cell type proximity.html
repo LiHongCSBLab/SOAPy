@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spatial architecture - cell type proximity &mdash; SOAPy 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorial 5: Spatial architecture - niche composition" href="Niche%20composition.html" />
+    <link rel="prev" title="Spatial tendency" href="Spatial%20tendency.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #FF8C00" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SOAPy
+              <img src="../_static/logo_soapy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#examples-data">Examples data</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#major-tutorials">Major tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Read_spatial_omics.html">Read spatial omics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20domain.html">Spatial domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20tendency.html">Spatial tendency</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Spatial architecture - cell type proximity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Read">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Constructing-spatial-network">Constructing spatial network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Neighborhood-analysis">Neighborhood analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Infiltration-analysis">Infiltration analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Tutorial 5: Spatial architecture - niche composition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20communications.html">Spatial communications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatiotemporal%20pattern.html">Spatiotemporal pattern</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-tutorials">Other tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #FF8C00" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SOAPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Spatial architecture - cell type proximity</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/Cell type proximity.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Spatial-architecture---cell-type-proximity">
+<h1>Spatial architecture - cell type proximity<a class="headerlink" href="#Spatial-architecture---cell-type-proximity" title="Link to this heading"></a></h1>
+<p>Spatial architecture of cells is important for understanding the organization rules from single cells to tissues. SOAPy first constructs a cell/spot network from experimental obtained spatial locations; then implements two scenarios for deciphering spatial architecture: spatial proximity analysis (including neighborhood and infiltration) determines whether the distributions of two cell types or two kinds of cell states within an image are significant proximal.</p>
+<p>We applied this analysis to a dataset of 41 triple-negative breast cancer (TNBC) patients, which used multiplexed ion beam imaging by time-of-flight (MIBI-TOF) to simultaneously quantify in situ expression of 36 proteins at sub-cellular resolution. Cells were annotated to seven types (epithelial, endothelial, mesenchymal, B, CD4 T, CD8 T and macrophage) based on the expression of known protein markers and a undefined one without clear marker expression.</p>
+<p>Data download from <a class="reference external" href="https://mibi-share.ionpath.com">https://mibi-share.ionpath.com</a>, Seeing <strong>Tutorial: Read spatial omics</strong> for adata_combined.h5ad generation.</p>
+<section id="Read">
+<h2>Read<a class="headerlink" href="#Read" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">SOAPy_st</span> <span class="k">as</span> <span class="nn">sp</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_com</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;adata_combined.h5ad&#39;</span><span class="p">)</span>
+<span class="n">adata_com</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;sample&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adata_com</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;sample&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Constructing-spatial-network">
+<h2>Constructing spatial network<a class="headerlink" href="#Constructing-spatial-network" title="Link to this heading"></a></h2>
+<p>First of all, the adjacency network is constructed, here 40 pixels are used to construct the range radiance network.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">make_network</span><span class="p">(</span>
+    <span class="n">adata_com</span><span class="p">,</span>
+    <span class="n">sample_key</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="c1"># range radiance network</span>
+    <span class="n">cutoff</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="c1"># radius: 40 pixels</span>
+    <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING:root:adata has not been initialized, and adata.uns[&#39;SOAPy&#39;] has been established
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 211649 × 44
+    obs: &#39;sample&#39;, &#39;leiden&#39;, &#39;cluster&#39;
+    var: &#39;highly_variable&#39;
+    uns: &#39;cluster_colors&#39;, &#39;leiden&#39;, &#39;leiden_colors&#39;, &#39;neighbors&#39;, &#39;pca&#39;, &#39;umap&#39;, &#39;var_for_clustering&#39;, &#39;SOAPy&#39;
+    obsm: &#39;X_pca&#39;, &#39;X_umap&#39;, &#39;spatial&#39;
+    varm: &#39;PCs&#39;
+    obsp: &#39;connectivities&#39;, &#39;distances&#39;
+</pre></div></div>
+</div>
+<p>Using sample 4 as an example to show the network.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_network</span><span class="p">(</span>
+    <span class="n">adata</span><span class="o">=</span><span class="n">adata_com</span><span class="p">,</span>
+    <span class="n">sample_key</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span>
+    <span class="n">sample_id</span><span class="o">=</span><span class="s1">&#39;4&#39;</span><span class="p">,</span>
+    <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span>
+    <span class="n">spot_size</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Cell_type_proximity_9_0.png" src="../_images/Tutorials_Cell_type_proximity_9_0.png" />
+</div>
+</div>
+</section>
+<section id="Neighborhood-analysis">
+<h2>Neighborhood analysis<a class="headerlink" href="#Neighborhood-analysis" title="Link to this heading"></a></h2>
+<p>Continue to use sample 4 as an example to carry out the neighborhood analysis used <code class="docutils literal notranslate"><span class="pre">sp.tl.neighborhood_analysis()</span></code> after removing the influence of self-connected edges.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">neighborhood_analysis</span><span class="p">(</span>
+    <span class="n">adata_com</span><span class="p">,</span>
+    <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span>
+    <span class="n">sample_key</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span>
+    <span class="n">sample</span><span class="o">=</span><span class="s1">&#39;4&#39;</span><span class="p">,</span>
+    <span class="n">n_iters</span><span class="o">=</span><span class="mi">100</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 211649 × 44
+    obs: &#39;sample&#39;, &#39;leiden&#39;, &#39;cluster&#39;
+    var: &#39;highly_variable&#39;
+    uns: &#39;cluster_colors&#39;, &#39;leiden&#39;, &#39;leiden_colors&#39;, &#39;neighbors&#39;, &#39;pca&#39;, &#39;umap&#39;, &#39;var_for_clustering&#39;, &#39;SOAPy&#39;
+    obsm: &#39;X_pca&#39;, &#39;X_umap&#39;, &#39;spatial&#39;
+    varm: &#39;PCs&#39;
+    obsp: &#39;connectivities&#39;, &#39;distances&#39;
+</pre></div></div>
+</div>
+<p>Illustration show the neighborhood score of all samples for all paired cell types, with positive or negative scores corresponding to co-localization or avoidance. Different immune cells types such as B, CD4 T, CD8 T and macrophage have significant co-localization in sample 4, which may relate with the formation of inflammatory foci.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_neighborhood_analysis</span><span class="p">(</span>
+    <span class="n">adata</span><span class="o">=</span><span class="n">adata_com</span><span class="p">,</span>
+    <span class="n">sample_id</span><span class="o">=</span><span class="s1">&#39;4&#39;</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=-</span><span class="mi">15</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Cell_type_proximity_14_0.png" src="../_images/Tutorials_Cell_type_proximity_14_0.png" />
+</div>
+</div>
+<p>It was also confirmed from the Voronoi map of sample 4 that the immune cells showed a high degree of co-localization.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_voronoi</span><span class="p">(</span>
+    <span class="n">adata</span><span class="o">=</span><span class="n">adata_com</span><span class="p">,</span>
+    <span class="n">sample_id</span> <span class="o">=</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span>
+    <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;sample 4&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Cell_type_proximity_16_0.png" src="../_images/Tutorials_Cell_type_proximity_16_0.png" />
+</div>
+</div>
+</section>
+<section id="Infiltration-analysis">
+<h2>Infiltration analysis<a class="headerlink" href="#Infiltration-analysis" title="Link to this heading"></a></h2>
+<p>In tumor tissues, parenchymal cells are the major cell types, infiltration of non-parenchymal (immune or stromal) cells is important for studying microenvironment. <code class="docutils literal notranslate"><span class="pre">sp.tl.infiltration_analysis()</span></code> can show the extent of infiltration of non-parenchymal cells into parenchymal cells.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">infiltration_analysis</span><span class="p">(</span>
+    <span class="n">adata_com</span><span class="p">,</span>
+    <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span>
+    <span class="n">sample_key</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 211649 × 44
+    obs: &#39;sample&#39;, &#39;leiden&#39;, &#39;cluster&#39;
+    var: &#39;highly_variable&#39;
+    uns: &#39;cluster_colors&#39;, &#39;leiden&#39;, &#39;leiden_colors&#39;, &#39;neighbors&#39;, &#39;pca&#39;, &#39;umap&#39;, &#39;var_for_clustering&#39;, &#39;SOAPy&#39;
+    obsm: &#39;X_pca&#39;, &#39;X_umap&#39;, &#39;spatial&#39;
+    varm: &#39;PCs&#39;
+    obsp: &#39;connectivities&#39;, &#39;distances&#39;
+</pre></div></div>
+</div>
+<p>When there are too few mesenchymal cells in the sample (less than 200), it was usually directly considered as the cold interaction. The rest of the samples can be measured by the infiltration analysis to measure the degree of infiltration of mesenchymal cells into the epithelium cells.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_infiltration_analysis</span><span class="p">(</span>
+    <span class="n">adata</span><span class="o">=</span><span class="n">adata_com</span><span class="p">,</span>
+    <span class="n">parenchyma</span><span class="o">=</span><span class="s1">&#39;Epithelial cell&#39;</span><span class="p">,</span>
+    <span class="n">nonparenchyma</span><span class="o">=</span><span class="s1">&#39;Mesenchymal cell&#39;</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="n">min_nonparenchyma</span><span class="o">=</span><span class="mi">200</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Cell_type_proximity_21_0.png" src="../_images/Tutorials_Cell_type_proximity_21_0.png" />
+</div>
+</div>
+<p>Samples with higher and lower infiltration scores indicate mixed and compartmentalized patterns between malignant epithelial cells and mesenchymal cells respectively. Here we hold out sample 28 as the presentation of the compartmentalized pattern and sample 29 as the presentation of the mixed pattern.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compartmentalized pattern</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_voronoi</span><span class="p">(</span>
+    <span class="n">adata_com</span><span class="p">,</span>
+    <span class="n">sample_id</span> <span class="o">=</span> <span class="s1">&#39;28&#39;</span><span class="p">,</span>
+    <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;sample 28&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Cell_type_proximity_23_0.png" src="../_images/Tutorials_Cell_type_proximity_23_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mixed pattern</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_voronoi</span><span class="p">(</span>
+    <span class="n">adata_com</span><span class="p">,</span>
+    <span class="n">sample_id</span> <span class="o">=</span> <span class="s1">&#39;29&#39;</span><span class="p">,</span>
+    <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;sample 29&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Cell_type_proximity_24_0.png" src="../_images/Tutorials_Cell_type_proximity_24_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Spatial%20tendency.html" class="btn btn-neutral float-left" title="Spatial tendency" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Niche%20composition.html" class="btn btn-neutral float-right" title="Tutorial 5: Spatial architecture - niche composition" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Heqi Wang.
+      <span class="lastupdated">Last updated on Jan 02, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

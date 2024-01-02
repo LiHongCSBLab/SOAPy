@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spatial domain &mdash; SOAPy 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Spatial tendency" href="Spatial%20tendency.html" />
+    <link rel="prev" title="Read spatial omics" href="Read_spatial_omics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #FF8C00" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SOAPy
+              <img src="../_static/logo_soapy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#examples-data">Examples data</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#major-tutorials">Major tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Read_spatial_omics.html">Read spatial omics</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Spatial domain</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Read-and-preprocessing">Read and preprocessing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Unsupervised-spatial-domian-identification-(STAGATE)">Unsupervised spatial domian identification (STAGATE)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Supervised-spatial-domian-identification">Supervised spatial domian identification</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20tendency.html">Spatial tendency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cell%20type%20proximity.html">Spatial architecture - cell type proximity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Tutorial 5: Spatial architecture - niche composition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20communications.html">Spatial communications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatiotemporal%20pattern.html">Spatiotemporal pattern</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-tutorials">Other tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #FF8C00" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SOAPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Spatial domain</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/Spatial domain.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Spatial-domain">
+<h1>Spatial domain<a class="headerlink" href="#Spatial-domain" title="Link to this heading"></a></h1>
+<p>The Spatial Domain analysis provides unsupervised (STAGATE) and supervised (AUCell-LMI) methods to detect these structures (called spatial domains) based on gene expression profiles and spatial locations. We used the kidney cancer Visium sample to perform the two analysis methods separately.</p>
+<p>Data download from <a class="reference external" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5924030">https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5924030</a></p>
+<section id="Read-and-preprocessing">
+<h2>Read and preprocessing<a class="headerlink" href="#Read-and-preprocessing" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">SOAPy_st</span> <span class="k">as</span> <span class="nn">sp</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="s1">&#39;KIRC_5_Visium_adata.h5ad&#39;</span><span class="p">)</span>
+
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">highly_variable_genes</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">flavor</span><span class="o">=</span><span class="s2">&quot;seurat_v3&quot;</span><span class="p">,</span> <span class="n">n_top_genes</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">normalize_total</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">target_sum</span><span class="o">=</span><span class="mf">1e4</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Unsupervised-spatial-domian-identification-(STAGATE)">
+<h2>Unsupervised spatial domian identification (STAGATE)<a class="headerlink" href="#Unsupervised-spatial-domian-identification-(STAGATE)" title="Link to this heading"></a></h2>
+<p>The spatial domain of renal cancer was obtained by <code class="docutils literal notranslate"><span class="pre">sp.tl.domain_from_STAGATE()</span></code> and then clustering using the mclust package in the R environment.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the R environment.</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;R_HOME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./lib/R/&#39;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;R_USER&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./lib/python3.9/site-packages/rpy2&#39;</span>
+
+<span class="n">adata</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">domain_from_STAGATE</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">cluster_method</span><span class="o">=</span><span class="s1">&#39;m_clust&#39;</span><span class="p">,</span>
+    <span class="n">rad_cutoff</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+    <span class="n">n_epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+    <span class="n">cluster_number</span><span class="o">=</span><span class="mi">8</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2024-01-01 22:27:30.336430: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-01-01 22:27:30.548260: I tensorflow/core/util/port.cc:104] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-01-01 22:27:32.334378: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libnvinfer.so.7&#39;; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/cv2/../../lib64:/home/wangheqi/anaconda3/lib:/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/cv2/../../lib64:/home/wangheqi/anaconda3/lib:
+2024-01-01 22:27:32.334624: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libnvinfer_plugin.so.7&#39;; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/cv2/../../lib64:/home/wangheqi/anaconda3/lib:/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/cv2/../../lib64:/home/wangheqi/anaconda3/lib:
+2024-01-01 22:27:32.334651: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+------Calculating spatial graph...
+The graph contains 0 edges, 1949 cells.
+0.0000 neighbors per cell on average.
+Size of Input:  (1949, 2000)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2024-01-01 22:27:35.958478: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-01-01 22:27:35.965007: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcuda.so.1&#39;; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/cv2/../../lib64:/home/wangheqi/anaconda3/lib:/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/cv2/../../lib64:/home/wangheqi/anaconda3/lib:
+2024-01-01 22:27:35.965031: W tensorflow/compiler/xla/stream_executor/cuda/cuda_driver.cc:265] failed call to cuInit: UNKNOWN ERROR (303)
+2024-01-01 22:27:35.965058: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (lihong-svr2.icb.ac.cn): /proc/driver/nvidia/version does not exist
+2024-01-01 22:27:35.973964: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:357] MLIR V1 optimization pass is not enabled
+100%|█████████████████████████████████████████| 500/500 [00:17&lt;00:00, 29.14it/s]
+R[write to console]:                    __           __
+   ____ ___  _____/ /_  _______/ /_
+  / __ `__ \/ ___/ / / / / ___/ __/
+ / / / / / / /__/ / /_/ (__  ) /_
+/_/ /_/ /_/\___/_/\__,_/____/\__/   version 6.0.0
+Type &#39;citation(&#34;mclust&#34;)&#39; for citing this R package in publications.
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+fitting ...
+  |======================================================================| 100%
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">img_key</span><span class="o">=</span><span class="s2">&quot;hires&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;Ground Truth&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Spatial_domain_8_0.png" src="../_images/Tutorials_Spatial_domain_8_0.png" />
+</div>
+</div>
+</section>
+<section id="Supervised-spatial-domian-identification">
+<h2>Supervised spatial domian identification<a class="headerlink" href="#Supervised-spatial-domian-identification" title="Link to this heading"></a></h2>
+<p>The AUCell score was calculated for each spot based on the gene set of the tertiary lymph node.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">signatures</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;TLS&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;IGHA1&#39;</span><span class="p">,</span> <span class="s1">&#39;IGHG1&#39;</span><span class="p">,</span> <span class="s1">&#39;IGHG2&#39;</span><span class="p">,</span> <span class="s1">&#39;IGHG3&#39;</span><span class="p">,</span> <span class="s1">&#39;IGHG4&#39;</span><span class="p">,</span> <span class="s1">&#39;IGHGP&#39;</span><span class="p">,</span> <span class="s1">&#39;IGHM&#39;</span><span class="p">,</span> <span class="s1">&#39;IGKC&#39;</span><span class="p">,</span> <span class="s1">&#39;IGLC1&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;IGLC2&#39;</span><span class="p">,</span> <span class="s1">&#39;IGLC3&#39;</span><span class="p">,</span> <span class="s1">&#39;JCHAIN&#39;</span><span class="p">,</span> <span class="s1">&#39;CD52&#39;</span><span class="p">,</span> <span class="s1">&#39;CD79A&#39;</span><span class="p">,</span> <span class="s1">&#39;FCRL5&#39;</span><span class="p">,</span> <span class="s1">&#39;MZB1&#39;</span><span class="p">,</span> <span class="s1">&#39;SSR4&#39;</span><span class="p">,</span> <span class="s1">&#39;XBP1&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;TRBC2&#39;</span><span class="p">,</span> <span class="s1">&#39;IL7R&#39;</span><span class="p">,</span> <span class="s1">&#39;CXCL12&#39;</span><span class="p">,</span> <span class="s1">&#39;LUM&#39;</span><span class="p">,</span> <span class="s1">&#39;C1QA&#39;</span><span class="p">,</span> <span class="s1">&#39;C7&#39;</span><span class="p">,</span> <span class="s1">&#39;APOE&#39;</span><span class="p">,</span> <span class="s1">&#39;PTLP&#39;</span><span class="p">,</span> <span class="s1">&#39;PTGDS&#39;</span><span class="p">,</span> <span class="s1">&#39;PIM2&#39;</span><span class="p">,</span> <span class="s1">&#39;DERL3&#39;</span><span class="p">]}</span>
+
+<span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">cal_aucell</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">signatures</span><span class="o">=</span><span class="n">signatures</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING:root:adata has not been initialized, and adata.uns[&#39;SOAPy&#39;] has been established
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 1949 × 36601
+    obs: &#39;in_tissue&#39;, &#39;array_row&#39;, &#39;array_col&#39;, &#39;Ground Truth&#39;, &#39;domain&#39;
+    var: &#39;gene_ids&#39;, &#39;feature_types&#39;, &#39;genome&#39;, &#39;highly_variable&#39;, &#39;highly_variable_rank&#39;, &#39;means&#39;, &#39;variances&#39;, &#39;variances_norm&#39;
+    uns: &#39;spatial&#39;, &#39;hvg&#39;, &#39;log1p&#39;, &#39;Spatial_Net&#39;, &#39;domain_colors&#39;, &#39;Ground Truth_colors&#39;, &#39;SOAPy&#39;
+    obsm: &#39;spatial&#39;, &#39;STAGATE&#39;
+</pre></div></div>
+</div>
+<p>The local Moran index of AUCell score was calculated by <code class="docutils literal notranslate"><span class="pre">sp.tl.domain_from_local_moran</span></code>, and the spot with a p-value less than 0.05 was selected as a hotspot.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">domain_from_local_moran</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">score_key</span><span class="o">=</span><span class="s1">&#39;TLS&#39;</span><span class="p">,</span>
+    <span class="n">spatial_lag_filter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">attribute_filter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">moran_label_key</span><span class="o">=</span><span class="s1">&#39;TLS&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+attribute_filter: 0
+spatial_lag_filter: 0
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 1949 × 36601
+    obs: &#39;in_tissue&#39;, &#39;array_row&#39;, &#39;array_col&#39;, &#39;Ground Truth&#39;, &#39;domain&#39;, &#39;Moran_domain&#39;, &#39;TLS&#39;
+    var: &#39;gene_ids&#39;, &#39;feature_types&#39;, &#39;genome&#39;, &#39;highly_variable&#39;, &#39;highly_variable_rank&#39;, &#39;means&#39;, &#39;variances&#39;, &#39;variances_norm&#39;
+    uns: &#39;spatial&#39;, &#39;hvg&#39;, &#39;log1p&#39;, &#39;Spatial_Net&#39;, &#39;domain_colors&#39;, &#39;Ground Truth_colors&#39;, &#39;SOAPy&#39;
+    obsm: &#39;spatial&#39;, &#39;STAGATE&#39;
+</pre></div></div>
+</div>
+<p>The Moran scatter plot shows the distribution of hotspots, with the dotted blue lines representing the attribute_filter and spatial_lag_filter values.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_moran_scatterplot</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Spatial_domain_15_0.png" src="../_images/Tutorials_Spatial_domain_15_0.png" />
+</div>
+</div>
+<p>The regions found by local Moran were compared with the manually labeled ground truth.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">img_key</span><span class="o">=</span><span class="s2">&quot;hires&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;TLS&#39;</span><span class="p">,</span> <span class="s1">&#39;Ground Truth&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Spatial_domain_17_0.png" src="../_images/Tutorials_Spatial_domain_17_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Read_spatial_omics.html" class="btn btn-neutral float-left" title="Read spatial omics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Spatial%20tendency.html" class="btn btn-neutral float-right" title="Spatial tendency" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Heqi Wang.
+      <span class="lastupdated">Last updated on Jan 02, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spatial communication - cell level &mdash; SOAPy 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API" href="../Api/index.html" />
+    <link rel="prev" title="Visualization of Nanostring DSP subtissues" href="Visualization%20of%20Nanostring%20DSP%20subtissues.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #FF8C00" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SOAPy
+              <img src="../_static/logo_soapy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#examples-data">Examples data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#major-tutorials">Major tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#other-tutorials">Other tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Transfer%20Seurat%20object%20into%20Anndata%20object.html">Transfer Seurat object into Scanpy object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Visualization%20of%20Nanostring%20DSP%20subtissues.html">Visualization of Nanostring DSP subtissues</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Spatial communication - cell level</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Read-and-preprocessing">Read and preprocessing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #FF8C00" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SOAPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Spatial communication - cell level</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/Spatial communication - cell level.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Spatial-communication---cell-level">
+<h1>Spatial communication - cell level<a class="headerlink" href="#Spatial-communication---cell-level" title="Link to this heading"></a></h1>
+<section id="Read-and-preprocessing">
+<h2>Read and preprocessing<a class="headerlink" href="#Read-and-preprocessing" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">SOAPy_st</span> <span class="k">as</span> <span class="nn">sp</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_visium</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;C:\Users\Administrator.DESKTOP-MAL5PKV\Desktop\jsy-ST\A_230357&#39;</span><span class="p">,</span>
+                       <span class="n">count_file</span><span class="o">=</span><span class="s1">&#39;filtered_feature_bc_matrix.h5&#39;</span>
+                       <span class="p">)</span>
+<span class="n">annotation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;C:\Users\Administrator.DESKTOP-MAL5PKV\Desktop\jsy-ST\Q2_TSF-high\A.csv&#39;</span><span class="p">,</span>
+                         <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span>
+                         <span class="p">)</span>
+<span class="n">lr_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;C:\Users\Administrator.DESKTOP-MAL5PKV\Desktop\Human-2020-Jin-LR-pairs.csv&#39;</span><span class="p">,</span>
+                      <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span>
+                      <span class="p">)</span>
+
+<span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">annotation</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs_names</span><span class="p">,</span> <span class="s1">&#39;TSF_type&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="o">.</span><span class="n">var_names_make_unique</span><span class="p">()</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">filter_genes</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">min_counts</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">filter_genes</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">min_cells</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">normalize_total</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr_pairs</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">lr_pairs</span><span class="p">(</span>
+    <span class="n">lr_data</span><span class="o">=</span><span class="n">lr_data</span><span class="p">,</span>
+    <span class="n">Annotation_key</span><span class="o">=</span><span class="s1">&#39;annotation&#39;</span><span class="p">,</span>
+    <span class="n">ligand_key</span><span class="o">=</span><span class="s1">&#39;ligand_symbol&#39;</span><span class="p">,</span>
+    <span class="n">receptor_key</span><span class="o">=</span><span class="s1">&#39;receptor_symbol&#39;</span>
+<span class="p">)</span>
+<span class="n">lr_pairs</span><span class="o">.</span><span class="n">get_complexes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">cell_level_communications</span><span class="p">(</span>
+    <span class="n">adata</span><span class="o">=</span><span class="n">adata</span><span class="p">,</span>
+    <span class="n">lr_pairs</span><span class="o">=</span><span class="n">lr_pairs</span><span class="p">,</span>
+    <span class="n">secretory_key</span><span class="o">=</span><span class="s1">&#39;Secreted Signaling&#39;</span><span class="p">,</span>
+    <span class="n">contact_key</span><span class="o">=</span><span class="s1">&#39;Cell-Cell Contact&#39;</span><span class="p">,</span>
+    <span class="n">secretory_radius</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+    <span class="n">n_iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">cell_level_communications</span><span class="p">(</span>
+    <span class="n">adata</span><span class="o">=</span><span class="n">adata</span><span class="p">,</span>
+    <span class="n">lr_pairs</span><span class="o">=</span><span class="n">lr_pairs</span><span class="p">,</span>
+    <span class="n">species</span><span class="o">=</span><span class="s1">&#39;receptor&#39;</span><span class="p">,</span>
+    <span class="n">secretory_key</span><span class="o">=</span><span class="s1">&#39;Secreted Signaling&#39;</span><span class="p">,</span>
+    <span class="n">contact_key</span><span class="o">=</span><span class="s1">&#39;Cell-Cell Contact&#39;</span><span class="p">,</span>
+    <span class="n">secretory_radius</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+    <span class="n">n_iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+There are 806 cell-cell contact ligand-receptor pairs in sample
+In contact mode, The average number of neighbors is 5.690730106644791
+In contact mode, total of 0 spots have no neighbors
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+806 contact ligand-receptor pairs.: 100%|█████████████████████████████████████████████████████████ [ time left: 00:00 ]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Updated adata.uns[lr_summary]
+There are 1199 secreted ligand-receptor pairs in sample
+In secretory mode, The average number of neighbors is 211.77091878589007
+In secretory mode, total of 0 spots have no neighbors
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+1199 secretory ligand-receptor pairs.: 100%|██████████████████████████████████████████████████████ [ time left: 00:00 ]
+WARNING:root:adata has not been initialized, and adata.uns[&#39;SOAPy&#39;] has been established
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Updated adata.uns[lr_summary]
+There are 806 cell-cell contact ligand-receptor pairs in sample
+In contact mode, The average number of neighbors is 5.690730106644791
+In contact mode, total of 0 spots have no neighbors
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+806 contact ligand-receptor pairs.: 100%|█████████████████████████████████████████████████████████ [ time left: 00:00 ]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Updated adata.uns[lr_summary]
+There are 1199 secreted ligand-receptor pairs in sample
+In secretory mode, The average number of neighbors is 211.77091878589007
+In secretory mode, total of 0 spots have no neighbors
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+1199 secretory ligand-receptor pairs.: 100%|██████████████████████████████████████████████████████ [ time left: 00:00 ]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Updated adata.uns[lr_summary]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 4877 × 33538
+    obs: &#39;in_tissue&#39;, &#39;array_row&#39;, &#39;array_col&#39;, &#39;cluster&#39;
+    var: &#39;gene_ids&#39;, &#39;feature_types&#39;, &#39;genome&#39;
+    uns: &#39;spatial&#39;, &#39;SOAPy&#39;
+    obsm: &#39;spatial&#39;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">comm</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;SOAPy&#39;</span><span class="p">][</span><span class="s1">&#39;ligand_cell_comm_score&#39;</span><span class="p">]</span>
+<span class="n">ligand_cell_communication</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">comm</span><span class="p">[</span><span class="s1">&#39;contact_affinity&#39;</span><span class="p">][</span><span class="s1">&#39;p_vals&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">adata</span><span class="o">.</span><span class="n">obs_names</span><span class="p">,</span>
+                                         <span class="n">columns</span><span class="o">=</span><span class="n">comm</span><span class="p">[</span><span class="s1">&#39;contact_names&#39;</span><span class="p">])</span>
+<span class="n">ligand_cell_communication</span><span class="p">[</span><span class="s1">&#39;COL1A1:ITGA1&amp;ITGB1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">comm</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;SOAPy&#39;</span><span class="p">][</span><span class="s1">&#39;receptor_cell_comm_score&#39;</span><span class="p">]</span>
+<span class="n">receptor_cell_communication</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">comm</span><span class="p">[</span><span class="s1">&#39;contact_affinity&#39;</span><span class="p">][</span><span class="s1">&#39;p_vals&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">adata</span><span class="o">.</span><span class="n">obs_names</span><span class="p">,</span>
+                                         <span class="n">columns</span><span class="o">=</span><span class="n">comm</span><span class="p">[</span><span class="s1">&#39;contact_names&#39;</span><span class="p">])</span>
+
+<span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;sig&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;other&#39;</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs_names</span><span class="p">:</span>
+    <span class="n">ligand_sig</span> <span class="o">=</span> <span class="n">ligand_cell_communication</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s1">&#39;COL1A1:ITGA1&amp;ITGB1&#39;</span><span class="p">]</span>
+    <span class="n">receptor_sig</span> <span class="o">=</span> <span class="n">receptor_cell_communication</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s1">&#39;COL1A1:ITGA1&amp;ITGB1&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">ligand_sig</span> <span class="o">&lt;</span> <span class="mf">0.05</span> <span class="ow">and</span> <span class="n">receptor_sig</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+        <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s1">&#39;sig&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;both_sig&#39;</span>
+        <span class="k">continue</span>
+    <span class="k">elif</span> <span class="n">ligand_sig</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+        <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s1">&#39;sig&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;l_sig&#39;</span>
+        <span class="k">continue</span>
+    <span class="k">elif</span> <span class="n">receptor_sig</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+        <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s1">&#39;sig&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;r_sig&#39;</span>
+        <span class="k">continue</span>
+
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">img_key</span><span class="o">=</span><span class="s2">&quot;hires&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sig&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Spatial_communication_-_cell_level_9_0.png" src="../_images/Tutorials_Spatial_communication_-_cell_level_9_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Visualization%20of%20Nanostring%20DSP%20subtissues.html" class="btn btn-neutral float-left" title="Visualization of Nanostring DSP subtissues" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Api/index.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Heqi Wang.
+      <span class="lastupdated">Last updated on Jan 02, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

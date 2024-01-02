@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spatial tendency &mdash; SOAPy 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Spatial architecture - cell type proximity" href="Cell%20type%20proximity.html" />
+    <link rel="prev" title="Spatial domain" href="Spatial%20domain.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #FF8C00" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SOAPy
+              <img src="../_static/logo_soapy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#examples-data">Examples data</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#major-tutorials">Major tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Read_spatial_omics.html">Read spatial omics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20domain.html">Spatial domain</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Spatial tendency</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Read-and-preprocessing">Read and preprocessing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Generate-a-mask-image-from-the-domain-cluster">Generate a mask image from the domain cluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Statstical-testing">Statstical testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Regression">Regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Clustering-genes-based-on-regression-curves">Clustering genes based on regression curves</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Cell%20type%20proximity.html">Spatial architecture - cell type proximity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Tutorial 5: Spatial architecture - niche composition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20communications.html">Spatial communications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatiotemporal%20pattern.html">Spatiotemporal pattern</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-tutorials">Other tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #FF8C00" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SOAPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Spatial tendency</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/Spatial tendency.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Spatial-tendency">
+<h1>Spatial tendency<a class="headerlink" href="#Spatial-tendency" title="Link to this heading"></a></h1>
+<p>The aim of spatial tendency analysis is to assess whether expression features were influenced by spatial proximity to the region of interest. Expression features could be gene expression, pathway activity, cell proportion and so on. The region of interest could be defined by manual annotation or be automatically detected by the “Spatial Domain” function. Two kinds of methods, statistical test and regression model, were available for tendency estimation in the “Spatial Tendency” module.</p>
+<p>Here we used 10X Visium data of mouse dorsolateral prefrontal cortex (DLPFC, 151676) as an example to validate the feasibility of spatial tendency estimation.</p>
+<p>The processed data are available at <a class="reference external" href="https://github.com/LieberInstitute/spatialLIBD">https://github.com/LieberInstitute/spatialLIBD</a>.</p>
+<section id="Read-and-preprocessing">
+<h2>Read and preprocessing<a class="headerlink" href="#Read-and-preprocessing" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">SOAPy_st</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># input adata</span>
+<span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="s1">&#39;1516761_10X_adata.h5ad&#39;</span><span class="p">)</span>
+
+<span class="c1"># delete genes with same names</span>
+<span class="n">adata</span><span class="o">.</span><span class="n">var_names_make_unique</span><span class="p">()</span>
+
+<span class="c1"># preprocessing</span>
+<span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="s2">&quot;mt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">var_names</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;MT-&quot;</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">calculate_qc_metrics</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">qc_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mt&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">filter_genes</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">min_counts</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">filter_genes</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">min_cells</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">normalize_total</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">img_key</span><span class="o">=</span><span class="s2">&quot;hires&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Spatial_tendency_5_0.png" src="../_images/Tutorials_Spatial_tendency_5_0.png" />
+</div>
+</div>
+</section>
+<section id="Generate-a-mask-image-from-the-domain-cluster">
+<h2>Generate a mask image from the domain cluster<a class="headerlink" href="#Generate-a-mask-image-from-the-domain-cluster" title="Link to this heading"></a></h2>
+<p>To find genes whose spatial expression changes with the distance to white matter, white matter regions (ROI) are selected to construct a mask image used <code class="docutils literal notranslate"><span class="pre">sp.tl.get_mask_from_domain()</span></code>. <em>KSize</em> is the convolution kernel for the dilation and erosion operations of the image, which must be the odd number.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">get_mask_from_domain</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">clusters</span><span class="o">=</span><span class="s1">&#39;WM&#39;</span><span class="p">,</span> <span class="n">KSize</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[11361 11260]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING:root:adata has not been initialized, and adata.uns[&#39;SOAPy&#39;] has been established
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Spatial_tendency_8_2.png" src="../_images/Tutorials_Spatial_tendency_8_2.png" />
+</div>
+</div>
+</section>
+<section id="Statstical-testing">
+<h2>Statstical testing<a class="headerlink" href="#Statstical-testing" title="Link to this heading"></a></h2>
+<p>Cortical layers were divided into two regions before and use Wilcoxon test.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wilcoxon_res</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">wilcoxon_test</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">mask</span><span class="p">,</span>
+    <span class="n">radius</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">location</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">,</span>
+    <span class="n">cut</span><span class="o">=</span><span class="mi">500</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wilcoxon_res</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gene</th>
+      <th>stat</th>
+      <th>P value</th>
+      <th>effective spot near</th>
+      <th>effective spot far</th>
+      <th>P fdr</th>
+      <th>P rej</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AL669831.5</td>
+      <td>1096392.0</td>
+      <td>0.003146</td>
+      <td>1234</td>
+      <td>1750</td>
+      <td>0.041365</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LINC00115</td>
+      <td>1081393.0</td>
+      <td>0.397687</td>
+      <td>1234</td>
+      <td>1750</td>
+      <td>0.698975</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>FAM41C</td>
+      <td>1082177.0</td>
+      <td>0.358737</td>
+      <td>1234</td>
+      <td>1750</td>
+      <td>0.668305</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SAMD11</td>
+      <td>1076975.0</td>
+      <td>0.384899</td>
+      <td>1234</td>
+      <td>1750</td>
+      <td>0.689967</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>NOC2L</td>
+      <td>1099105.0</td>
+      <td>0.185846</td>
+      <td>1234</td>
+      <td>1750</td>
+      <td>0.491811</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Divide the surrounding areas of ROIs into continuous zones parallel to the shape of the boundary lines, and then calculate the Spearman correlation coefficients between the expression median of different zones and their distance ranks to the boundaries.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spearman_res</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">spearman_correlation</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">mask</span><span class="p">,</span>
+    <span class="n">radius</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">num</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spearman_res</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gene</th>
+      <th>coef</th>
+      <th>P value</th>
+      <th>P fdr</th>
+      <th>P rej</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AL669831.5</td>
+      <td>0.032850</td>
+      <td>0.053347</td>
+      <td>0.125194</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LINC00115</td>
+      <td>-0.011713</td>
+      <td>0.490979</td>
+      <td>0.639046</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>FAM41C</td>
+      <td>0.016004</td>
+      <td>0.346641</td>
+      <td>0.504274</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SAMD11</td>
+      <td>-0.008111</td>
+      <td>0.633396</td>
+      <td>0.756434</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>NOC2L</td>
+      <td>0.046243</td>
+      <td>0.006516</td>
+      <td>0.023516</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Regression">
+<h2>Regression<a class="headerlink" href="#Regression" title="Link to this heading"></a></h2>
+<p>To resolve more complex spatial tendency (e.g., nonlinear) or analyze ROIs without prior hypothesis, SOAPy provides a parameter regression method (polynomial regression) and a non-parametric regression method (LOESS regression).</p>
+<p>Here we use the method of polynomial regression as an example.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">spatial_tendency</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">mask</span><span class="p">,</span> <span class="c1">#</span>
+    <span class="n">radius</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">location</span><span class="o">=</span><span class="s1">&#39;out&#39;</span><span class="p">,</span>
+    <span class="n">frac</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|███████████████████████████████████████████████████████████████████████████| 16120/16120 [01:43&lt;00:00, 156.25it/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 3460 × 16120
+    obs: &#39;in_tissue&#39;, &#39;array_row&#39;, &#39;array_col&#39;, &#39;cluster&#39;, &#39;n_genes_by_counts&#39;, &#39;log1p_n_genes_by_counts&#39;, &#39;total_counts&#39;, &#39;log1p_total_counts&#39;, &#39;pct_counts_in_top_50_genes&#39;, &#39;pct_counts_in_top_100_genes&#39;, &#39;pct_counts_in_top_200_genes&#39;, &#39;pct_counts_in_top_500_genes&#39;, &#39;total_counts_mt&#39;, &#39;log1p_total_counts_mt&#39;, &#39;pct_counts_mt&#39;, &#39;imagerow&#39;, &#39;imagecol&#39;
+    var: &#39;gene_ids&#39;, &#39;feature_types&#39;, &#39;genome&#39;, &#39;mt&#39;, &#39;n_cells_by_counts&#39;, &#39;mean_counts&#39;, &#39;log1p_mean_counts&#39;, &#39;pct_dropout_by_counts&#39;, &#39;total_counts&#39;, &#39;log1p_total_counts&#39;, &#39;n_counts&#39;, &#39;n_cells&#39;
+    uns: &#39;spatial&#39;, &#39;log1p&#39;, &#39;cluster_colors&#39;, &#39;SOAPy&#39;
+    obsm: &#39;spatial&#39;
+</pre></div></div>
+</div>
+<p>The regression method describes the continuous spatial variation of expression, therefore it could find more complex spatial patterns than other methods, such as nonlinear change “low-high-low”. <strong>PCP4</strong> is an example.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">show_tendency()</span></code> to display the spatial tendency of genes.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_tendency</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">gene_name</span> <span class="o">=</span> <span class="s1">&#39;PCP4&#39;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Spatial_tendency_20_0.png" src="../_images/Tutorials_Spatial_tendency_20_0.png" />
+</div>
+</div>
+<p>The real spatial distribution of <strong>PCP4</strong> is used for verification, and the results are consistent with the trend we find out.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">img_key</span><span class="o">=</span><span class="s2">&quot;hires&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;PCP4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Spatial_tendency_22_0.png" src="../_images/Tutorials_Spatial_tendency_22_0.png" />
+</div>
+</div>
+</section>
+<section id="Clustering-genes-based-on-regression-curves">
+<h2>Clustering genes based on regression curves<a class="headerlink" href="#Clustering-genes-based-on-regression-curves" title="Link to this heading"></a></h2>
+<p>According to the similarity of the curves, the genes were clustered into 10 clusters, and the genes with similar expression distribution were summarized. <code class="docutils literal notranslate"><span class="pre">sp.tl.gene_cluster()</span></code> can cluster the curves of genes to obtain genes with similar spatial trends and <code class="docutils literal notranslate"><span class="pre">sp.pl.show_curves_cluster()</span></code> shows the spatial trends of the clusters</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">gene_cluster</span><span class="p">(</span><span class="n">adata</span><span class="o">=</span><span class="n">adata</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">range_min</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">fdr</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pvalue</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_curves_cluster</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Spatial_tendency_25_0.png" src="../_images/Tutorials_Spatial_tendency_25_0.png" />
+</div>
+</div>
+<p>Display of regression results</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;SOAPy&#39;</span><span class="p">][</span><span class="s1">&#39;gene_cluster&#39;</span><span class="p">][</span><span class="s1">&#39;gene_cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>p_value</th>
+      <th>param</th>
+      <th>range</th>
+      <th>correlation</th>
+      <th>Spots number</th>
+      <th>AIC</th>
+      <th>BIC</th>
+      <th>p_adjust</th>
+      <th>p_rej</th>
+      <th>cluster</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>HES4</th>
+      <td>5.633906e-04</td>
+      <td>[0.1326486493536636, -0.0006650708778897599, 2...</td>
+      <td>0.102010</td>
+      <td>0.073997</td>
+      <td>2984</td>
+      <td>942.057647</td>
+      <td>978.063767</td>
+      <td>4.933111e-03</td>
+      <td>True</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>ISG15</th>
+      <td>1.319379e-14</td>
+      <td>[0.22827312424365218, 0.0005261164861054161, -...</td>
+      <td>0.300210</td>
+      <td>-0.141283</td>
+      <td>2984</td>
+      <td>2178.312135</td>
+      <td>2214.318255</td>
+      <td>6.042155e-13</td>
+      <td>True</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>AL390719.2</th>
+      <td>1.297129e-09</td>
+      <td>[0.0019054998589420366, 0.0002970081801439279,...</td>
+      <td>0.106286</td>
+      <td>0.016078</td>
+      <td>2984</td>
+      <td>-8162.861949</td>
+      <td>-8126.855829</td>
+      <td>3.313742e-08</td>
+      <td>True</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>VWA1</th>
+      <td>9.578931e-13</td>
+      <td>[0.28116883264488357, -0.001837142582764715, 6...</td>
+      <td>0.197253</td>
+      <td>-0.090514</td>
+      <td>2984</td>
+      <td>798.483110</td>
+      <td>834.489229</td>
+      <td>3.582653e-11</td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>FNDC10</th>
+      <td>2.519397e-03</td>
+      <td>[0.014935926080451146, 0.001300456461821516, -...</td>
+      <td>0.185734</td>
+      <td>0.023977</td>
+      <td>2984</td>
+      <td>84.695352</td>
+      <td>120.701472</td>
+      <td>1.725996e-02</td>
+      <td>True</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Spatial%20domain.html" class="btn btn-neutral float-left" title="Spatial domain" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Cell%20type%20proximity.html" class="btn btn-neutral float-right" title="Spatial architecture - cell type proximity" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Heqi Wang.
+      <span class="lastupdated">Last updated on Jan 02, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

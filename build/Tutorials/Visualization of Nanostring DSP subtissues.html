@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visualization of Nanostring DSP subtissues &mdash; SOAPy 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Spatial communication - cell level" href="Spatial%20communication%20-%20cell%20level.html" />
+    <link rel="prev" title="Transfer Seurat object into Scanpy object" href="Transfer%20Seurat%20object%20into%20Anndata%20object.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #FF8C00" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SOAPy
+              <img src="../_static/logo_soapy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#examples-data">Examples data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#major-tutorials">Major tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#other-tutorials">Other tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Transfer%20Seurat%20object%20into%20Anndata%20object.html">Transfer Seurat object into Scanpy object</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Visualization of Nanostring DSP subtissues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Read">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Preprocessing">Preprocessing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Visualization">Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20communication%20-%20cell%20level.html">Spatial communication - cell level</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #FF8C00" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SOAPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Visualization of Nanostring DSP subtissues</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/Visualization of Nanostring DSP subtissues.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Visualization-of-Nanostring-DSP-subtissues">
+<h1>Visualization of Nanostring DSP subtissues<a class="headerlink" href="#Visualization-of-Nanostring-DSP-subtissues" title="Link to this heading"></a></h1>
+<p>The original data of <strong>Nanostring DSP</strong> technology is different from other technologies, It consists of a number of points to form a ROI, and then the ROI shows the merge expression level. Here we use this tutorial to better visualize the DSP data.</p>
+<p>The more complete week 13 slides were used for presentation. Image data can be downloaded from <a class="reference external" href="https://nanostring.com/products/geomx-digital-spatial-profiler/spatial-organ-atlas/mouse-development/">https://nanostring.com/products/geomx-digital-spatial-profiler/spatial-organ-atlas/mouse-development/</a>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">tifffile</span> <span class="k">as</span> <span class="nn">tiff</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/soapy/pp/utils.py:9: NumbaDeprecationWarning: The &#39;nopython&#39; keyword argument was not supplied to the &#39;numba.jit&#39; decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
+  def _filter_of_graph(obs: pd.DataFrame,
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/soapy/tl/utils.py:66: NumbaDeprecationWarning: The &#39;nopython&#39; keyword argument was not supplied to the &#39;numba.jit&#39; decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
+  @nb.jit()
+</pre></div></div>
+</div>
+<section id="Read">
+<h2>Read<a class="headerlink" href="#Read" title="Link to this heading"></a></h2>
+<p>Read the Anndata data generated in <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">spatial</span> <span class="pre">omics</span></code> tutorial.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="s1">&#39;mouse_embryo_dsp_adata.h5ad&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">tiff</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E13_image_files/mu_dev_E13_006.ome.tiff&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Index([&#39;SlideName&#39;, &#39;ScanLabel&#39;, &#39;ROILabel&#39;, &#39;SegmentLabel&#39;, &#39;QCFlags&#39;,
+       &#39;AOISurfaceArea&#39;, &#39;AOINucleiCount&#39;, &#39;ROICoordinateX&#39;, &#39;ROICoordinateY&#39;,
+       &#39;RawReads&#39;, &#39;AlignedReads&#39;, &#39;DeduplicatedReads&#39;, &#39;TrimmedReads&#39;,
+       &#39;StitchedReads&#39;, &#39;SequencingSaturation&#39;, &#39;SequencingSetID&#39;, &#39;UMIQ30&#39;,
+       &#39;RTSQ30&#39;, &#39;GeoMxNgsPipelineVersion&#39;,
+       &#39;LOT_Mouse_NGS_Whole_Transcriptome_Atlas_RNA&#39;, &#39;Tissue_annotation&#39;,
+       &#39;Tissue&#39;, &#39;p63_expression&#39;, &#39;Tissue_substructure&#39;, &#39;Tissue_type&#39;,
+       &#39;Timepoint&#39;, &#39;ROIID&#39;, &#39;SegmentID&#39;, &#39;ScanWidth&#39;, &#39;ScanHeight&#39;,
+       &#39;ScanOffsetX&#39;, &#39;ScanOffsetY&#39;,
+       &#39;LOQ (Mouse NGS Whole Transcriptome Atlas RNA)&#39;, &#39;NormalizationFactor&#39;,
+       &#39;ExpressionFilteringThreshold (Mouse NGS Whole Transcriptome Atlas RNA)&#39;],
+      dtype=&#39;object&#39;)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;point&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>slide</th>
+      <th>roi</th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>mu_dev_E13_006</td>
+      <td>1</td>
+      <td>13011.793535</td>
+      <td>10484.417086</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mu_dev_E13_006</td>
+      <td>1</td>
+      <td>13109.708338</td>
+      <td>10499.139178</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mu_dev_E13_006</td>
+      <td>1</td>
+      <td>13184.708338</td>
+      <td>10547.123928</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>mu_dev_E13_006</td>
+      <td>1</td>
+      <td>13242.708338</td>
+      <td>10642.093747</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>mu_dev_E13_006</td>
+      <td>1</td>
+      <td>13261.840745</td>
+      <td>10730.656697</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>4171</th>
+      <td>mu_dev_E13_011</td>
+      <td>58</td>
+      <td>4548.893838</td>
+      <td>10387.159712</td>
+    </tr>
+    <tr>
+      <th>4172</th>
+      <td>mu_dev_E13_011</td>
+      <td>58</td>
+      <td>4477.882657</td>
+      <td>10362.799483</td>
+    </tr>
+    <tr>
+      <th>4173</th>
+      <td>mu_dev_E13_011</td>
+      <td>58</td>
+      <td>4437.660936</td>
+      <td>10371.299021</td>
+    </tr>
+    <tr>
+      <th>4174</th>
+      <td>mu_dev_E13_011</td>
+      <td>58</td>
+      <td>4487.202775</td>
+      <td>10425.060315</td>
+    </tr>
+    <tr>
+      <th>4175</th>
+      <td>mu_dev_E13_011</td>
+      <td>58</td>
+      <td>4636.188087</td>
+      <td>10423.920083</td>
+    </tr>
+  </tbody>
+</table>
+<p>4176 rows × 4 columns</p>
+</div></div>
+</div>
+</section>
+<section id="Preprocessing">
+<h2>Preprocessing<a class="headerlink" href="#Preprocessing" title="Link to this heading"></a></h2>
+<p>We used subtissues of the heart, lung, and midgut for visualization.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Tissue&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Heart&#39;</span><span class="p">,</span> <span class="s1">&#39;Lung&#39;</span><span class="p">,</span> <span class="s1">&#39;Midgut&#39;</span><span class="p">]),</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Tissue_s&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Tissue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Tissue_substructure&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Slide_name</span> <span class="o">=</span> <span class="s1">&#39;mu_dev_E13_006&#39;</span>
+
+<span class="n">tissue_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Heart Trabecula&#39;</span><span class="p">,</span> <span class="s1">&#39;Heart Valve&#39;</span><span class="p">,</span> <span class="s1">&#39;Heart Wall&#39;</span><span class="p">,</span> <span class="s1">&#39;Lung Epithelium&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Lung Mesenchyme&#39;</span><span class="p">,</span> <span class="s1">&#39;Midgut Epithelium&#39;</span><span class="p">,</span> <span class="s1">&#39;Midgut Mesenchyme&#39;</span><span class="p">,</span> <span class="s1">&#39;Midgut Neuron&#39;</span><span class="p">]</span>
+
+<span class="n">color_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Heart Trabecula&#39;</span><span class="p">:</span> <span class="s1">&#39;#beeac4&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Heart Valve&#39;</span><span class="p">:</span> <span class="s1">&#39;#800000&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Heart Wall&#39;</span><span class="p">:</span> <span class="s1">&#39;#fa6d1d&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Lung Epithelium&#39;</span><span class="p">:</span> <span class="s1">&#39;#4169e1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Lung Mesenchyme&#39;</span><span class="p">:</span> <span class="s1">&#39;#ee82ee&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Midgut Epithelium&#39;</span><span class="p">:</span> <span class="s1">&#39;#da1f18&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Midgut Mesenchyme&#39;</span><span class="p">:</span> <span class="s1">&#39;#ffe5b4&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Midgut Neuron&#39;</span><span class="p">:</span> <span class="s1">&#39;#f47a75&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gray scale transformation</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span> <span class="o">/</span> <span class="mi">23758</span> <span class="o">*</span> <span class="mi">255</span><span class="o">*</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obs_inf</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">obs_inf</span> <span class="o">=</span> <span class="n">obs_inf</span><span class="p">[</span><span class="n">obs_inf</span><span class="p">[</span><span class="s1">&#39;SlideName&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">Slide_name</span><span class="p">]</span>
+
+<span class="n">point_inf</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;point&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">point_inf</span> <span class="o">=</span> <span class="n">point_inf</span><span class="p">[</span><span class="n">point_inf</span><span class="p">[</span><span class="s1">&#39;slide&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">Slide_name</span><span class="p">]</span>
+
+<span class="n">points_roi</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">point_inf</span><span class="p">[</span><span class="s1">&#39;roi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">roi</span> <span class="o">=</span> <span class="n">point_inf</span><span class="p">[</span><span class="n">point_inf</span><span class="p">[</span><span class="s1">&#39;roi&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">index</span><span class="p">]</span>
+    <span class="n">points_roi</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">roi</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Visualization">
+<h2>Visualization<a class="headerlink" href="#Visualization" title="Link to this heading"></a></h2>
+<p>Place the original image and the spot distribution of the sub-tissues on two layers and then show them separately.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+<span class="c1"># plot subtissues</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">obs_inf</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
+    <span class="n">subt</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="s1">&#39;Tissue_s&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">subt</span> <span class="ow">in</span> <span class="n">tissue_list</span><span class="p">:</span>
+        <span class="c1"># print(getattr(row, &#39;ROILabel&#39;), getattr(row, &#39;Tissue_substructure&#39;))</span>
+        <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">points_roi</span><span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="s1">&#39;ROILabel&#39;</span><span class="p">)]:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">point</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">color_dict</span><span class="p">[</span><span class="n">subt</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">subt</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Spatial1&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Spatial2&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">unique</span> <span class="o">=</span> <span class="p">[(</span><span class="n">h</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span> <span class="k">if</span> <span class="n">l</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">[:</span><span class="n">i</span><span class="p">]]</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">unique</span><span class="p">),</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.01</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">markerscale</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># plot image</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_13525/2934043088.py:29: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig.show()
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Visualization_of_Nanostring_DSP_subtissues_16_1.png" src="../_images/Tutorials_Visualization_of_Nanostring_DSP_subtissues_16_1.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Transfer%20Seurat%20object%20into%20Anndata%20object.html" class="btn btn-neutral float-left" title="Transfer Seurat object into Scanpy object" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Spatial%20communication%20-%20cell%20level.html" class="btn btn-neutral float-right" title="Spatial communication - cell level" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Heqi Wang.
+      <span class="lastupdated">Last updated on Jan 02, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

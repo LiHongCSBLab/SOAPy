@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial 5: Spatial architecture - niche composition &mdash; SOAPy 0.1.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Spatial communications" href="Spatial%20communications.html" />
+    <link rel="prev" title="Spatial architecture - cell type proximity" href="Cell%20type%20proximity.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #FF8C00" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SOAPy
+              <img src="../_static/logo_soapy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#examples-data">Examples data</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#major-tutorials">Major tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Read_spatial_omics.html">Read spatial omics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20domain.html">Spatial domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20tendency.html">Spatial tendency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cell%20type%20proximity.html">Spatial architecture - cell type proximity</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Tutorial 5: Spatial architecture - niche composition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Read">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Constructing-spatial-network">Constructing spatial network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#C-niche-cluster">C-niche cluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Tensor-decomposition-of-niche">Tensor decomposition of niche</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Spatial%20communications.html">Spatial communications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Spatiotemporal%20pattern.html">Spatiotemporal pattern</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-tutorials">Other tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #FF8C00" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SOAPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Tutorial 5: Spatial architecture - niche composition</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/Niche composition.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Tutorial-5:-Spatial-architecture---niche-composition">
+<h1>Tutorial 5: Spatial architecture - niche composition<a class="headerlink" href="#Tutorial-5:-Spatial-architecture---niche-composition" title="Link to this heading"></a></h1>
+<p>Spatial composition analysis identifies multi-cellular niches that composed by cell types with specific proportion.</p>
+<p>MIBI-TOF TNBC samples were used as in <strong>tutorial: Cell type proximity</strong></p>
+<section id="Read">
+<h2>Read<a class="headerlink" href="#Read" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">SOAPy_st</span> <span class="k">as</span> <span class="nn">sp</span>
+</pre></div>
+</div>
+</div>
+<p>To simplify the analyzed data, the cell types were combined, and <strong>DK cells</strong>, <strong>NK cells</strong>, <strong>Neutrophil cells</strong>, <strong>Treg cells</strong>, and <strong>other immune cell</strong> categories were collectively referred to as <strong>other</strong>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_com</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;adata_combinednew.h5ad&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Constructing-spatial-network">
+<h2>Constructing spatial network<a class="headerlink" href="#Constructing-spatial-network" title="Link to this heading"></a></h2>
+<p>the cell-cell network was built using 100 pixels as the radius to capture the composition pattern of more surrounding cells</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">make_network</span><span class="p">(</span><span class="n">adata_com</span><span class="p">,</span> <span class="n">sample_key</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING:root:adata has not been initialized, and adata.uns[&#39;SOAPy&#39;] has been established
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 211649 × 44
+    obs: &#39;sample&#39;, &#39;leiden&#39;, &#39;cluster&#39;
+    var: &#39;highly_variable&#39;
+    uns: &#39;cluster_colors&#39;, &#39;leiden&#39;, &#39;leiden_colors&#39;, &#39;neighbors&#39;, &#39;pca&#39;, &#39;umap&#39;, &#39;var_for_clustering&#39;, &#39;SOAPy&#39;
+    obsm: &#39;X_pca&#39;, &#39;X_umap&#39;, &#39;spatial&#39;
+    varm: &#39;PCs&#39;
+    obsp: &#39;connectivities&#39;, &#39;distances&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="C-niche-cluster">
+<h2>C-niche cluster<a class="headerlink" href="#C-niche-cluster" title="Link to this heading"></a></h2>
+<p>Each cell was represented by the proportion of cell type of its surrounding cells (niche). 211649 cells from 41 TNBC samples were clustered into 30 C-niche clusters.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">get_c_niche</span><span class="p">(</span><span class="n">adata</span><span class="o">=</span><span class="n">adata_com</span><span class="p">,</span> <span class="n">k_max</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">celltype_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">sample_key</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 211649 × 44
+    obs: &#39;sample&#39;, &#39;leiden&#39;, &#39;cluster&#39;, &#39;C_niche&#39;
+    var: &#39;highly_variable&#39;
+    uns: &#39;cluster_colors&#39;, &#39;leiden&#39;, &#39;leiden_colors&#39;, &#39;neighbors&#39;, &#39;pca&#39;, &#39;umap&#39;, &#39;var_for_clustering&#39;, &#39;SOAPy&#39;
+    obsm: &#39;X_pca&#39;, &#39;X_umap&#39;, &#39;spatial&#39;
+    varm: &#39;PCs&#39;
+    obsp: &#39;connectivities&#39;, &#39;distances&#39;
+</pre></div></div>
+</div>
+<p>Show the cellular composition of each C-niche.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_celltype_niche_heatmap</span><span class="p">(</span><span class="n">adata</span><span class="o">=</span><span class="n">adata_com</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Niche_composition_13_0.png" src="../_images/Tutorials_Niche_composition_13_0.png" />
+</div>
+</div>
+<p>Show the cell type composition of each sample.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_celltype_sample_heatmap</span><span class="p">(</span><span class="n">adata</span><span class="o">=</span><span class="n">adata_com</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Niche_composition_15_0.png" src="../_images/Tutorials_Niche_composition_15_0.png" />
+</div>
+</div>
+<p>Show the C-niche composition of each sample.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_niche_sample_heatmap</span><span class="p">(</span><span class="n">adata</span><span class="o">=</span><span class="n">adata_com</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Niche_composition_17_0.png" src="../_images/Tutorials_Niche_composition_17_0.png" />
+</div>
+</div>
+<p>Show the composition of the microenvironment belonging to C-niche2 cells in sample 1</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fixed color map of each cell type</span>
+<span class="n">color_map</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;other&#39;</span><span class="p">:</span> <span class="s1">&#39;#999999&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="s1">&#39;#765005&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CD4 T&#39;</span><span class="p">:</span> <span class="s1">&#39;#0780cf&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CD8 T&#39;</span><span class="p">:</span> <span class="s1">&#39;#fa6d1d&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Endothelial cell&#39;</span><span class="p">:</span> <span class="s1">&#39;#024b51&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Epithelial cell&#39;</span><span class="p">:</span> <span class="s1">&#39;#b6b51f&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Macrophage&#39;</span><span class="p">:</span> <span class="s1">&#39;#da1f18&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Mesenchymal cell&#39;</span><span class="p">:</span> <span class="s1">&#39;#701866&#39;</span>
+<span class="p">}</span>
+
+<span class="c1"># Black boundary: cells of C-niche 2, Gray boundary: cells of C-niche</span>
+<span class="c1"># Filled areas with colors of cell types: the range of microenvironments labeled as C-niche 2 cells.</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_niche_environment</span><span class="p">(</span>
+    <span class="n">adata</span><span class="o">=</span><span class="n">adata_com</span><span class="p">,</span>
+    <span class="n">celltype_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span>
+    <span class="n">sample_key</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span>
+    <span class="n">sample_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">color_map</span><span class="p">,</span>
+    <span class="n">niche_key</span><span class="o">=</span><span class="s1">&#39;C_niche&#39;</span><span class="p">,</span>
+    <span class="n">niche</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Niche_composition_19_0.png" src="../_images/Tutorials_Niche_composition_19_0.png" />
+</div>
+</div>
+</section>
+<section id="Tensor-decomposition-of-niche">
+<h2>Tensor decomposition of niche<a class="headerlink" href="#Tensor-decomposition-of-niche" title="Link to this heading"></a></h2>
+<p>In order to investigate the combinational effects of cell types and niches on patient heterogeneity, the “Niche-CellType (without epithelial)-Sample” tensor (size: 30*7*41) was factorized to four factors</p>
+<p>To highlight the more diverse microenvironment composition, epithelial cells were removed when constructing the tensor.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">niche_tensor</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">TensorDecomposition</span><span class="p">()</span>
+<span class="n">adata_copy</span> <span class="o">=</span> <span class="n">adata_com</span><span class="p">[</span><span class="n">adata_com</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;Epithelial cell&#39;</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">niche_tensor</span><span class="o">.</span><span class="n">tensor_with_obs</span><span class="p">(</span><span class="n">adata_copy</span><span class="p">,</span> <span class="n">obs_factor</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="s1">&#39;C_niche&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Each sample is internally normalized followed by non-negative CP decomposition</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">niche_tensor</span><span class="o">.</span><span class="n">normalization</span><span class="p">(</span><span class="n">factor_name</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">)</span>
+<span class="n">weights</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">nre</span> <span class="o">=</span> <span class="n">niche_tensor</span><span class="o">.</span><span class="n">CP_decomposition</span><span class="p">(</span><span class="n">rank</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">non_negative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The sample factor matrix is clustered, and the samples with the similar microenvironment are clustered into one class.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_factor_matrix_in_CP_tensor</span><span class="p">(</span><span class="n">tensor</span><span class="o">=</span><span class="n">niche_tensor</span><span class="p">,</span> <span class="n">factor_name</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Niche_composition_26_0.png" src="../_images/Tutorials_Niche_composition_26_0.png" />
+</div>
+</div>
+<p>Through the orthographic observation of the samples, the samples enriched in factor 3 have a large number of enriched regions of B cells, which may correspond to tertiary lymph node structures.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_voronoi</span><span class="p">(</span><span class="n">adata_com</span><span class="p">,</span> <span class="n">sample_id</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span> <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;sample 35&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Niche_composition_28_0.png" src="../_images/Tutorials_Niche_composition_28_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_voronoi</span><span class="p">(</span><span class="n">adata_com</span><span class="p">,</span> <span class="n">sample_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;sample 1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorials_Niche_composition_29_0.png" src="../_images/Tutorials_Niche_composition_29_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Cell%20type%20proximity.html" class="btn btn-neutral float-left" title="Spatial architecture - cell type proximity" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Spatial%20communications.html" class="btn btn-neutral float-right" title="Spatial communications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Heqi Wang.
+      <span class="lastupdated">Last updated on Jan 02, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
