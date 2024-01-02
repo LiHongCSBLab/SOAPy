@@ -1,0 +1,16 @@
+numpy <= 1.22.3
+scanpy >= 1.9.3
+opencv-python
+scipy
+tqdm
+anndata >= 0.9.1
+esda
+libpysal
+geopandas >= 0.12.2
+igraph >= 0.9.9
+s-dbw >= 0.4.0
+rp2
+seaborn
+matplotlib
+scikit-misc
+tensorly
