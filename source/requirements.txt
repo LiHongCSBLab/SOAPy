@@ -3,3 +3,4 @@ jupyter_sphinx
 nbsphinx
 sphinx_rtd_theme
 recommonmark
+pandas==2.0.0
