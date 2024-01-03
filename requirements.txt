@@ -1,5 +1,6 @@
 numpy <= 1.22.3
 scanpy >= 1.9.3
+pandas
 opencv-python
 scipy
 tqdm
