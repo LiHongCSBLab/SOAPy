@@ -15,7 +15,3 @@ sphinx:
 python:
   install:
     - requirements: source/requirements.txt
-
-doc_build:
-  type: python
-  script: false
