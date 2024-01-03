@@ -798,3 +798,7 @@ def gene_cluster(adata: ad.AnnData,
         adata.uns['SOAPy'][scale]['k_lowess'] = New_gc.best_k
 
     return New_gc.best_k, New_gc.df_params
+
+
+if __name__ == '__main__':
+    pass
