@@ -1041,3 +1041,7 @@ def cell_type_level_communication(
         _add_info_from_sample(adata, sample_id=sample_id, keys='celltype_comm_score', add=communication_)
 
     return adata
+
+
+if __name__ == '__main__':
+    pass
