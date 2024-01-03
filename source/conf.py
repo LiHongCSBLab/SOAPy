@@ -12,12 +12,12 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../SOAPy'))
+sys.path.insert(0, os.path.abspath('../SOAPy_st'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'SOAPy'
+project = 'SOAPy_st'
 copyright = '2023, Heqi Wang'
 author = 'Cancer system biology lab'
 
