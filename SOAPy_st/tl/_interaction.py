@@ -420,3 +420,6 @@ def get_c_niche(
 
     return adata
 
+
+if __name__ == '__main__':
+    pass

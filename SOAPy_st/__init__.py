@@ -8,7 +8,7 @@ __version__ = "v0.1.0"
 
 """
 # Author: Lihong lab
-# File Name:SOAPy_st
+# File Name:SOAPy-st
 # github:https://github.com/LiHongCSBLab/SOAPy
 # Description:
 """

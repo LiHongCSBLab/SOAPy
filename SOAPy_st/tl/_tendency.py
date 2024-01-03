@@ -1148,3 +1148,7 @@ def gene_cluster(
     _add_info_from_sample(adata, sample_id=None, keys='gene_cluster', add=gene_cluster_params)
 
     return adata
+
+
+if __name__ == '__main__':
+    pass

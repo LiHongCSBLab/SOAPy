@@ -244,3 +244,7 @@ def get_mask_from_domain(
     _add_info_from_sample(adata, sample_id=None, keys='mask', add=Mask)
 
     return Mask
+
+
+if __name__ == '__main__':
+    pass

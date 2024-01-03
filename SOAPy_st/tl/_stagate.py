@@ -160,3 +160,7 @@ def domain_from_STAGATE(adata: sc.AnnData,
 
     if not inplace:
         return adata, adata_obs
+
+
+if __name__ == '__main__':
+    pass

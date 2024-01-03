@@ -372,3 +372,6 @@ def _nre_similar(tensor1, tensor2) -> float:
     NRE = norm(tensor1 - tensor2)/norm(tensor1)
     return NRE
 
+
+if __name__ == '__main__':
+    pass

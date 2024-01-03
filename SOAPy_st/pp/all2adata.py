@@ -627,3 +627,7 @@ def sc_Seurat2Anndata(
     adata = anndata.AnnData(X=count_mat, var=metafeature, obs=metadata)
 
     return adata
+
+
+if __name__ == '__main__':
+    pass
