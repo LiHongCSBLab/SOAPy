@@ -1,3 +1,13 @@
+<a href="https://pypi.python.org/pypi/SOAPy-st/">
+    <img src="https://img.shields.io/pypi/v/SOAPy-st.svg" alt="PyPI Version">
+</a>
+<a href="https://pepy.tech/project/SOAPy-st">
+<img src="https://static.pepy.tech/personalized-badge/SOAPy-st?period=total&units=international_system&left_color=grey&right_color=orange&left_text=Downloads"
+alt="PyPI downloads">
+</a>
+<a href='https://soapy-st.readthedocs.io/en/latest/?badge=latest'>
+    <img src='https://readthedocs.org/projects/soapy-st/badge/?version=latest' alt='Documentation Status' />
+</a>
 
 # SOAPy: A package for **S**patial-**O**mics **A**nalysis in **Py**thon
 
@@ -9,6 +19,10 @@ preprocessing modules (“Data Import”, “spatial network”, and “Spatial 
 expression patterns of genes (“Spatial Variation”, “Spatial Tendency”, and “Spatiotemporal Pattern”), two modules
 for analyzing the spatial architecture of cells (“Spatial Proximity”, “Spatial Composition”), and two module for
 analyzing Spatial Communication.
+
+## Tutorial
+
+https://soapy-st.readthedocs.io/en/latest/
 
 ## Pipeline
 
