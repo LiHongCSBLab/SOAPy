@@ -425,3 +425,6 @@ def cal_aucell(
 
     return adata
 
+
+if __name__ == '__main__':
+    pass
