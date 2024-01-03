@@ -36,6 +36,7 @@ extensions = [
     'sphinx.ext.autosummary',
     'nbsphinx',
     "sphinx.ext.autodoc",
+    'sphinx.ext.viewcode',
 ]
 
 nbsphinx_execute = 'never'
