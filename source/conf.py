@@ -12,7 +12,9 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../SOAPy_st'))
+
+sys.path.insert(0, os.path.abspath(".."))
+import SOAPy_st
 
 
 # -- Project information -----------------------------------------------------
