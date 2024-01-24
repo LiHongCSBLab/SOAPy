@@ -50,8 +50,8 @@ def _best_k(data, k, sdbw):
             if data.shape[0] <= k_i:
                 break
             km = KMeans(n_clusters=k_i)
-            clusters_res = km.fit_predict(data)
-            s_Dbw[k_i] = S_Dbw(data, clusters_res)
+            clusters_res = km.fit_predict(data.values)
+            s_Dbw[k_i] = S_Dbw(data.values, clusters_res)
 
         min_k = list(s_Dbw.keys())[list(s_Dbw.values()).index(min(list(s_Dbw.values())))]
     else:
