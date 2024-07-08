@@ -1,5 +1,6 @@
 import copy
 import pandas as pd
+import torch
 import scanpy as sc
 import numpy as np
 from typing import Optional, Union
@@ -424,6 +425,3 @@ def cal_aucell(
 
     return adata
 
-
-if __name__ == '__main__':
-    pass

@@ -164,6 +164,9 @@ class niche(cell_network):
             mat_neigh[int(edge.loc[index, 'point_1']), self._cell_type_map[edge.at[index, 'cluster_2']]] += 1
             mat_neigh[int(edge.loc[index, 'point_2']), self._cell_type_map[edge.at[index, 'cluster_1']]] += 1
 
+        for index in range(len(self.adata.obs_names)):
+            mat_neigh[index, self._cell_type_map[self.cluster[index]]] += 1
+
         pd_i_niche = pd.DataFrame(mat_neigh, index=self.adata.obs_names, columns=list(self.cell_type))
 
         for index in range(mat_neigh.shape[0]):
@@ -185,15 +188,18 @@ class mult_sample_niche(object):
         list_i_niche = []
 
         in_sample_cluster = []
+        in_sample_list = []
         for sample_id in sample:
             i_niche_single = niche(adata, celltype_key, sample_key, sample=sample_id)
             list_i_niche.append(i_niche_single.i_niche)
             in_sample_cluster += i_niche_single.adata.obs[celltype_key].tolist()
+            in_sample_list += i_niche_single.adata.obs[sample_key].tolist()
 
         all_cluster = adata.obs[celltype_key].tolist()
 
         self.cluster = celltype_key
         self.in_sample_cluster = in_sample_cluster
+        self.in_sample_list = in_sample_list
         new_list = [str(elem) for elem in all_cluster]
         self._cell_type_map = {v: i for i, v in enumerate(sorted(new_list))}
         self._species_of_clusters = len(self._cell_type_map)
@@ -202,7 +208,7 @@ class mult_sample_niche(object):
         i_mult_niche = []
         for index, mat_niche in enumerate(list_i_niche):
 
-            dict_num_spots[index+1] = mat_niche.shape[0]
+            dict_num_spots[sample[index]] = mat_niche.shape[0]
 
             if self._species_of_clusters != mat_niche.shape[1]:
                 mat_label = mat_niche.columns.tolist()
@@ -225,8 +231,9 @@ class mult_sample_niche(object):
                      sdbw: bool = True) -> pd.DataFrame:
         res, km = _best_k(self.mult_niche, k_max, sdbw)
         df_mult_niche = pd.DataFrame(data=self.mult_niche, columns=list(self._cell_type_map.keys()))
-        df_mult_niche['sample'] = [elem for item in
-                                   [[str(key)] * val for key, val in self.num_niche.items()] for elem in item]
+
+        df_mult_niche['sample'] = self.in_sample_list
+
         df_mult_niche['celltype'] = self.in_sample_cluster
         df_mult_niche['C_niche'] = res
 
@@ -403,7 +410,7 @@ def get_c_niche(
         logg.error(f'Mult-sample niche analysis cannot be specified without a given sample key')
         raise ValueError
     if sample is None and sample_key is not None:
-        sample = list(np.unique(adata.obs[sample_key]))
+        sample = list(adata.obs[sample_key].unique())
         logg.info(f'Use all samples in the niche calculation')
 
     assert celltype_key in adata.obs.columns
@@ -412,7 +419,7 @@ def get_c_niche(
     niche_inf = niche_.mult_c_niche(k_max=k_max, sdbw=sdbw)
     _add_info_from_sample(adata=adata, sample_id=None, keys='niche', add=niche_inf)
 
-    if sample_key is not None:
+    if sample is not None:
         adata.obs[niche_key] = None
         adata.obs.loc[np.isin(adata.obs[sample_key], sample), niche_key] = niche_inf['C_niche'].tolist()
     else:
@@ -420,6 +427,3 @@ def get_c_niche(
 
     return adata
 
-
-if __name__ == '__main__':
-    pass

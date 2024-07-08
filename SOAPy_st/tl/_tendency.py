@@ -297,7 +297,10 @@ class SpatialTendency(object):
                 if self.adata.obs.loc[index, 'in_mask'] is None:
                     self.adata.obs.loc[index, 'in_mask'] = marker
                 else:
-                    self.adata.obs.loc[index, 'in_mask'] = np.min(abs(self.adata.obs.loc[index, 'in_mask']), abs(marker))
+                    if marker < 0:
+                        self.adata.obs.loc[index, 'in_mask'] = marker
+                    else:
+                        self.adata.obs.loc[index, 'in_mask'] = np.min((self.adata.obs.loc[index, 'in_mask'], marker))
 
         if radius is None:
             radius = np.inf
@@ -1148,7 +1151,3 @@ def gene_cluster(
     _add_info_from_sample(adata, sample_id=None, keys='gene_cluster', add=gene_cluster_params)
 
     return adata
-
-
-if __name__ == '__main__':
-    pass

@@ -187,7 +187,3 @@ def cal_spark(
     test_result = ro.conversion.rpy2py(test_result)
 
     return test_result
-
-
-if __name__ == '__main__':
-    pass

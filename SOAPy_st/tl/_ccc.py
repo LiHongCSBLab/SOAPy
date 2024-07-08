@@ -29,7 +29,7 @@ class lr_pairs():
             Annotation_key: Optional[str] = 'annotation',
             ligand_key: Optional[str] = 'ligand_symbol',
             receptor_key: Optional[str] = 'receptor_symbol',
-    ):
+            ):
         """
         Parameters
         ----------
@@ -237,8 +237,7 @@ def update_exp(
 
     if norm:
         exp_new = ((exp_new - np.percentile(exp_new, percent_of_drop, axis=0)) /
-                   (np.percentile(exp_new, 100 - percent_of_drop, axis=0) - np.percentile(exp_new, percent_of_drop,
-                                                                                          axis=0)))
+                  (np.percentile(exp_new, 100 - percent_of_drop, axis=0) - np.percentile(exp_new, percent_of_drop, axis=0)))
         exp_new = np.where(exp_new > 1, 1.0, exp_new)
         exp_new = np.where(exp_new < 0, 0.0, exp_new)
         exp_new = np.nan_to_num(exp_new)
@@ -269,7 +268,7 @@ def get_sample_lr_score(
 
     without_neighbor = 0
     neigh_num = 0
-    i = 1
+    i=1
     for i, j in enumerate(indices):
         if not isinstance(j, np.ndarray):
             indices[i] = np.array([], dtype=np.int32)
@@ -279,7 +278,7 @@ def get_sample_lr_score(
             indices[i] = np.array(indices[i], dtype=np.int32)
             distances[i] = np.array(distances[i], dtype=np.float32)
         neigh_num += len(indices[i])
-    print(f'In {mode} mode, The average number of neighbors is {neigh_num / i}')
+    print(f'In {mode} mode, The average number of neighbors is {neigh_num/i}')
     print(f'In {mode} mode, total of {without_neighbor} spots have no neighbors')
 
     indices = nb.typed.List(indices)
@@ -628,7 +627,7 @@ def cell_level_communications(
             'secretory_affinity': update_p_data_s,
         }
 
-        _add_info_from_sample(adata, sample_id=sample_id, keys=species + '_cell_comm_score', add=communication_)
+        _add_info_from_sample(adata, sample_id=sample_id, keys=species+'_cell_comm_score', add=communication_)
 
     return adata
 
@@ -677,9 +676,9 @@ def get_celltype_score(
                 lr_score_i[ctj, cti] += shuffle_ligand_i[spotj] * shuffle_receptor_i[spoti]
             else:
                 lr_score_i[cti, ctj] += shuffle_ligand_i[spoti] * shuffle_receptor_i[spotj] / (
-                        d + np.float32(1.0))
+                            d + np.float32(1.0))
                 lr_score_i[ctj, cti] += shuffle_ligand_i[spotj] * shuffle_receptor_i[spoti] / (
-                        d + np.float32(1.0))
+                            d + np.float32(1.0))
 
         lr_score[i, :, :] = lr_score_i
 
@@ -735,7 +734,7 @@ def lr_score_with_cluster(
     for i, j in enumerate(indices):
         neigh_num += len(indices[i])
 
-    print(f'In {mode} mode, The average number of neighbors is {neigh_num / i}')
+    print(f'In {mode} mode, The average number of neighbors is {neigh_num/i}')
     print(f'In {mode} mode, total of {without_neighbor} spots have no neighbors')
 
     for index, name in enumerate(celltype):
@@ -774,7 +773,7 @@ def lr_score_with_cluster(
             lr_used_new.append(lr_used[index])
 
     lr_ct_strength = np.zeros(shape=(len(lr_names_new), len(celltype), len(celltype)), dtype=np.float32)
-    lr_ct_affinity = np.ones(shape=(len(lr_names_new), len(celltype), len(celltype)), dtype=np.float32) * (n_iters + 1)
+    lr_ct_affinity = np.ones(shape=(len(lr_names_new), len(celltype), len(celltype)), dtype=np.float32) * (n_iters+1)
 
     with tqdm(
             total=len(lr_names_new),
@@ -810,9 +809,9 @@ def lr_score_with_cluster(
                         lr_ct_strength[index, index_i, index_j] = exp_score
                     else:
                         count_edge_ij = count_edges[index_i, index_j]
-                        count_score = np.power(count_edge_ij / expectation_edges[index_i, index_j], m)
-                        count_score = 2 * count_score / (count_score + np.float32(1.0))
-                        lr_ct_strength[index, index_i, index_j] = exp_score * count_score
+                        count_score = np.power(count_edge_ij/expectation_edges[index_i, index_j], m)
+                        count_score = 2*count_score / (count_score + np.float32(1.0))
+                        lr_ct_strength[index, index_i, index_j] = exp_score*count_score
 
             pbar.update(1)
 
@@ -1042,7 +1041,3 @@ def cell_type_level_communication(
         _add_info_from_sample(adata, sample_id=sample_id, keys='celltype_comm_score', add=communication_)
 
     return adata
-
-
-if __name__ == '__main__':
-    pass
