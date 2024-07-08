@@ -144,7 +144,3 @@ def _get_edge(obs, indices, distances, cluster_label, exclude):
         distances=distances
     )
     return indices, distances, edge
-
-
-if __name__ == '__main__':
-    pass
