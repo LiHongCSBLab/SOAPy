@@ -92,8 +92,8 @@ class cell_cell_interaction(cell_network):
                 matrix[i, i] = matrix_sum[i] - matrix[i, i]
             for i in range(species):
                 for j in range(i):
-                    matrix[i, j] = matrix[i, j] / (matrix[i, i] + matrix[j, j])
-                    matrix[j, i] = matrix[j, i] / (matrix[i, i] + matrix[j, j])
+                    matrix[i, j] = matrix[i, j] / (matrix[i, i] + matrix[j, j] + 1)
+                    matrix[j, i] = matrix[j, i] / (matrix[i, i] + matrix[j, j] + 1)
             for i in range(species):
                 matrix[i, i] = 0
 
@@ -186,7 +186,7 @@ class mult_sample_niche(object):
                  sample_key: Optional[str] = None,
                  ):
         list_i_niche = []
-
+        list_barcode = []
         in_sample_cluster = []
         in_sample_list = []
         for sample_id in sample:
@@ -194,12 +194,14 @@ class mult_sample_niche(object):
             list_i_niche.append(i_niche_single.i_niche)
             in_sample_cluster += i_niche_single.adata.obs[celltype_key].tolist()
             in_sample_list += i_niche_single.adata.obs[sample_key].tolist()
+            list_barcode += i_niche_single.adata.obs_names.tolist()
 
         all_cluster = adata.obs[celltype_key].tolist()
 
         self.cluster = celltype_key
         self.in_sample_cluster = in_sample_cluster
         self.in_sample_list = in_sample_list
+        self.barcode = list_barcode
         new_list = [str(elem) for elem in all_cluster]
         self._cell_type_map = {v: i for i, v in enumerate(sorted(new_list))}
         self._species_of_clusters = len(self._cell_type_map)
@@ -216,24 +218,26 @@ class mult_sample_niche(object):
                 if len(label_add_mat) > 0:
                     for label in label_add_mat:
                         mat_niche[label] = [0.0 for i in range(mat_niche.shape[0])]
-                mat_niche = mat_niche.reindex(columns=all_cluster, fill_value=0)
 
             if index == 0:
                 i_mult_niche = copy.deepcopy(mat_niche)
                 continue
 
-            i_mult_niche = np.vstack((i_mult_niche, mat_niche))
+            i_mult_niche = pd.concat([i_mult_niche, mat_niche])
+
+        i_mult_niche = i_mult_niche.reindex(columns=all_cluster, fill_value=0)
         self.mult_niche = i_mult_niche
         self.num_niche = dict_num_spots
 
     def mult_c_niche(self,
                      k_max,
                      sdbw: bool = True) -> pd.DataFrame:
-        res, km = _best_k(self.mult_niche, k_max, sdbw)
-        df_mult_niche = pd.DataFrame(data=self.mult_niche, columns=list(self._cell_type_map.keys()))
+        res, km = _best_k(self.mult_niche.values, k_max, sdbw)
+        df_mult_niche = self.mult_niche
+        # df_mult_niche = pd.DataFrame(data=self.mult_niche, columns=list(self._cell_type_map.keys()))
 
         df_mult_niche['sample'] = self.in_sample_list
-
+        df_mult_niche['barcode'] = self.barcode
         df_mult_niche['celltype'] = self.in_sample_cluster
         df_mult_niche['C_niche'] = res
 
