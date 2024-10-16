@@ -60,7 +60,7 @@ def _type_check(var: Any, varname: str, types: Union[type, Tuple[type, ...]]):
     raise TypeError(f"{varname} must be of type {possible_types_str}")
 
 
-class stLearnConfig:
+class sopyConfig:
     """\
     Config manager for scanpy.
     """
@@ -462,4 +462,4 @@ class stLearnConfig:
         )
 
 
-settings = stLearnConfig()
+settings = sopyConfig()
