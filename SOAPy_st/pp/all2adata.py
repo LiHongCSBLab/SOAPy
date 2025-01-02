@@ -320,12 +320,6 @@ def read_dsp2adata(
 from typing import List
 from os import PathLike
 
-# R console preparation
-from rpy2.robjects import r
-import rpy2.robjects as robjects
-from rpy2.robjects.packages import importr
-from rpy2.robjects import pandas2ri
-
 
 # function to transform 10X Visium data
 def st_Seurat2Anndata(
@@ -349,6 +343,11 @@ def st_Seurat2Anndata(
         anndata.Anndata object
 
     """
+    # R console preparation
+    from rpy2.robjects import r
+    import rpy2.robjects as robjects
+    from rpy2.robjects.packages import importr
+    from rpy2.robjects import pandas2ri
 
     # assert r_home!=None 'R Console is not assigned'
 
@@ -574,6 +573,12 @@ def sc_Seurat2Anndata(
         exp_mat_slot=['RNA', 'counts']
 ):
     # assert r_home!=None 'R Console is not assigned'
+
+    # R console preparation
+    from rpy2.robjects import r
+    import rpy2.robjects as robjects
+    from rpy2.robjects.packages import importr
+    from rpy2.robjects import pandas2ri
 
     # Automatically transfer R-data.frame to Python-DataFrame
     pandas2ri.activate()
