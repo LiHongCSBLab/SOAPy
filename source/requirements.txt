@@ -1,4 +1,4 @@
-Sphinx==7.6.2
+Sphinx
 jupyter_sphinx
 nbsphinx
 sphinx_rtd_theme
