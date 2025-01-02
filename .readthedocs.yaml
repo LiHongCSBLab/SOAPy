@@ -1,23 +1,28 @@
 # Required
 version: 2
 
-# Set the version of Python and other tools you might need
+# 设置构建环境
 build:
   os: ubuntu-22.04
   tools:
     python: "3.9"
 
+# 设置 Sphinx 配置
 sphinx:
   builder: html
   configuration: source/conf.py
   fail_on_warning: false
 
+# 安装 Python 和其他依赖
 python:
   install:
     - method: pip
       path: .
     - requirements: source/requirements.txt
 
-commands:
-  - apt-get update && apt-get install -y r-base r-base-dev
-  - pip install rpy2
+# 在构建前安装 R 和 rpy2
+build:
+  jobs:
+    pre:
+      - apt-get update && apt-get install -y r-base r-base-dev
+      - pip install rpy2
