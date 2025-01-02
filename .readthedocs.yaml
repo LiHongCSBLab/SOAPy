@@ -18,7 +18,3 @@ python:
       path: .
     - requirements: source/requirements.txt
 
-commands:
-  - apt-get update
-  - apt-get install -y r-base r-base-dev
-  - pip install rpy2
