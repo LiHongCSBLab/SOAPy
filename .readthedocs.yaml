@@ -17,6 +17,3 @@ python:
     - method: pip
       path: .
     - requirements: source/requirements.txt
-
-env:
-  RPY2_CFFI_MODE: "ABI"
