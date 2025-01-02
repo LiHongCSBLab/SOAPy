@@ -20,5 +20,4 @@ seaborn==0.13.2
 statsmodels==0.13.2
 tensorly==0.8.1
 matplotlib
-sklearn
 tqdm
