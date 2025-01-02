@@ -21,4 +21,5 @@ tensorly==0.8.1
 pandas
 matplotlib
 tqdm
+RPY2_CFFI_MODE=ABI
 rpy2
