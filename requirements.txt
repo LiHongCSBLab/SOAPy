@@ -7,7 +7,7 @@ networkx==2.8.6
 numba==0.60.0
 numpy==1.24.3
 opencv-python==4.8.1.78
-pandas==1.5.2
+pandas==2.0.0
 pyscenic==0.12.1
 s-dbw==0.4.0
 shapely==2.0.3
