@@ -20,9 +20,3 @@ python:
       path: .
     - requirements: source/requirements.txt
 
-# 在构建前安装 R 和 rpy2
-build:
-  jobs:
-    pre:
-      - apt-get update && apt-get install -y r-base r-base-dev
-      - pip install rpy2
