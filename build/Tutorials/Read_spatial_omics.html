@@ -4,10 +4,10 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Read spatial omics &mdash; SOAPy 0.1.4 documentation</title>
+  <title>Read spatial omics &mdash; SOAPy 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/documentation_options.js?v=59fadc99"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -65,7 +65,7 @@
 <li class="toctree-l3"><a class="reference internal" href="Spatial%20domain.html">Spatial domain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Spatial%20tendency.html">Spatial tendency</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Cell%20type%20proximity.html">Spatial architecture - cell type proximity</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Tutorial 5: Spatial architecture - niche composition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Spatial architecture - niche composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Spatial%20communications.html">Spatial communications</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Spatiotemporal%20pattern.html">Spatiotemporal pattern</a></li>
 </ul>
@@ -105,7 +105,7 @@
              
   <section id="Read-spatial-omics">
 <h1>Read spatial omics<a class="headerlink" href="#Read-spatial-omics" title="Link to this heading"></a></h1>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
@@ -114,28 +114,17 @@
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\numpy\_distributor_init.py:30: UserWarning: loaded more than 1 DLL from .libs:
-C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\numpy\.libs\libopenblas.EL2C6PLE4ZYW3ECEVIV3OXXGRN2NRFM2.gfortran-win_amd64.dll
-C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\numpy\.libs\libopenblas.GK7GX5KEQ4F6UYO3P26ULGBQYHGQO7J4.gfortran-win_amd64.dll
-  warnings.warn(&#34;loaded more than 1 DLL from .libs:&#34;
-</pre></div></div>
-</div>
 <section id="Read-Visium">
 <h2>Read Visium<a class="headerlink" href="#Read-Visium" title="Link to this heading"></a></h2>
 <p>Using the h5 file to load the data:</p>
-<p>Download from <a class="reference external" href="https://spatial-dlpfc.s3.us-east-2.amazonaws.com/h5/151676_filtered_feature_bc_matrix.h5">https://spatial-dlpfc.s3.us-east-2.amazonaws.com/h5/151676_filtered_feature_bc_matrix.h5</a>.</p>
+<p>Raw data download from <a class="reference external" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5924030">https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5924030</a></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_visium</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">read_visium2adata</span><span class="p">(</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;D:\data\mouse_brain\151676\151676&#39;</span><span class="p">,</span>
-    <span class="n">count_file</span> <span class="o">=</span> <span class="s1">&#39;151676_filtered_feature_bc_matrix.h5&#39;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/KIRC_5/&#39;</span><span class="p">,</span>
+    <span class="n">count_file</span> <span class="o">=</span> <span class="s1">&#39;filtered_feature_bc_matrix.h5&#39;</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -145,7 +134,7 @@ C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\n
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\anndata\_core\anndata.py:1832: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/anndata/_core/anndata.py:1832: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
   utils.warn_names_duplicates(&#34;var&#34;)
 </pre></div></div>
 </div>
@@ -163,7 +152,7 @@ C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\a
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-AnnData object with n_obs × n_vars = 3460 × 33538
+AnnData object with n_obs × n_vars = 1949 × 36601
     obs: &#39;in_tissue&#39;, &#39;array_row&#39;, &#39;array_col&#39;
     var: &#39;gene_ids&#39;, &#39;feature_types&#39;, &#39;genome&#39;
     uns: &#39;spatial&#39;
@@ -183,17 +172,16 @@ AnnData object with n_obs × n_vars = 3460 × 33538
     <span class="n">xml_file</span><span class="o">=</span><span class="p">{</span>
         <span class="c1"># Using the xml file for two samples as an example,</span>
         <span class="c1"># you can add key-value pairs to the dictionary if you need information about sample points for more samples.</span>
-        <span class="s1">&#39;mu_dev_E13_006&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;D:\data\nanostring_growth\mu_dev_E13_006.ome.xml&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;mu_dev_E13_011&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;D:\data\nanostring_growth\mu_dev_E13_011.ome.xml&#39;</span>
+        <span class="s1">&#39;mu_dev_E13_006&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/nanostring_growth/mu_dev_E13_006.ome.xml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mu_dev_E13_011&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/nanostring_growth/mu_dev_E13_011.ome.xml&#39;</span>
     <span class="p">},</span>
-    <span class="n">information_file</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;D:\data\nanostring_growth\Export4_NormalizationQ3.xlsx&#39;</span><span class="p">,</span>
+    <span class="n">information_file</span><span class="o">=</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/nanostring_growth/Export4_NormalizationQ3.xlsx&#39;</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">adata</span><span class="o">.</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_dsp</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -201,7 +189,7 @@ AnnData object with n_obs × n_vars = 3460 × 33538
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -272,272 +260,128 @@ AnnData object with n_obs × n_vars = 3460 × 33538
   </thead>
   <tbody>
     <tr>
-      <th>mu_dev_E13_006 | 001 | Full ROI</th>
-      <td>mu_dev_E13_006</td>
-      <td>mu_dev_E13_006</td>
+      <th>mu_dev_E9_001 | 001 | Full ROI</th>
+      <td>mu_dev_E9_001</td>
+      <td>mu_dev_E9_001</td>
       <td>1</td>
       <td>Full ROI</td>
       <td>Low Negative Probe Count for Probe Kit Mouse N...</td>
-      <td>18903.649637</td>
-      <td>232</td>
-      <td>13045</td>
-      <td>10716</td>
-      <td>4562764</td>
+      <td>47287.021916</td>
+      <td>392</td>
+      <td>16573</td>
+      <td>18896</td>
+      <td>4259786</td>
       <td>...</td>
-      <td>E13</td>
-      <td>06500829-4ffd-4113-a99d-12b07ce7cfe5</td>
-      <td>aea467c9-b2cd-4e35-8e3a-89046af25c70</td>
-      <td>17027.785156</td>
-      <td>24236.730469</td>
-      <td>7870</td>
-      <td>4265</td>
-      <td>17.933519</td>
-      <td>0.568844</td>
-      <td>17.933519</td>
+      <td>E9</td>
+      <td>c73163bc-f107-498f-bd40-bbcab9a48993</td>
+      <td>f057dc6e-68ce-441d-a816-58802fc38258</td>
+      <td>16904.210938</td>
+      <td>20578.818359</td>
+      <td>7932</td>
+      <td>6094</td>
+      <td>16.252453</td>
+      <td>0.536152</td>
+      <td>16.252453</td>
     </tr>
     <tr>
-      <th>mu_dev_E13_006 | 002 | Full ROI</th>
-      <td>mu_dev_E13_006</td>
-      <td>mu_dev_E13_006</td>
+      <th>mu_dev_E9_001 | 002 | Full ROI</th>
+      <td>mu_dev_E9_001</td>
+      <td>mu_dev_E9_001</td>
       <td>2</td>
       <td>Full ROI</td>
-      <td>NaN</td>
-      <td>40862.261776</td>
-      <td>535</td>
-      <td>13043</td>
-      <td>10716</td>
-      <td>10734759</td>
+      <td>Low Negative Probe Count for Probe Kit Mouse N...</td>
+      <td>41175.373907</td>
+      <td>340</td>
+      <td>16485</td>
+      <td>19752</td>
+      <td>4725639</td>
       <td>...</td>
-      <td>E13</td>
-      <td>20713d4a-ce80-4763-b7d0-42314d03fc00</td>
-      <td>fe759caf-f932-480e-acf8-dcf3b9f78a92</td>
-      <td>17027.785156</td>
-      <td>24236.730469</td>
-      <td>7870</td>
-      <td>4265</td>
-      <td>26.548776</td>
-      <td>0.295223</td>
-      <td>26.548776</td>
+      <td>E9</td>
+      <td>be667b65-38c0-49c4-af51-845ffd8a7a85</td>
+      <td>09985ba0-449c-4b1a-9c8f-9327991df8fa</td>
+      <td>16904.210938</td>
+      <td>20578.818359</td>
+      <td>7932</td>
+      <td>6094</td>
+      <td>17.745085</td>
+      <td>0.496225</td>
+      <td>17.745085</td>
     </tr>
     <tr>
-      <th>mu_dev_E13_006 | 003 | Full ROI</th>
-      <td>mu_dev_E13_006</td>
-      <td>mu_dev_E13_006</td>
+      <th>mu_dev_E9_001 | 003 | Full ROI</th>
+      <td>mu_dev_E9_001</td>
+      <td>mu_dev_E9_001</td>
       <td>3</td>
       <td>Full ROI</td>
       <td>Low Negative Probe Count for Probe Kit Mouse N...</td>
-      <td>16132.074042</td>
-      <td>294</td>
-      <td>13222</td>
-      <td>10694</td>
-      <td>3592371</td>
+      <td>43198.870210</td>
+      <td>403</td>
+      <td>15756</td>
+      <td>18824</td>
+      <td>5958816</td>
       <td>...</td>
-      <td>E13</td>
-      <td>0988206b-12a2-40b2-a991-3a02c9c76e86</td>
-      <td>e96dbf28-0185-41a3-947f-957e29fac866</td>
-      <td>17027.785156</td>
-      <td>24236.730469</td>
-      <td>7870</td>
-      <td>4265</td>
-      <td>13.964632</td>
-      <td>0.696197</td>
-      <td>13.964632</td>
+      <td>E9</td>
+      <td>ba522e1c-7e21-4cc6-b529-118603949d5a</td>
+      <td>2ac08d0d-c65d-4ab9-b834-5ef7ebbad4cd</td>
+      <td>16904.210938</td>
+      <td>20578.818359</td>
+      <td>7932</td>
+      <td>6094</td>
+      <td>18.109046</td>
+      <td>0.395298</td>
+      <td>18.109046</td>
     </tr>
     <tr>
-      <th>mu_dev_E13_006 | 004 | Full ROI</th>
-      <td>mu_dev_E13_006</td>
-      <td>mu_dev_E13_006</td>
+      <th>mu_dev_E9_001 | 004 | Full ROI</th>
+      <td>mu_dev_E9_001</td>
+      <td>mu_dev_E9_001</td>
       <td>4</td>
       <td>Full ROI</td>
-      <td>Low Nuclei Count,Low Surface Area,Low Negative...</td>
-      <td>12612.492573</td>
-      <td>195</td>
-      <td>12767</td>
-      <td>10561</td>
-      <td>2428801</td>
+      <td>Low Negative Probe Count for Probe Kit Mouse N...</td>
+      <td>44444.810459</td>
+      <td>368</td>
+      <td>15722</td>
+      <td>19675</td>
+      <td>3703922</td>
       <td>...</td>
-      <td>E13</td>
-      <td>15275e09-2eb7-49f8-a31e-98f34b3c7e46</td>
-      <td>03fef82c-61a1-46b6-b9bb-48a9812d75ec</td>
-      <td>17027.785156</td>
-      <td>24236.730469</td>
-      <td>7870</td>
-      <td>4265</td>
-      <td>11.636453</td>
-      <td>0.951943</td>
-      <td>11.636453</td>
+      <td>E9</td>
+      <td>52d9a6b1-934d-4f42-a80e-a4a78b7ede43</td>
+      <td>aeed549d-8b7a-4fa4-b22a-c54059e83066</td>
+      <td>16904.210938</td>
+      <td>20578.818359</td>
+      <td>7932</td>
+      <td>6094</td>
+      <td>14.509348</td>
+      <td>0.605782</td>
+      <td>14.509348</td>
     </tr>
     <tr>
-      <th>mu_dev_E13_006 | 005 | Full ROI</th>
-      <td>mu_dev_E13_006</td>
-      <td>mu_dev_E13_006</td>
+      <th>mu_dev_E9_001 | 005 | Full ROI</th>
+      <td>mu_dev_E9_001</td>
+      <td>mu_dev_E9_001</td>
       <td>5</td>
       <td>Full ROI</td>
-      <td>Low Nuclei Count,Low Surface Area,Low Negative...</td>
-      <td>14701.099267</td>
-      <td>158</td>
-      <td>11930</td>
-      <td>9360</td>
-      <td>4720222</td>
-      <td>...</td>
-      <td>E13</td>
-      <td>9e72c37e-efb0-4bab-9dfb-8a4dafe24353</td>
-      <td>1565b22e-8e8a-4c2f-8a90-8ca122c66323</td>
-      <td>17027.785156</td>
-      <td>24236.730469</td>
-      <td>7870</td>
-      <td>4265</td>
-      <td>13.668204</td>
-      <td>0.613752</td>
-      <td>13.668204</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>mu_dev_E13_006 | 070 | Full ROI</th>
-      <td>mu_dev_E13_006</td>
-      <td>mu_dev_E13_006</td>
-      <td>70</td>
-      <td>Full ROI</td>
-      <td>Low Nuclei Count,Low Negative Probe Count for ...</td>
-      <td>30408.415712</td>
-      <td>199</td>
-      <td>14315</td>
-      <td>15570</td>
-      <td>4182247</td>
-      <td>...</td>
-      <td>E13</td>
-      <td>df847b31-150e-453e-9655-4637cbe0bf6b</td>
-      <td>d8981b38-1fb1-4140-a227-84899ad187b0</td>
-      <td>17027.785156</td>
-      <td>24236.730469</td>
-      <td>7870</td>
-      <td>4265</td>
-      <td>18.082137</td>
-      <td>0.914612</td>
-      <td>18.082137</td>
-    </tr>
-    <tr>
-      <th>mu_dev_E13_006 | 071 | Full ROI</th>
-      <td>mu_dev_E13_006</td>
-      <td>mu_dev_E13_006</td>
-      <td>71</td>
-      <td>Full ROI</td>
       <td>Low Negative Probe Count for Probe Kit Mouse N...</td>
-      <td>43689.030037</td>
-      <td>337</td>
-      <td>11946</td>
-      <td>14451</td>
-      <td>6504157</td>
+      <td>31889.529594</td>
+      <td>279</td>
+      <td>15064</td>
+      <td>18429</td>
+      <td>3069897</td>
       <td>...</td>
-      <td>E13</td>
-      <td>a37d80b8-ca4c-47ef-8242-ed57deba194e</td>
-      <td>a80f9727-dc6e-4fdb-a6ac-22489910d9f3</td>
-      <td>17027.785156</td>
-      <td>24236.730469</td>
-      <td>7870</td>
-      <td>4265</td>
-      <td>21.958678</td>
-      <td>0.568844</td>
-      <td>21.958678</td>
-    </tr>
-    <tr>
-      <th>mu_dev_E13_006 | 072 | Full ROI</th>
-      <td>mu_dev_E13_006</td>
-      <td>mu_dev_E13_006</td>
-      <td>72</td>
-      <td>Full ROI</td>
-      <td>Low Negative Probe Count for Probe Kit Mouse N...</td>
-      <td>33598.777767</td>
-      <td>283</td>
-      <td>11676</td>
-      <td>14877</td>
-      <td>4043511</td>
-      <td>...</td>
-      <td>E13</td>
-      <td>70160960-3b85-40a3-a202-ae324eeba07b</td>
-      <td>fa57381b-c138-44db-a1f9-9f82be221b26</td>
-      <td>17027.785156</td>
-      <td>24236.730469</td>
-      <td>7870</td>
-      <td>4265</td>
-      <td>18.827867</td>
-      <td>0.790596</td>
-      <td>18.827867</td>
-    </tr>
-    <tr>
-      <th>mu_dev_E13_006 | 073 | Full ROI</th>
-      <td>mu_dev_E13_006</td>
-      <td>mu_dev_E13_006</td>
-      <td>73</td>
-      <td>Full ROI</td>
-      <td>Low Negative Probe Count for Probe Kit Mouse N...</td>
-      <td>39661.579208</td>
-      <td>300</td>
-      <td>11678</td>
-      <td>15824</td>
-      <td>2236827</td>
-      <td>...</td>
-      <td>E13</td>
-      <td>a7f48d52-f3ca-4494-8ff4-92d298bc61bc</td>
-      <td>1ce02e44-021f-4f81-83e6-f22c6c485eab</td>
-      <td>17027.785156</td>
-      <td>24236.730469</td>
-      <td>7870</td>
-      <td>4265</td>
-      <td>14.253218</td>
-      <td>1.048207</td>
-      <td>14.253218</td>
-    </tr>
-    <tr>
-      <th>mu_dev_E13_006 | 074 | Full ROI</th>
-      <td>mu_dev_E13_006</td>
-      <td>mu_dev_E13_006</td>
-      <td>74</td>
-      <td>Full ROI</td>
-      <td>Low Nuclei Count,Low Negative Probe Count for ...</td>
-      <td>17689.572357</td>
-      <td>113</td>
-      <td>12746</td>
-      <td>15388</td>
-      <td>1856400</td>
-      <td>...</td>
-      <td>E13</td>
-      <td>b77a64cb-7f65-4be2-95d8-e8b027ef9e3d</td>
-      <td>b73f5930-c1b8-4217-8af5-0ca0e0c0728f</td>
-      <td>17027.785156</td>
-      <td>24236.730469</td>
-      <td>7870</td>
-      <td>4265</td>
-      <td>10.774001</td>
-      <td>1.554840</td>
-      <td>10.774001</td>
+      <td>E9</td>
+      <td>a9e0bca3-59a4-4131-90b7-c787ca400759</td>
+      <td>c53d1b52-712e-4a3d-9af4-5bdb55365eef</td>
+      <td>16904.210938</td>
+      <td>20578.818359</td>
+      <td>7932</td>
+      <td>6094</td>
+      <td>12.118616</td>
+      <td>0.717618</td>
+      <td>12.118616</td>
     </tr>
   </tbody>
 </table>
-<p>74 rows × 35 columns</p>
+<p>5 rows × 35 columns</p>
 </div></div>
 </div>
 <p>The sampling points corresponding to each ROI is stored in.uns.point.</p>
@@ -670,8 +514,8 @@ AnnData object with n_obs × n_vars = 3460 × 33538
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">express</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;D:\data\Slide_seqV2_ofactory_bulb\Puck_200127_15.digital_expression.txt&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">location</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;D:\data\Slide_seqV2_ofactory_bulb\Puck_200127_15_bead_locations.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">express</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/Slide_seqV2/Puck_200127_15.digital_expression.txt&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/Slide_seqV2/Puck_200127_15_bead_locations.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -679,7 +523,7 @@ AnnData object with n_obs × n_vars = 3460 × 33538
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_csv</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">read_csv2adata</span><span class="p">(</span><span class="n">express</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">location</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_csv</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">read_csv2adata</span><span class="p">(</span><span class="n">express</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">spatial</span><span class="o">=</span><span class="n">location</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -698,8 +542,6 @@ AnnData object with n_obs × n_vars = 3460 × 33538
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 AnnData object with n_obs × n_vars = 21724 × 21220
-    obs: &#39;xcoord&#39;, &#39;ycoord&#39;
-    obsm: &#39;spatial&#39;
 </pre></div></div>
 </div>
 </section>
@@ -713,8 +555,8 @@ AnnData object with n_obs × n_vars = 21724 × 21220
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tifffile</span> <span class="k">as</span> <span class="nn">tiff</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">tiff</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;D:/data/soapy_test_data/mibi/TA459_multipleCores2_Run-4_Point4.tiff&#39;</span><span class="p">)</span>
-<span class="n">mask</span> <span class="o">=</span> <span class="n">tiff</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;D:/data/soapy_test_data/mibi/Point4_binarymask.tiff&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">tiff</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/mibi_tof/TA459_multipleCores2_Run-4_Point4.tiff&#39;</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">tiff</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/mibi_tof/Point4_binarymask.tiff&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -767,7 +609,7 @@ AnnData object with n_obs × n_vars = 21724 × 21220
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_img</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">read_mult_image2adata</span><span class="p">(</span>
@@ -779,24 +621,13 @@ AnnData object with n_obs × n_vars = 21724 × 21220
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_img</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-AnnData object with n_obs × n_vars = 6667 × 44
-    uns: &#39;img&#39;, &#39;mask&#39;, &#39;var_for_analysis&#39;, &#39;spatial&#39;, &#39;SOAPy&#39;
-    obsm: &#39;spatial&#39;
-</pre></div></div>
 </div>
 </section>
 </section>
@@ -813,7 +644,7 @@ AnnData object with n_obs × n_vars = 6667 × 44
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023, Heqi Wang.
-      <span class="lastupdated">Last updated on Jan 02, 2024.
+      <span class="lastupdated">Last updated on Jan 02, 2025.
       </span></p>
   </div>
 

@@ -4,10 +4,10 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Visualization of Nanostring DSP subtissues &mdash; SOAPy 0.1.4 documentation</title>
+  <title>Visualization of Nanostring DSP subtissues &mdash; SOAPy 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/documentation_options.js?v=59fadc99"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -102,7 +102,7 @@
 <h1>Visualization of Nanostring DSP subtissues<a class="headerlink" href="#Visualization-of-Nanostring-DSP-subtissues" title="Link to this heading"></a></h1>
 <p>The original data of <strong>Nanostring DSP</strong> technology is different from other technologies, It consists of a number of points to form a ROI, and then the ROI shows the merge expression level. Here we use this tutorial to better visualize the DSP data.</p>
 <p>The more complete week 13 slides were used for presentation. Image data can be downloaded from <a class="reference external" href="https://nanostring.com/products/geomx-digital-spatial-profiler/spatial-organ-atlas/mouse-development/">https://nanostring.com/products/geomx-digital-spatial-profiler/spatial-organ-atlas/mouse-development/</a>.</p>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
@@ -114,25 +114,14 @@
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/soapy/pp/utils.py:9: NumbaDeprecationWarning: The &#39;nopython&#39; keyword argument was not supplied to the &#39;numba.jit&#39; decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
-  def _filter_of_graph(obs: pd.DataFrame,
-/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/soapy/tl/utils.py:66: NumbaDeprecationWarning: The &#39;nopython&#39; keyword argument was not supplied to the &#39;numba.jit&#39; decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
-  @nb.jit()
-</pre></div></div>
-</div>
 <section id="Read">
 <h2>Read<a class="headerlink" href="#Read" title="Link to this heading"></a></h2>
-<p>Read the Anndata data generated in <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">spatial</span> <span class="pre">omics</span></code> tutorial.</p>
+<p>Read the Anndata data generated in <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">spatial</span> <span class="pre">omics</span></code> or <code class="docutils literal notranslate"><span class="pre">Spatiotemporal</span> <span class="pre">pattern</span></code> tutorial.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="s1">&#39;mouse_embryo_dsp_adata.h5ad&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/mouse_embryo_dsp_adata.h5ad&#39;</span><span class="p">)</span><span class="c1"># write Spatiotemporal pattern tutorial&#39;s h5ad to make the &#39;mouse_embryo_dsp_adata.h5ad&#39; data</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">tiff</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E13_image_files/mu_dev_E13_006.ome.tiff&#39;</span><span class="p">)</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
 </pre></div>
@@ -392,7 +381,7 @@ Index([&#39;SlideName&#39;, &#39;ScanLabel&#39;, &#39;ROILabel&#39;, &#39;Segmen
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/tmp/ipykernel_13525/2934043088.py:29: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+/tmp/ipykernel_74608/2934043088.py:29: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
   fig.show()
 </pre></div></div>
 </div>
@@ -418,7 +407,7 @@ Index([&#39;SlideName&#39;, &#39;ScanLabel&#39;, &#39;ROILabel&#39;, &#39;Segmen
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023, Heqi Wang.
-      <span class="lastupdated">Last updated on Jan 02, 2024.
+      <span class="lastupdated">Last updated on Jan 02, 2025.
       </span></p>
   </div>
 

@@ -4,10 +4,10 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tutorial 5: Spatial architecture - niche composition &mdash; SOAPy 0.1.4 documentation</title>
+  <title>Spatial architecture - niche composition &mdash; SOAPy 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/documentation_options.js?v=59fadc99"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -59,7 +59,7 @@
 <li class="toctree-l3"><a class="reference internal" href="Spatial%20domain.html">Spatial domain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Spatial%20tendency.html">Spatial tendency</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Cell%20type%20proximity.html">Spatial architecture - cell type proximity</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Tutorial 5: Spatial architecture - niche composition</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Spatial architecture - niche composition</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#Read">Read</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Constructing-spatial-network">Constructing spatial network</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#C-niche-cluster">C-niche cluster</a></li>
@@ -93,7 +93,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
-      <li class="breadcrumb-item active">Tutorial 5: Spatial architecture - niche composition</li>
+      <li class="breadcrumb-item active">Spatial architecture - niche composition</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/Tutorials/Niche composition.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
@@ -103,9 +103,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="Tutorial-5:-Spatial-architecture---niche-composition">
-<h1>Tutorial 5: Spatial architecture - niche composition<a class="headerlink" href="#Tutorial-5:-Spatial-architecture---niche-composition" title="Link to this heading"></a></h1>
+  <section id="Spatial-architecture---niche-composition">
+<h1>Spatial architecture - niche composition<a class="headerlink" href="#Spatial-architecture---niche-composition" title="Link to this heading"></a></h1>
 <p>Spatial composition analysis identifies multi-cellular niches that composed by cell types with specific proportion.</p>
+<p>You can download <code class="docutils literal notranslate"><span class="pre">adata_combine_7celltype.h5ad</span></code> from <a class="reference external" href="https://zenodo.org/records/14588408">https://zenodo.org/records/14588408</a>.</p>
 <p>MIBI-TOF TNBC samples were used as in <strong>tutorial: Cell type proximity</strong></p>
 <section id="Read">
 <h2>Read<a class="headerlink" href="#Read" title="Link to this heading"></a></h2>
@@ -117,6 +118,7 @@
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
 <span class="kn">import</span> <span class="nn">SOAPy_st</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -125,7 +127,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_com</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;adata_combinednew.h5ad&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_com</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/adata_combine_7celltype.h5ad&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -239,7 +241,7 @@ AnnData object with n_obs × n_vars = 211649 × 44
 <img alt="../_images/Tutorials_Niche_composition_17_0.png" src="../_images/Tutorials_Niche_composition_17_0.png" />
 </div>
 </div>
-<p>Show the composition of the microenvironment belonging to C-niche2 cells in sample 1</p>
+<p>Show the composition of the microenvironment belonging to C-niche5 cells in sample 1</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -266,7 +268,7 @@ AnnData object with n_obs × n_vars = 211649 × 44
     <span class="n">sample_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">color</span><span class="o">=</span><span class="n">color_map</span><span class="p">,</span>
     <span class="n">niche_key</span><span class="o">=</span><span class="s1">&#39;C_niche&#39;</span><span class="p">,</span>
-    <span class="n">niche</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">niche</span><span class="o">=</span><span class="mi">5</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -305,7 +307,7 @@ AnnData object with n_obs × n_vars = 211649 × 44
 </div>
 <p>The sample factor matrix is clustered, and the samples with the similar microenvironment are clustered into one class.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_factor_matrix_in_CP_tensor</span><span class="p">(</span><span class="n">tensor</span><span class="o">=</span><span class="n">niche_tensor</span><span class="p">,</span> <span class="n">factor_name</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
@@ -321,7 +323,7 @@ AnnData object with n_obs × n_vars = 211649 × 44
 </div>
 <p>Through the orthographic observation of the samples, the samples enriched in factor 3 have a large number of enriched regions of B cells, which may correspond to tertiary lymph node structures.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_voronoi</span><span class="p">(</span><span class="n">adata_com</span><span class="p">,</span> <span class="n">sample_id</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span> <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;sample 35&#39;</span><span class="p">)</span>
@@ -336,7 +338,7 @@ AnnData object with n_obs × n_vars = 211649 × 44
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_voronoi</span><span class="p">(</span><span class="n">adata_com</span><span class="p">,</span> <span class="n">sample_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cluster_key</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;sample 1&#39;</span><span class="p">)</span>
@@ -365,7 +367,7 @@ AnnData object with n_obs × n_vars = 211649 × 44
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023, Heqi Wang.
-      <span class="lastupdated">Last updated on Jan 02, 2024.
+      <span class="lastupdated">Last updated on Jan 02, 2025.
       </span></p>
   </div>
 

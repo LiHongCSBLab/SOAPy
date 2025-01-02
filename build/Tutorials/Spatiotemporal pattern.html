@@ -4,10 +4,10 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spatiotemporal pattern &mdash; SOAPy 0.1.4 documentation</title>
+  <title>Spatiotemporal pattern &mdash; SOAPy 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/documentation_options.js?v=59fadc99"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -59,7 +59,7 @@
 <li class="toctree-l3"><a class="reference internal" href="Spatial%20domain.html">Spatial domain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Spatial%20tendency.html">Spatial tendency</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Cell%20type%20proximity.html">Spatial architecture - cell type proximity</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Tutorial 5: Spatial architecture - niche composition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Spatial architecture - niche composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Spatial%20communications.html">Spatial communications</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Spatiotemporal pattern</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#Read-and-preprocessing">Read and preprocessing</a></li>
@@ -105,36 +105,44 @@
   <section id="Spatiotemporal-pattern">
 <h1>Spatiotemporal pattern<a class="headerlink" href="#Spatiotemporal-pattern" title="Link to this heading"></a></h1>
 <p>The Spatiotemporal Pattern function in SOAPy employs tensor decomposition to extract components from the three-order expression tensor (“Time-Space-Gene”), revealing hidden patterns and reducing the complexity of data explanation. We used Nanosting DSP mouse developmental samples to explore the spatio-temporal developmental relationships of three major organs: heart, lung, and midgut.</p>
-<p>Download from <a class="reference external" href="https://nanostring.com/products/geomx-digital-spatial-profiler/spatial-organ-atlas/mouse-development/">https://nanostring.com/products/geomx-digital-spatial-profiler/spatial-organ-atlas/mouse-development/</a></p>
+<p>Download ‘Count Results’ and ‘Images’ files from <a class="reference external" href="https://nanostring.com/products/geomx-digital-spatial-profiler/spatial-organ-atlas/mouse-development/">https://nanostring.com/products/geomx-digital-spatial-profiler/spatial-organ-atlas/mouse-development/</a>.</p>
 <section id="Read-and-preprocessing">
 <h2>Read and preprocessing<a class="headerlink" href="#Read-and-preprocessing" title="Link to this heading"></a></h2>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SOAPy_st</span> <span class="k">as</span> <span class="nn">sp</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">SOAPy_st</span> <span class="k">as</span> <span class="nn">sp</span>
 <span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\numpy\_distributor_init.py:30: UserWarning: loaded more than 1 DLL from .libs:
-C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\numpy\.libs\libopenblas.EL2C6PLE4ZYW3ECEVIV3OXXGRN2NRFM2.gfortran-win_amd64.dll
-C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\numpy\.libs\libopenblas.GK7GX5KEQ4F6UYO3P26ULGBQYHGQO7J4.gfortran-win_amd64.dll
-  warnings.warn(&#34;loaded more than 1 DLL from .libs:&#34;
-</pre></div></div>
-</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># imput data</span>
-<span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="s1">&#39;mouse_embryo_dsp_adata.h5ad&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">read_dsp2adata</span><span class="p">(</span>
+    <span class="n">xml_file</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;mu_dev_E9_001&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E9_image_files/mu_dev_E9_001.ome.xml&#39;</span><span class="p">,</span>
+        <span class="c1"># The reason is that the keywords in the xml file of mu_dev_E9_002 are different from other .xml files.</span>
+        <span class="c1"># If you want to read the mu_dev_E9_002 .xml file together, you need to change the &quot;Polyline&quot; to &quot;Polygon&quot; in the mu_dev_E9_002.ome.xml file.</span>
+        <span class="s1">&#39;mu_dev_E9_003&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E9_image_files/mu_dev_E9_003.ome.xml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mu_dev_E11_004&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E11_image_files/mu_dev_E11_004.ome.xml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mu_dev_E11_005&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E11_image_files/mu_dev_E11_005.ome.xml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mu_dev_E13_006&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E13_image_files/mu_dev_E13_006.ome.xml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mu_dev_E13_007&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E13_image_files/mu_dev_E13_007.ome.xml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mu_dev_E13_008&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E13_image_files/mu_dev_E13_008.ome.xml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mu_dev_E13_009&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E13_image_files/mu_dev_E13_009.ome.xml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mu_dev_E13_010&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E13_image_files/mu_dev_E13_010.ome.xml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mu_dev_E13_011&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E13_image_files/mu_dev_E13_011.ome.xml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mu_dev_E15_012&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E15_image_files/mu_dev_E15_012.ome.xml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;mu_dev_E15_013&#39;</span><span class="p">:</span> <span class="s1">&#39;/csb2/project/tmp_download/GeoMx_MouseDevelopment/image_files/mu_dev_E15_image_files/mu_dev_E15_013.ome.xml&#39;</span>
+    <span class="p">},</span>
+    <span class="n">information_file</span><span class="o">=</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/nanostring_growth/Export4_NormalizationQ3.xlsx&#39;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -154,8 +162,9 @@ C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\n
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
 <span class="c1"># sc.pp.highly_variable_genes(adata, flavor=&quot;seurat&quot;, n_top_genes=1000)</span>
 <span class="c1"># adata = adata[:, adata.var[&#39;highly_variable&#39;] == True].copy()</span>
-<span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Tissue_s&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Tissue&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Tissue_substructure&#39;</span><span class="p">]</span>
-</pre></div>
+
+<span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Tissue_s&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Tissue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Tissue_substructure&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<br/></pre></div>
 </div>
 </div>
 </section>
@@ -179,7 +188,7 @@ C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\n
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="o">.</span><span class="n">highly_variable</span><span class="p">(</span><span class="n">factor_name</span><span class="o">=</span><span class="s1">&#39;gene&#39;</span><span class="p">,</span> <span class="n">top_num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># select 1000 high variable genes</span>
 <span class="n">tensor</span><span class="o">.</span><span class="n">normalization</span><span class="p">(</span><span class="n">factor_name</span><span class="o">=</span><span class="s1">&#39;gene&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">)</span> <span class="c1"># normalization used the maximum value</span>
-<span class="n">weights</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">nre</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">CP_decomposition</span><span class="p">(</span><span class="n">rank</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">non_negative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">weights</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">nre</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">CP_decomposition</span><span class="p">(</span><span class="n">rank</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">non_negative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">use_hals</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -195,20 +204,11 @@ C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\n
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\soapy\pl\_tensor.py:143: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
-  fig.show()
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Spatiotemporal_pattern_15_1.png" src="../_images/Tutorials_Spatiotemporal_pattern_15_1.png" />
+<img alt="../_images/Tutorials_Spatiotemporal_pattern_15_0.png" src="../_images/Tutorials_Spatiotemporal_pattern_15_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -219,20 +219,11 @@ C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\s
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\soapy\pl\_tensor.py:143: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
-  fig.show()
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Spatiotemporal_pattern_16_1.png" src="../_images/Tutorials_Spatiotemporal_pattern_16_1.png" />
+<img alt="../_images/Tutorials_Spatiotemporal_pattern_16_0.png" src="../_images/Tutorials_Spatiotemporal_pattern_16_0.png" />
 </div>
 </div>
 </section>
@@ -250,7 +241,7 @@ C:\Users\Administrator.DESKTOP-MAL5PKV\anaconda3\envs\toolCV\lib\site-packages\s
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023, Heqi Wang.
-      <span class="lastupdated">Last updated on Jan 02, 2024.
+      <span class="lastupdated">Last updated on Jan 02, 2025.
       </span></p>
   </div>
 

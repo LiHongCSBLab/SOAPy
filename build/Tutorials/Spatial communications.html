@@ -4,10 +4,10 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spatial communications &mdash; SOAPy 0.1.4 documentation</title>
+  <title>Spatial communications &mdash; SOAPy 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/documentation_options.js?v=59fadc99"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Spatiotemporal pattern" href="Spatiotemporal%20pattern.html" />
-    <link rel="prev" title="Tutorial 5: Spatial architecture - niche composition" href="Niche%20composition.html" /> 
+    <link rel="prev" title="Spatial architecture - niche composition" href="Niche%20composition.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -59,7 +59,7 @@
 <li class="toctree-l3"><a class="reference internal" href="Spatial%20domain.html">Spatial domain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Spatial%20tendency.html">Spatial tendency</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Cell%20type%20proximity.html">Spatial architecture - cell type proximity</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Tutorial 5: Spatial architecture - niche composition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Spatial architecture - niche composition</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Spatial communications</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#Read-and-preprocessing">Read and preprocessing</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Run">Run</a></li>
@@ -106,17 +106,18 @@
 <h1>Spatial communications<a class="headerlink" href="#Spatial-communications" title="Link to this heading"></a></h1>
 <p>SOAPy develops a new method that simultaneously utilizes spatial location and gene expression to calculate interaction scores (affinity and strength) and then outputs significant Ligand-Receptor(LR) interactions. It can not only infers short-range cell communication that relies on contact LRs to directly deliver signaling between adjacent cells; but also infer long-range cell communication that does not require cell–cell contact, rather depending on the diffusion of signaling molecules from one
 cell to another after secretion Here we will use the human ovarian cancer MERSCOPE sample as a demonstration</p>
-<p>Source data download from <a class="reference external" href="https://info.vizgen.com/ffpe-showcase">https://info.vizgen.com/ffpe-showcase</a></p>
-<p>Our annotation of cells can be download from <a class="reference external" href="https://zenodo.org/records/10450764">https://zenodo.org/records/10450764</a></p>
+<p>Source data download from <a class="reference external" href="https://info.vizgen.com/ffpe-showcase">https://info.vizgen.com/ffpe-showcase</a> (Ovarian cancer 3)</p>
+<p>Our annotation of cells can be download from <a class="reference external" href="https://zenodo.org/records/14588408">https://zenodo.org/records/14588408</a>.</p>
 <p>Ligand-receptor database download from <a class="reference external" href="https://github.com/LewisLabUCSD/Ligand-Receptor-Pairs">https://github.com/LewisLabUCSD/Ligand-Receptor-Pairs</a>.</p>
 <section id="Read-and-preprocessing">
 <h2>Read and preprocessing<a class="headerlink" href="#Read-and-preprocessing" title="Link to this heading"></a></h2>
-<p>Reading ovarian cancer data and ligand-receptor data (using the dataset provided in cellchat)</p>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
 <span class="kn">import</span> <span class="nn">numba</span> <span class="k">as</span> <span class="nn">nb</span>
@@ -124,34 +125,14 @@ cell to another after secretion Here we will use the human ovarian cancer MERSCO
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/soapy/pp/utils.py:9: NumbaDeprecationWarning: The &#39;nopython&#39; keyword argument was not supplied to the &#39;numba.jit&#39; decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
-  def _filter_of_graph(obs: pd.DataFrame,
-/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/soapy/tl/utils.py:66: NumbaDeprecationWarning: The &#39;nopython&#39; keyword argument was not supplied to the &#39;numba.jit&#39; decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
-  @nb.jit()
-</pre></div></div>
-</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-    <span class="sa">r</span><span class="s1">&#39;/csb2/project/tmp_download/Slide-seq/kidney/human/Human-2020-Jin-LR-pairs.csv&#39;</span><span class="p">,</span>
-    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span>
-<span class="p">)</span>
-<span class="n">lr_data</span> <span class="o">=</span> <span class="n">lr_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;ECM-Receptor&#39;</span><span class="p">,</span> <span class="s1">&#39;Cell-Cell Contact&#39;</span><span class="p">)</span>
-
-<span class="n">lr_pairs</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">lr_pairs</span><span class="p">(</span>
-    <span class="n">lr_data</span><span class="p">,</span>
-    <span class="n">Annotation_key</span><span class="o">=</span><span class="s1">&#39;annotation&#39;</span><span class="p">,</span>
-    <span class="n">ligand_key</span><span class="o">=</span><span class="s1">&#39;ligand_symbol&#39;</span><span class="p">,</span>
-    <span class="n">receptor_key</span><span class="o">=</span><span class="s1">&#39;receptor_symbol&#39;</span>
-<span class="p">)</span>
-<span class="n">lr_pairs</span><span class="o">.</span><span class="n">get_complexes</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/MERSCOPE/HumanOvarianCancerPatient2Slice2_cell_by_gene.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/MERSCOPE/HumanOvarianCancerPatient2Slice2_cell_metadata.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="p">:]</span>
+<span class="n">celltype</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/MERSCOPE/OV_MERSCOPE_cluster.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -159,12 +140,34 @@ cell to another after secretion Here we will use the human ovarian cancer MERSCO
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="s1">&#39;OV_MERSCOPE.h5ad&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">read_csv2adata</span><span class="p">(</span>
+    <span class="n">express</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">,</span>
+    <span class="n">spatial</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;center_x&#39;</span><span class="p">,</span> <span class="s1">&#39;center_y&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">celltype</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">celltype</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">normalize_per_cell</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span><span class="n">counts_per_cell_after</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="s2">&quot;spatial&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">)</span>
@@ -175,14 +178,29 @@ cell to another after secretion Here we will use the human ovarian cancer MERSCO
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Spatial_communications_7_0.png" src="../_images/Tutorials_Spatial_communications_7_0.png" />
+<img alt="../_images/Tutorials_Spatial_communications_8_0.png" src="../_images/Tutorials_Spatial_communications_8_0.png" />
+</div>
+</div>
+<p>Reading ovarian cancer data and ligand-receptor data (using the dataset provided in cellchat)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr_pairs</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">lr_pairs</span><span class="p">(</span>
+    <span class="s1">&#39;human&#39;</span><span class="p">,</span>
+    <span class="n">Annotation_key</span><span class="o">=</span><span class="s1">&#39;annotation&#39;</span><span class="p">,</span>
+    <span class="n">ligand_key</span><span class="o">=</span><span class="s1">&#39;ligand_symbol&#39;</span><span class="p">,</span>
+    <span class="n">receptor_key</span><span class="o">=</span><span class="s1">&#39;receptor_symbol&#39;</span>
+<span class="p">)</span>
+<span class="n">lr_pairs</span><span class="o">.</span><span class="n">get_complexes</span><span class="p">()</span>
+</pre></div>
 </div>
 </div>
 </section>
 <section id="Run">
 <h2>Run<a class="headerlink" href="#Run" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
@@ -202,15 +220,6 @@ cell to another after secretion Here we will use the human ovarian cancer MERSCO
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/scipy/stats/_stats_py.py:287: RuntimeWarning: divide by zero encountered in log
-  log_a = np.log(a)
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 In contact mode, The average number of neighbors is 5.699148588756707
@@ -223,8 +232,6 @@ In contact mode, total of 0 spots have no neighbors
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 37 contact ligand-receptor pairs.: 100%|████████████████████████████████████████████████████████████████ [ time left: 00:00 ]
-/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/scipy/stats/_stats_py.py:287: RuntimeWarning: divide by zero encountered in log
-  log_a = np.log(a)
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -250,7 +257,7 @@ WARNING:root:adata has not been initialized, and adata.uns[&#39;SOAPy&#39;] has 
 <h2>Visualization<a class="headerlink" href="#Visualization" title="Link to this heading"></a></h2>
 <p>In the following, network and chord diagrams are used to show the communication strength between each cell type, respectively.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_ccc_netplot</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">lr_type</span><span class="o">=</span><span class="s1">&#39;contact&#39;</span><span class="p">)</span>
@@ -261,11 +268,11 @@ WARNING:root:adata has not been initialized, and adata.uns[&#39;SOAPy&#39;] has 
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Spatial_communications_12_0.png" src="../_images/Tutorials_Spatial_communications_12_0.png" />
+<img alt="../_images/Tutorials_Spatial_communications_15_0.png" src="../_images/Tutorials_Spatial_communications_15_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_ccc_netplot</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">lr_type</span><span class="o">=</span><span class="s1">&#39;secretory&#39;</span><span class="p">)</span>
@@ -276,11 +283,11 @@ WARNING:root:adata has not been initialized, and adata.uns[&#39;SOAPy&#39;] has 
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Spatial_communications_13_0.png" src="../_images/Tutorials_Spatial_communications_13_0.png" />
+<img alt="../_images/Tutorials_Spatial_communications_16_0.png" src="../_images/Tutorials_Spatial_communications_16_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_ccc_chordplot</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">lr_type</span><span class="o">=</span><span class="s1">&#39;contact&#39;</span><span class="p">)</span>
@@ -291,11 +298,11 @@ WARNING:root:adata has not been initialized, and adata.uns[&#39;SOAPy&#39;] has 
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Spatial_communications_14_0.png" src="../_images/Tutorials_Spatial_communications_14_0.png" />
+<img alt="../_images/Tutorials_Spatial_communications_17_0.png" src="../_images/Tutorials_Spatial_communications_17_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_ccc_chordplot</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">lr_type</span><span class="o">=</span><span class="s1">&#39;secretory&#39;</span><span class="p">)</span>
@@ -306,12 +313,12 @@ WARNING:root:adata has not been initialized, and adata.uns[&#39;SOAPy&#39;] has 
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Spatial_communications_15_0.png" src="../_images/Tutorials_Spatial_communications_15_0.png" />
+<img alt="../_images/Tutorials_Spatial_communications_18_0.png" src="../_images/Tutorials_Spatial_communications_18_0.png" />
 </div>
 </div>
 <p>Significant ligand-receptor pairs between each cell type are shown by dotplot.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_ccc_dotplot</span><span class="p">(</span>
@@ -327,31 +334,23 @@ WARNING:root:adata has not been initialized, and adata.uns[&#39;SOAPy&#39;] has 
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-WARNING:matplotlib.font_manager:findfont: Font family [&#39;Times New Roman&#39;] not found. Falling back to DejaVu Sans.
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;AxesSubplot:title={&#39;center&#39;:&#39;contact lr pairs&#39;}, xlabel=&#39;cell type&#39;, ylabel=&#39;LR-pair&#39;&gt;
+&lt;Axes: title={&#39;center&#39;: &#39;contact lr pairs&#39;}, xlabel=&#39;cell type&#39;, ylabel=&#39;LR-pair&#39;&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Spatial_communications_17_2.png" src="../_images/Tutorials_Spatial_communications_17_2.png" />
+<img alt="../_images/Tutorials_Spatial_communications_20_1.png" src="../_images/Tutorials_Spatial_communications_20_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_ccc_dotplot</span><span class="p">(</span>
@@ -367,24 +366,24 @@ WARNING:matplotlib.font_manager:findfont: Font family [&#39;Times New Roman&#39;
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;AxesSubplot:title={&#39;center&#39;:&#39;secretory lr pairs&#39;}, xlabel=&#39;cell type&#39;, ylabel=&#39;LR-pair&#39;&gt;
+&lt;Axes: title={&#39;center&#39;: &#39;secretory lr pairs&#39;}, xlabel=&#39;cell type&#39;, ylabel=&#39;LR-pair&#39;&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Spatial_communications_18_1.png" src="../_images/Tutorials_Spatial_communications_18_1.png" />
+<img alt="../_images/Tutorials_Spatial_communications_21_1.png" src="../_images/Tutorials_Spatial_communications_21_1.png" />
 </div>
 </div>
 <p>Examples are seleced to show the real distribution of ligands and receptors in each cell in the space.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_ccc_embedding</span><span class="p">(</span>
@@ -400,24 +399,15 @@ WARNING:matplotlib.font_manager:findfont: Font family [&#39;Times New Roman&#39;
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/scipy/stats/_stats_py.py:287: RuntimeWarning: divide by zero encountered in log
-  log_a = np.log(a)
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Spatial_communications_20_1.png" src="../_images/Tutorials_Spatial_communications_20_1.png" />
+<img alt="../_images/Tutorials_Spatial_communications_23_0.png" src="../_images/Tutorials_Spatial_communications_23_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">show_ccc_embedding</span><span class="p">(</span>
@@ -437,7 +427,7 @@ WARNING:matplotlib.font_manager:findfont: Font family [&#39;Times New Roman&#39;
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Spatial_communications_21_0.png" src="../_images/Tutorials_Spatial_communications_21_0.png" />
+<img alt="../_images/Tutorials_Spatial_communications_24_0.png" src="../_images/Tutorials_Spatial_communications_24_0.png" />
 </div>
 </div>
 </section>
@@ -447,7 +437,7 @@ WARNING:matplotlib.font_manager:findfont: Font family [&#39;Times New Roman&#39;
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Niche%20composition.html" class="btn btn-neutral float-left" title="Tutorial 5: Spatial architecture - niche composition" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Niche%20composition.html" class="btn btn-neutral float-left" title="Spatial architecture - niche composition" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="Spatiotemporal%20pattern.html" class="btn btn-neutral float-right" title="Spatiotemporal pattern" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -455,7 +445,7 @@ WARNING:matplotlib.font_manager:findfont: Font family [&#39;Times New Roman&#39;
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023, Heqi Wang.
-      <span class="lastupdated">Last updated on Jan 02, 2024.
+      <span class="lastupdated">Last updated on Jan 02, 2025.
       </span></p>
   </div>
 

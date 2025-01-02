@@ -4,10 +4,10 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spatial tendency &mdash; SOAPy 0.1.4 documentation</title>
+  <title>Spatial tendency &mdash; SOAPy 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/documentation_options.js?v=59fadc99"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -66,7 +66,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Cell%20type%20proximity.html">Spatial architecture - cell type proximity</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Tutorial 5: Spatial architecture - niche composition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Spatial architecture - niche composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Spatial%20communications.html">Spatial communications</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Spatiotemporal%20pattern.html">Spatiotemporal pattern</a></li>
 </ul>
@@ -108,7 +108,7 @@
 <h1>Spatial tendency<a class="headerlink" href="#Spatial-tendency" title="Link to this heading"></a></h1>
 <p>The aim of spatial tendency analysis is to assess whether expression features were influenced by spatial proximity to the region of interest. Expression features could be gene expression, pathway activity, cell proportion and so on. The region of interest could be defined by manual annotation or be automatically detected by the “Spatial Domain” function. Two kinds of methods, statistical test and regression model, were available for tendency estimation in the “Spatial Tendency” module.</p>
 <p>Here we used 10X Visium data of mouse dorsolateral prefrontal cortex (DLPFC, 151676) as an example to validate the feasibility of spatial tendency estimation.</p>
-<p>The processed data are available at <a class="reference external" href="https://github.com/LieberInstitute/spatialLIBD">https://github.com/LieberInstitute/spatialLIBD</a>.</p>
+<p>The raw data are available at <a class="reference external" href="https://github.com/LieberInstitute/spatialLIBD">https://github.com/LieberInstitute/spatialLIBD</a>. The processed data 1516761_10X_adata.h5ad is stored in <a class="reference external" href="https://zenodo.org/records/14588408">https://zenodo.org/records/14588408</a>.</p>
 <section id="Read-and-preprocessing">
 <h2>Read and preprocessing<a class="headerlink" href="#Read-and-preprocessing" title="Link to this heading"></a></h2>
 <div class="nbinput nblast docutils container">
@@ -129,7 +129,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># input adata</span>
-<span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="s1">&#39;1516761_10X_adata.h5ad&#39;</span><span class="p">)</span>
+<span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/1516761_10X_adata.h5ad&#39;</span><span class="p">)</span>
 
 <span class="c1"># delete genes with same names</span>
 <span class="n">adata</span><span class="o">.</span><span class="n">var_names_make_unique</span><span class="p">()</span>
@@ -430,7 +430,7 @@ WARNING:root:adata has not been initialized, and adata.uns[&#39;SOAPy&#39;] has 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|███████████████████████████████████████████████████████████████████████████| 16120/16120 [01:43&lt;00:00, 156.25it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████| 16120/16120 [00:57&lt;00:00, 282.07it/s]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -546,68 +546,68 @@ AnnData object with n_obs × n_vars = 3460 × 16120
   <tbody>
     <tr>
       <th>HES4</th>
-      <td>5.633906e-04</td>
-      <td>[0.1326486493536636, -0.0006650708778897599, 2...</td>
-      <td>0.102010</td>
+      <td>5.633775e-04</td>
+      <td>[0.13264303892839413, -0.0006650334489480428, ...</td>
+      <td>0.101848</td>
       <td>0.073997</td>
       <td>2984</td>
-      <td>942.057647</td>
-      <td>978.063767</td>
-      <td>4.933111e-03</td>
+      <td>942.057636</td>
+      <td>978.063756</td>
+      <td>4.932996e-03</td>
       <td>True</td>
-      <td>4</td>
+      <td>8</td>
     </tr>
     <tr>
       <th>ISG15</th>
-      <td>1.319379e-14</td>
-      <td>[0.22827312424365218, 0.0005261164861054161, -...</td>
-      <td>0.300210</td>
+      <td>1.319268e-14</td>
+      <td>[0.22827756017707687, 0.0005260869480460644, -...</td>
+      <td>0.300578</td>
       <td>-0.141283</td>
       <td>2984</td>
-      <td>2178.312135</td>
-      <td>2214.318255</td>
-      <td>6.042155e-13</td>
-      <td>True</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>AL390719.2</th>
-      <td>1.297129e-09</td>
-      <td>[0.0019054998589420366, 0.0002970081801439279,...</td>
-      <td>0.106286</td>
-      <td>0.016078</td>
-      <td>2984</td>
-      <td>-8162.861949</td>
-      <td>-8126.855829</td>
-      <td>3.313742e-08</td>
-      <td>True</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>VWA1</th>
-      <td>9.578931e-13</td>
-      <td>[0.28116883264488357, -0.001837142582764715, 6...</td>
-      <td>0.197253</td>
-      <td>-0.090514</td>
-      <td>2984</td>
-      <td>798.483110</td>
-      <td>834.489229</td>
-      <td>3.582653e-11</td>
+      <td>2178.311971</td>
+      <td>2214.318090</td>
+      <td>6.041649e-13</td>
       <td>True</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>FNDC10</th>
-      <td>2.519397e-03</td>
-      <td>[0.014935926080451146, 0.001300456461821516, -...</td>
-      <td>0.185734</td>
-      <td>0.023977</td>
+      <th>AL390719.2</th>
+      <td>1.297120e-09</td>
+      <td>[0.0019080052657183982, 0.00029699148644908916...</td>
+      <td>0.106268</td>
+      <td>0.016078</td>
       <td>2984</td>
-      <td>84.695352</td>
-      <td>120.701472</td>
-      <td>1.725996e-02</td>
+      <td>-8162.861969</td>
+      <td>-8126.855849</td>
+      <td>3.313721e-08</td>
+      <td>True</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>VWA1</th>
+      <td>9.577923e-13</td>
+      <td>[0.2811533391077294, -0.0018370393852305462, 6...</td>
+      <td>0.197323</td>
+      <td>-0.090514</td>
+      <td>2984</td>
+      <td>798.482892</td>
+      <td>834.489012</td>
+      <td>3.582277e-11</td>
       <td>True</td>
       <td>5</td>
+    </tr>
+    <tr>
+      <th>FNDC10</th>
+      <td>2.519375e-03</td>
+      <td>[0.014946894836472786, 0.0013003833923470607, ...</td>
+      <td>0.185635</td>
+      <td>0.023977</td>
+      <td>2984</td>
+      <td>84.695331</td>
+      <td>120.701451</td>
+      <td>1.725981e-02</td>
+      <td>True</td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -628,7 +628,7 @@ AnnData object with n_obs × n_vars = 3460 × 16120
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023, Heqi Wang.
-      <span class="lastupdated">Last updated on Jan 02, 2024.
+      <span class="lastupdated">Last updated on Jan 02, 2025.
       </span></p>
   </div>
 

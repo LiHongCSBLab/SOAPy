@@ -4,10 +4,10 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spatial architecture - cell type proximity &mdash; SOAPy 0.1.4 documentation</title>
+  <title>Spatial architecture - cell type proximity &mdash; SOAPy 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=fd825880"></script>
+        <script src="../_static/documentation_options.js?v=59fadc99"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -25,7 +25,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tutorial 5: Spatial architecture - niche composition" href="Niche%20composition.html" />
+    <link rel="next" title="Spatial architecture - niche composition" href="Niche%20composition.html" />
     <link rel="prev" title="Spatial tendency" href="Spatial%20tendency.html" /> 
 </head>
 
@@ -65,7 +65,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#Infiltration-analysis">Infiltration analysis</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Tutorial 5: Spatial architecture - niche composition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Niche%20composition.html">Spatial architecture - niche composition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Spatial%20communications.html">Spatial communications</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Spatiotemporal%20pattern.html">Spatiotemporal pattern</a></li>
 </ul>
@@ -107,7 +107,8 @@
 <h1>Spatial architecture - cell type proximity<a class="headerlink" href="#Spatial-architecture---cell-type-proximity" title="Link to this heading"></a></h1>
 <p>Spatial architecture of cells is important for understanding the organization rules from single cells to tissues. SOAPy first constructs a cell/spot network from experimental obtained spatial locations; then implements two scenarios for deciphering spatial architecture: spatial proximity analysis (including neighborhood and infiltration) determines whether the distributions of two cell types or two kinds of cell states within an image are significant proximal.</p>
 <p>We applied this analysis to a dataset of 41 triple-negative breast cancer (TNBC) patients, which used multiplexed ion beam imaging by time-of-flight (MIBI-TOF) to simultaneously quantify in situ expression of 36 proteins at sub-cellular resolution. Cells were annotated to seven types (epithelial, endothelial, mesenchymal, B, CD4 T, CD8 T and macrophage) based on the expression of known protein markers and a undefined one without clear marker expression.</p>
-<p>Data download from <a class="reference external" href="https://mibi-share.ionpath.com">https://mibi-share.ionpath.com</a>, Seeing <strong>Tutorial: Read spatial omics</strong> for adata_combined.h5ad generation.</p>
+<p>You can download <code class="docutils literal notranslate"><span class="pre">adata_combine_7celltype.h5ad</span></code> from <a class="reference external" href="https://zenodo.org/records/14588408">https://zenodo.org/records/14588408</a>.</p>
+<p>Raw data download from <a class="reference external" href="https://mibi-share.ionpath.com">https://mibi-share.ionpath.com</a>, Seeing <strong>Tutorial: Read spatial omics</strong> for <code class="docutils literal notranslate"><span class="pre">adata_combine_7celltype.h5ad</span></code> generation.</p>
 <section id="Read">
 <h2>Read<a class="headerlink" href="#Read" title="Link to this heading"></a></h2>
 <div class="nbinput nblast docutils container">
@@ -123,7 +124,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_com</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;adata_combined.h5ad&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata_com</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;/csb2/project/SpatialPackage_whq/Tutorial/data/adata_combine_7celltype.h5ad&#39;</span><span class="p">)</span>
 <span class="n">adata_com</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;sample&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adata_com</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;sample&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -185,11 +186,20 @@ AnnData object with n_obs × n_vars = 211649 × 44
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/pl/_show.py:376: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout()
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Cell_type_proximity_9_0.png" src="../_images/Tutorials_Cell_type_proximity_9_0.png" />
+<img alt="../_images/Tutorials_Cell_type_proximity_9_1.png" src="../_images/Tutorials_Cell_type_proximity_9_1.png" />
 </div>
 </div>
 </section>
@@ -209,6 +219,15 @@ AnnData object with n_obs × n_vars = 211649 × 44
 <span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/tl/_interaction.py:112: RuntimeWarning: invalid value encountered in divide
+  zscore_array = (mat_edge - perms.mean(axis=0, dtype=np.float32)) / perms.std(axis=0, dtype=np.float32, ddof=1)
+</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -260,11 +279,20 @@ AnnData object with n_obs × n_vars = 211649 × 44
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/pl/_show.py:236: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout()
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Cell_type_proximity_16_0.png" src="../_images/Tutorials_Cell_type_proximity_16_0.png" />
+<img alt="../_images/Tutorials_Cell_type_proximity_16_1.png" src="../_images/Tutorials_Cell_type_proximity_16_1.png" />
 </div>
 </div>
 </section>
@@ -282,6 +310,29 @@ AnnData object with n_obs × n_vars = 211649 × 44
 <span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/tl/_interaction.py:127: RuntimeWarning: invalid value encountered in scalar divide
+  mat_score[index, column] = mat_edge[index, column] / min(mat_edge[index, index],
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/tl/_interaction.py:127: RuntimeWarning: divide by zero encountered in scalar divide
+  mat_score[index, column] = mat_edge[index, column] / min(mat_edge[index, index],
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/tl/_interaction.py:127: RuntimeWarning: invalid value encountered in scalar divide
+  mat_score[index, column] = mat_edge[index, column] / min(mat_edge[index, index],
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/tl/_interaction.py:127: RuntimeWarning: divide by zero encountered in scalar divide
+  mat_score[index, column] = mat_edge[index, column] / min(mat_edge[index, index],
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/tl/_interaction.py:127: RuntimeWarning: invalid value encountered in scalar divide
+  mat_score[index, column] = mat_edge[index, column] / min(mat_edge[index, index],
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/tl/_interaction.py:127: RuntimeWarning: divide by zero encountered in scalar divide
+  mat_score[index, column] = mat_edge[index, column] / min(mat_edge[index, index],
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/tl/_interaction.py:127: RuntimeWarning: divide by zero encountered in scalar divide
+  mat_score[index, column] = mat_edge[index, column] / min(mat_edge[index, index],
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/tl/_interaction.py:127: RuntimeWarning: invalid value encountered in scalar divide
+  mat_score[index, column] = mat_edge[index, column] / min(mat_edge[index, index],
+</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -313,11 +364,20 @@ AnnData object with n_obs × n_vars = 211649 × 44
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/pl/_neighborhood.py:287: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  fig.show()
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Cell_type_proximity_21_0.png" src="../_images/Tutorials_Cell_type_proximity_21_0.png" />
+<img alt="../_images/Tutorials_Cell_type_proximity_21_1.png" src="../_images/Tutorials_Cell_type_proximity_21_1.png" />
 </div>
 </div>
 <p>Samples with higher and lower infiltration scores indicate mixed and compartmentalized patterns between malignant epithelial cells and mesenchymal cells respectively. Here we hold out sample 28 as the presentation of the compartmentalized pattern and sample 29 as the presentation of the mixed pattern.</p>
@@ -335,11 +395,20 @@ AnnData object with n_obs × n_vars = 211649 × 44
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/wangheqi/anaconda3/envs/SpatialOmics/lib/python3.9/site-packages/SOAPy_st/pl/_show.py:236: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout()
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorials_Cell_type_proximity_23_0.png" src="../_images/Tutorials_Cell_type_proximity_23_0.png" />
+<img alt="../_images/Tutorials_Cell_type_proximity_23_1.png" src="../_images/Tutorials_Cell_type_proximity_23_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -371,14 +440,14 @@ AnnData object with n_obs × n_vars = 211649 × 44
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="Spatial%20tendency.html" class="btn btn-neutral float-left" title="Spatial tendency" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Niche%20composition.html" class="btn btn-neutral float-right" title="Tutorial 5: Spatial architecture - niche composition" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Niche%20composition.html" class="btn btn-neutral float-right" title="Spatial architecture - niche composition" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023, Heqi Wang.
-      <span class="lastupdated">Last updated on Jan 02, 2024.
+      <span class="lastupdated">Last updated on Jan 02, 2025.
       </span></p>
   </div>
 
