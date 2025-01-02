@@ -7,10 +7,6 @@ build:
   tools:
     python: "3.9"
 
-build:
-  apt_packages:
-    - r-base
-
 sphinx:
   builder: html
   configuration: source/conf.py
@@ -21,3 +17,6 @@ python:
     - method: pip
       path: .
     - requirements: source/requirements.txt
+
+env:
+  RPY2_CFFI_MODE: "ABI"
