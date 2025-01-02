@@ -7,6 +7,10 @@ build:
   tools:
     python: "3.9"
 
+build:
+  apt_packages:
+    - r-base
+
 sphinx:
   builder: html
   configuration: source/conf.py
