@@ -18,5 +18,7 @@ python:
       path: .
     - requirements: source/requirements.txt
 
-env:
-  RPY2_CFFI_MODE: "ABI"
+commands:
+  - apt-get update
+  - apt-get install -y r-base r-base-dev
+  - pip install rpy2
