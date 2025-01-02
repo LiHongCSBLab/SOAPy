@@ -139,7 +139,7 @@ def _neighbor_network(
     points = np.array(points, dtype=np.float32)
     dis_matrix = distance.cdist(points, points, 'euclidean')
 
-    distances, indices = map_dis_to_points(tri.vertices, dis_matrix, len(points))
+    distances, indices = map_dis_to_points(tri.simplices, dis_matrix, len(points))
     distances, indices = filter_upper(distances, indices, max_quantile)
 
     distances = np.array([np.array(dis) for dis in distances], dtype=object)

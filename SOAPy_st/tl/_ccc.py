@@ -14,6 +14,7 @@ from .utils import adj_pvals, _count_edge, allocation_edge_2_diff_cell_type
 from ..pp.utils import _preprocessing_of_graph
 import logging as logg
 import re
+import os
 
 __all__ = ['cell_level_communications', 'cell_type_level_communication', 'lr_pairs']
 
@@ -25,7 +26,7 @@ class lr_pairs():
 
     def __init__(
             self,
-            lr_data: pd.DataFrame,
+            lr_data: Union[pd.DataFrame, Literal['human', 'mouse']] = 'human',
             Annotation_key: Optional[str] = 'annotation',
             ligand_key: Optional[str] = 'ligand_symbol',
             receptor_key: Optional[str] = 'receptor_symbol',
@@ -34,7 +35,7 @@ class lr_pairs():
         Parameters
         ----------
         lr_data : pd.DataFrame
-            Ligand and receptor information database. Default: CellChat database
+            Ligand and receptor information database. Default: CellChat human database
         Annotation_key : str
             The key of Annotation (Contact or secretory) in lr_data
         ligand_key : str
@@ -46,6 +47,15 @@ class lr_pairs():
         self.ligand_key = ligand_key
         self.receptor_key = receptor_key
         self.Annotation_key = Annotation_key
+
+        if lr_data is 'human':
+            path = os.path.dirname(os.path.realpath(__file__))
+            lr_data = pd.read_csv(f'{path}/datasets/cci/human/Human-2020-Jin-LR-pairs.csv', index_col=0, header=0)
+            lr_data = lr_data.replace('ECM-Receptor', 'Cell-Cell Contact')
+        elif lr_data is 'mouse':
+            path = os.path.dirname(os.path.realpath(__file__))
+            lr_data = pd.read_csv(f'{path}/datasets/cci/mouse/Mouse-2020-Jin-LR-pairs.csv', index_col=0, header=0)
+            lr_data = lr_data.replace('ECM-Receptor', 'Cell-Cell Contact')
 
         if Annotation_key is None:
             self.lr_data = lr_data.loc[:, [ligand_key, receptor_key]]

@@ -38,7 +38,7 @@ def show_celltype_sample_heatmap(
         celltype_bar_kwargs: dict = {},
         sample_bar_kwargs: dict = {},
         **kwargs
-) -> Optional[Tuple[Figure, list[Axes]]]:
+) -> Optional[Tuple[Figure, dict]]:
     """
     Heatmap show the cell composition of each sample. Bar plot can be added to show the overall cell types distribution
     and the total number of cells in each sample, respectively.
@@ -105,8 +105,8 @@ def show_celltype_sample_heatmap(
     dict_sam = {clu: i for i, clu in enumerate(sample_uni)}
     mat_sample_cluster = np.zeros((len(sample_uni), len(celltype_uni)))
 
-    for i in range(len(sample)):
-        mat_sample_cluster[int(sample[i]) - 1, int(dict_clu[celltype[i]])] += 1
+    for index in range(len(sample)):
+        mat_sample_cluster[dict_sam[sample[index]], dict_clu[celltype[index]]] += 1
 
     fig, axes = _heatmap_with_dendrogram_and_bar(
         mat_sample_cluster,
@@ -148,7 +148,7 @@ def show_celltype_niche_heatmap(
         show: bool = True,
         save: Union[str, PathLike, None] = None,
         **kwargs,
-) -> Optional[Tuple[Figure, list[Axes]]]:
+) -> Optional[Tuple[Figure, dict]]:
     """
     The heatmap shows the cell composition of each niche,
     and the bar plot graph shows the number of each niche in all samples.
@@ -194,8 +194,8 @@ def show_celltype_niche_heatmap(
 
     data = _get_info_from_sample(adata=adata, sample_id=None, key='niche')
     data = data.fillna(0)
-    niche = data.columns[:-3]
-    drop_col = data.columns[-3:]
+    niche = data.columns[:-4]
+    drop_col = data.columns[-4:]
     niche_num = len(np.unique(data['C_niche'].tolist()))
 
     mat_niche = []
@@ -251,7 +251,7 @@ def show_niche_sample_heatmap(
         show: bool = True,
         save: Union[str, PathLike, None] = None,
         **kwargs
-) -> Optional[Tuple[Figure, list[Axes]]]:
+) -> Optional[Tuple[Figure, dict]]:
     """
     The heatmap shows the niche composition in each sample, and the bar plot shows the total number of each niche and
     the total number of cells in each sample, respectively.
@@ -319,8 +319,8 @@ def show_niche_sample_heatmap(
 
     mat_sample_niche = np.zeros((len(sample_uni), len(niche_uni)))
 
-    for i in range(len(sample)):
-        mat_sample_niche[int(sample[i])-1, int(niche[i])] += 1
+    for index in range(len(sample)):
+        mat_sample_niche[dict_sam[sample[index]], dict_niche[niche[index]]] += 1
 
     fig, axes = _heatmap_with_dendrogram_and_bar(
         mat_sample_niche,
@@ -495,7 +495,3 @@ def show_niche_environment(
         plt.show()
     else:
         return ax
-
-
-if __name__ == '__main__':
-    pass

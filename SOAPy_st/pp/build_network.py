@@ -1,10 +1,8 @@
 import warnings
-
 import copy
 import anndata
 import numpy as np
 import pandas as pd
-
 from typing import Optional, Union, Tuple, Literal
 from .utils import _filter_of_graph, _preprocessing_of_graph
 from ..utils import _scale, _graph, _add_info_from_sample, _check_adata_type

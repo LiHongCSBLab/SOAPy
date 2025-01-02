@@ -203,7 +203,8 @@ class mult_sample_niche(object):
         self.in_sample_list = in_sample_list
         self.barcode = list_barcode
         new_list = [str(elem) for elem in all_cluster]
-        self._cell_type_map = {v: i for i, v in enumerate(sorted(new_list))}
+        celltype_unique = np.unique(new_list)
+        self._cell_type_map = {v: i for i, v in enumerate(sorted(celltype_unique))}
         self._species_of_clusters = len(self._cell_type_map)
 
         dict_num_spots = {}
@@ -225,7 +226,7 @@ class mult_sample_niche(object):
 
             i_mult_niche = pd.concat([i_mult_niche, mat_niche])
 
-        i_mult_niche = i_mult_niche.reindex(columns=all_cluster, fill_value=0)
+        i_mult_niche = i_mult_niche.reindex(columns=np.unique(all_cluster), fill_value=0)
         self.mult_niche = i_mult_niche
         self.num_niche = dict_num_spots
 
@@ -376,7 +377,7 @@ def get_c_niche(
         celltype_key: str = 'clusters',
         sample_key: Optional[str] = None,
         sample: Union[str, list] = None,
-        sdbw: bool = True,
+        sdbw: bool = False,
         inplace: bool = True,
 ) -> anndata.AnnData:
     """

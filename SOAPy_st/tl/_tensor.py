@@ -137,57 +137,64 @@ class TensorDecomposition:
         method : Literal['mean', 'max', 'sum']
             The method of combining expression levels,
             'mean': the mean expression levels of all cells with consistent obs_factor;
-            'max': the maximum value of obs_factor expression of all cells consistent with OBS_factor;
-            'The' expression of all cells with consistent obs_factor was summed.
+            'max': the maximum value of obs_factor expression of all cells consistent with obs_factor;
+            'sum': the expression of all cells with consistent obs_factor was summed.
 
         Returns
         -------
         None
         """
-
-        def add_array_value(arr, value, *args):
-            if method == 'max':
-                arr[args] = max(arr[args], value)
-            else:
-                arr[args] += value
-            return arr
-
-        def update_counts(counts):
-            counts[counts == 0] = 1
-            return counts
-
         self.dict_sup = {}
         if gene_name is None:
             gene_name = list(adata.var_names)
         gene_dict = {gene: index for index, gene in enumerate(adata.var_names)}
         dimensionality = []
+
+        # Create mappings for obs_factor and gene
         for label in obs_factor:
             dict_sub = {clu: i for i, clu in enumerate(adata.obs[label].unique())}
             self.dict_sup[label] = dict_sub
             dimensionality.append(len(dict_sub))
-        dict_gene = {clu: i for i, clu in enumerate(gene_name)}
+        dict_gene = {gene: i for i, gene in enumerate(gene_name)}
         self.dict_sup['gene'] = dict_gene
         dimensionality.append(len(dict_gene))
-        tensor = np.zeros(dimensionality)
-        counts = np.zeros(dimensionality)
 
-        for i, row in enumerate(adata.obs.itertuples()):
-            index = []
-            for label in obs_factor:
-                index.append(self.dict_sup[label][getattr(row, label)])
-            for gene in gene_name:
-                index.append(dict_gene[gene])
-                add_array_value(tensor, adata.X[i, gene_dict[gene]], *index)
-                add_array_value(counts, 1, *index)
-                index = index[:-1]
+        # Initialize tensors
+        tensor = np.zeros(dimensionality, dtype=np.float32)
+        counts = np.zeros(dimensionality, dtype=np.int32)
 
-        obs_factor.append('gene')
-        self.factor_name = obs_factor
+        # Vectorized computation
+        obs_indices = [
+            adata.obs[label].map(self.dict_sup[label]).values for label in obs_factor
+        ]
+        obs_indices = np.array(obs_indices).T  # Shape: (n_cells, len(obs_factor))
+        gene_indices = np.array([dict_gene[gene] for gene in gene_name])
 
+        # Prepare index arrays
+        obs_indices_expanded = np.repeat(obs_indices, len(gene_name), axis=0)
+        gene_indices_expanded = np.tile(gene_indices, obs_indices.shape[0])
+
+        # Flattened index computation for fast access
+        flattened_indices = np.ravel_multi_index(
+            (
+                *obs_indices_expanded.T,
+                gene_indices_expanded,
+            ),
+            tensor.shape,
+        )
+
+        # Update tensor and counts
+        expression_values = adata.X[:, [gene_dict[gene] for gene in gene_name]].flatten()
+        np.add.at(tensor, np.unravel_index(flattened_indices, tensor.shape), expression_values)
+        np.add.at(counts, np.unravel_index(flattened_indices, counts.shape), 1)
+
+        # Adjust for 'mean' method
         if method == 'mean':
-            self.tensor = tl.tensor(tensor / update_counts(counts))
-        else:
-            self.tensor = tl.tensor(tensor)
+            counts[counts == 0] = 1  # Prevent division by zero
+            tensor /= counts
+
+        self.factor_name = obs_factor + ['gene']
+        self.tensor = tl.tensor(tensor)
 
     def normalization(
             self,
@@ -267,6 +274,7 @@ class TensorDecomposition:
             self,
             rank: int,
             non_negative: bool = False,
+            use_hals: bool = False,
             **kwargs
     ):
         """
@@ -289,11 +297,18 @@ class TensorDecomposition:
         tensor = self.tensor
         self.CP = {}
         if non_negative:
-            from tensorly.decomposition import non_negative_parafac_hals
-            weights, factors = non_negative_parafac_hals(tensor=tensor,
-                                                         rank=rank,
-                                                         normalize_factors=True,
-                                                         **kwargs)
+            if use_hals:
+                from tensorly.decomposition import non_negative_parafac_hals
+                weights, factors = non_negative_parafac_hals(tensor=tensor,
+                                                             rank=rank,
+                                                             normalize_factors=True,
+                                                             **kwargs)
+            else:
+                from tensorly.decomposition import non_negative_parafac
+                weights, factors = non_negative_parafac(tensor=tensor,
+                                                        rank=rank,
+                                                        normalize_factors=True,
+                                                        **kwargs)
         else:
             from tensorly.decomposition import parafac_power_iteration
             weights, factors = parafac_power_iteration(tensor=tensor,

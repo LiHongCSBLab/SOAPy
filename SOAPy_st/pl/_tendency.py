@@ -402,7 +402,3 @@ def show_box_plot(
         plt.show()
     else:
         return ax
-
-
-if __name__ == '__main__':
-    pass

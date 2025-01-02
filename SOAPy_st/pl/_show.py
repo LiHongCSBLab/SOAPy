@@ -368,10 +368,7 @@ def show_network(
     if 'title' not in legend_kwargs.keys():
         legend_kwargs['title'] = cluster_key
 
-    ax.legend(bbox_to_anchor=(1.02, 0.8),
-              title=cluster_key,
-              loc='upper left',
-              )
+    ax.legend(**legend_kwargs)
 
     ax.set_xticks([])
     ax.set_yticks([])
@@ -385,7 +382,3 @@ def show_network(
         plt.show()
     else:
         return ax
-
-
-if __name__ == '__main__':
-    pass

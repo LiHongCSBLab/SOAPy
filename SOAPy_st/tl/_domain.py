@@ -1,6 +1,5 @@
 import copy
 import pandas as pd
-import torch
 import scanpy as sc
 import numpy as np
 from typing import Optional, Union
@@ -8,57 +7,112 @@ from ..utils import _scale, _add_info_from_sample, _get_info_from_sample, _check
 from typing import Optional, Literal
 import anndata
 import logging as logg
+import os
 
-__all__ = ["domain_from_STAGATE", "domain_from_local_moran", "global_moran", "cal_aucell"]
+__all__ = ["domain_from_unsupervised", "domain_from_local_moran", "global_moran", "cal_aucell"]
 
 
-class _STAGATE2Domain(object):
+class _SpatialDomain(object):
 
     def __init__(self,
                  adata: sc.AnnData,
+                 domain_method: str,
                  inplace: bool = True,
                  ):
+
+        if domain_method == 'stagate':
+            self.domain_emb = 'STAGATE'
+        elif domain_method == 'graphst':
+            self.domain_emb = 'emb'
+        elif domain_method == 'scanit':
+            self.domain_emb = 'X_scanit'
+
         if inplace:
             self.adata = adata
         else:
             self.adata = copy.deepcopy(self.adata)
 
-    def get_Spatial_domain(self,
+    def get_stagate_domain(self,
+                           graph_model='Radius',
                            rad_cutoff=None,
+                           k_cutoff=None,
                            **kwargs
                            ):
 
-        import STAGATE
+        from .other_package_without_pip import STAGATE_pyG as STAGATE
+
         adata = self.adata
 
-        STAGATE.Cal_Spatial_Net(adata, rad_cutoff=rad_cutoff)
+        STAGATE.Cal_Spatial_Net(adata, model=graph_model, k_cutoff=k_cutoff, rad_cutoff=rad_cutoff)
         # STAGATE_pyG.Stats_Spatial_Net(adata)
 
         STAGATE.train_STAGATE(adata, **kwargs)
 
         return adata
 
+    def get_graphST_domain(self,
+                           **kwargs
+                           ):
+
+        from .other_package_without_pip.GraphST import GraphST
+        from sklearn.decomposition import PCA
+
+        adata = self.adata
+        model = GraphST.GraphST(adata, **kwargs)
+
+        # train model
+        adata = model.train()
+
+        pca = PCA(n_components=20, random_state=42)
+        embedding = pca.fit_transform(adata.obsm[self.domain_emb].copy())
+        adata.obsm['emb_pca'] = embedding
+        self.domain_emb = 'emb_pca'
+        self.adata = adata
+
+        return adata
+
+    def get_scanit_domain(self,
+                          graph_model='knn',
+                          alpha_n_layer=1,
+                          k_cutoff=10,
+                          **kwargs
+                          ):
+        from .other_package_without_pip import scanit
+
+        adata = self.adata
+        adata.X = adata.X.toarray()
+        scanit.tl.spatial_graph(adata, method=graph_model, knn_n_neighbors=k_cutoff, alpha_n_layer=alpha_n_layer)
+        scanit.tl.spatial_representation(adata, **kwargs)
+        self.adata = adata
+
+        return adata
+
     def mclust_R(self,
                  num_cluster: int,
                  key_added: str = 'domain',
+                 modelNames='EEE',
                  random_seed: int = 2020,
                  ):
 
-        import STAGATE
-
+        import rpy2.robjects as robjects
+        import rpy2.robjects.numpy2ri
         adata = self.adata
-        # sc.pp.neighbors(adata, use_rep='STAGATE')
-        # sc.tl.umap(adata)
 
-        # clust
-        adata = STAGATE.mclust_R(adata,
-                                 used_obsm='STAGATE',
-                                 num_cluster=num_cluster,
-                                 random_seed=random_seed)
+        np.random.seed(random_seed)
+        robjects.r.library("mclust")
+        rpy2.robjects.numpy2ri.activate()
+        r_random_seed = robjects.r['set.seed']
+        r_random_seed(random_seed)
+        rmclust = robjects.r['Mclust']
 
-        adata.obs.rename(columns={'mclust': key_added}, inplace=True)
+        res = rmclust(rpy2.robjects.numpy2ri.numpy2rpy(adata.obsm[self.domain_emb]), num_cluster, modelNames)
+        mclust_res = np.array(res[-2])
+
+        adata.obs[key_added] = mclust_res
+        adata.obs[key_added] = adata.obs[key_added].astype('int')
+        adata.obs[key_added] = adata.obs[key_added].astype('category')
+
         return adata
-        # obs_df = adata.obs.dropna()
 
     def louvain(self,
                 resolution: float = 0.5,
@@ -66,8 +120,7 @@ class _STAGATE2Domain(object):
                 ):
 
         adata = self.adata
-
-        sc.pp.neighbors(adata, use_rep='STAGATE')
+        sc.pp.neighbors(adata, use_rep=self.domain_emb)
         sc.tl.umap(adata)
         # louvain
         sc.tl.louvain(adata, resolution=resolution, key_added=key_added)
@@ -75,12 +128,16 @@ class _STAGATE2Domain(object):
         return adata
 
 
-def domain_from_STAGATE(
+def domain_from_unsupervised(
         adata: anndata.AnnData,
+        domain_method: Literal['stagate', 'graphst', 'scanit'] = 'stagate',
+        graph_model: str = None,
+        k_cutoff: Optional[int] = None,
+        rad_cutoff: Optional[float] = None,
+        alpha_n_layer: Optional[int] = None,
         cluster_method: Literal['m_clust', 'louvain'] = 'm_clust',
         cluster_number: int = 10,
         cluster_key: str = 'domain',
-        rad_cutoff: Optional[float] = None,
         random_seed: int = 2020,
         resolution_louvain: float = 0.5,
         spatial_in_obsm: str = 'spatial',
@@ -88,31 +145,60 @@ def domain_from_STAGATE(
         **kwargs
 ) -> anndata.AnnData:
     """
-    Using the STAGATE method generate the spatial domain.
-    Detailed methods for STAGATE are available at https://stagate.readthedocs.io/en/latest/T1_DLPFC.html
+    Generate spatial domains using unsupervised learning methods.
+    This function supports multiple spatial domain identification algorithms, including STAGATE, GraphST, and ScanIT,
+    and provides two clustering methods (mclust and Louvain) to cluster the spatial domains.
 
     Parameters
     ----------
     adata : anndata.AnnData
         An AnnData object containing spatial omics data and spatial information.
-    cluster_method : Literal['m_clust', 'louvain']
-        cluster method.
-    cluster_number : int
-        number of clusters (if 'cluster' is m_cluster)
-    cluster_key : str
-        Store the new label name for the domain category in adata.
-    rad_cutoff : float, optional
-        radius cutoff of spatial neighborhood.
-    random_seed : int
-        Random seed used in m_cluster.
-    resolution_louvain : float
-        resolution used in louvain cluster.
-    spatial_in_obsm : str
-        The key of spatial coordinates in adata.obsm
-    inplace : bool
-        If True, Modify directly in the original adata.
-    **kwargs : ANY
-        Parameters of STAGATE.train_STAGATE().
+
+    domain_method : Literal['stagate', 'graphst', 'scanit'], optional (default: 'stagate')
+        The method used to generate spatial domains. Available options are:
+        - 'stagate': Use the STAGATE algorithm to generate spatial domains.
+        - 'graphst': Use the GraphST algorithm to generate spatial domains.
+        - 'scanit': Use the ScanIT algorithm to generate spatial domains.
+
+    graph_model : str, optional (default: None)
+        The model used to construct the spatial graph. For STAGATE, options are 'Radius' or 'KNN';
+        for ScanIT, options are 'alpha shape' or 'knn'.
+
+    k_cutoff : Optional[int], optional (default: None)
+        The number of KNN neighbors used to construct the spatial graph. Only valid when graph_model is 'KNN' or 'knn'.
+
+    rad_cutoff : Optional[float], optional (default: None)
+        The radius cutoff used to construct the spatial graph. Only valid when graph_model is 'Radius'.
+
+    alpha_n_layer : Optional[int], optional (default: None)
+        The number of alpha layers used in the ScanIT algorithm. Only valid when domain_method is 'scanit'.
+
+    cluster_method : Literal['m_clust', 'louvain'], optional (default: 'm_clust')
+        The clustering algorithm used. Available options are:
+        - 'm_clust': Use the mclust algorithm for clustering.
+        - 'louvain': Use the Louvain algorithm for clustering.
+
+    cluster_number : int, optional (default: 10)
+        The number of clusters. Only valid when cluster_method is 'm_clust'.
+
+    cluster_key : str, optional (default: 'domain')
+        The key in adata.obs where the clustering results will be stored.
+
+    random_seed : int, optional (default: 2020)
+        Random seed for reproducibility.
+
+    resolution_louvain : float, optional (default: 0.5)
+        The resolution parameter for the Louvain algorithm. Only valid when cluster_method is 'louvain'.
+
+    spatial_in_obsm : str, optional (default: 'spatial')
+        The key in adata.obsm where spatial coordinates are stored.
+
+    inplace : bool, optional (default: True)
+        Whether to modify the AnnData object in place. If False, a modified copy is returned.
+
+    **kwargs : dict
+        Additional parameters passed to the specific algorithms.
+
 
     Returns
     -------
@@ -125,21 +211,50 @@ def domain_from_STAGATE(
         # stagate only recognize coordinate information from adata.obsm['spatial']
         adata.obsm['spatial'] = adata.obsm[spatial_in_obsm]
 
-    New_STAGATE = _STAGATE2Domain(adata, inplace=inplace)
+    New_SpatialDomain = _SpatialDomain(adata, domain_method=domain_method, inplace=inplace)
 
-    adata = New_STAGATE.get_Spatial_domain(
-        rad_cutoff=rad_cutoff,
-        **kwargs
-        )
+    if domain_method == 'stagate':
+
+        if graph_model == None:
+            graph_model = 'Radius'
+        elif graph_model == 'knn':
+            graph_model = 'KNN'
+
+        assert (graph_model in ['Radius', 'KNN']), 'graph_model of STAGATE must in [\'Radius\', \'KNN\']'
+
+        adata = New_SpatialDomain.get_stagate_domain(
+            graph_model=graph_model,
+            k_cutoff=k_cutoff,
+            rad_cutoff=rad_cutoff,
+            **kwargs
+            )
+    elif domain_method == 'graphst':
+        adata = New_SpatialDomain.get_graphST_domain(
+            **kwargs
+            )
+    elif domain_method == 'scanit':
+
+        if graph_model == None or graph_model == 'KNN':
+            graph_model = 'knn'
+
+        assert (graph_model in ['alpha shape', 'knn']), 'graph_model of scanit must in [\'alpha shape\', \'knn\']'
+
+        adata = New_SpatialDomain.get_scanit_domain(
+            graph_model=graph_model,
+            alpha_n_layer=alpha_n_layer,
+            k_cutoff=k_cutoff,
+            **kwargs
+            )
 
     if cluster_method == 'm_clust':
-        New_STAGATE.mclust_R(num_cluster=cluster_number,
-                             key_added=cluster_key,
-                             random_seed=random_seed,
-                             )
+        New_SpatialDomain.mclust_R(num_cluster=cluster_number,
+                                   key_added=cluster_key,
+                                   random_seed=random_seed,
+                                   )
     elif cluster_method == 'louvain':
-        New_STAGATE.louvain(resolution=resolution_louvain,
-                            key_added=cluster_key)
+        New_SpatialDomain.louvain(resolution=resolution_louvain,
+                                  key_added=cluster_key
+                                  )
     else:
         logg.error(f'{cluster_method} is not in [\'m_clust\', \'louvain\']', exc_info=True)
         raise ValueError()

@@ -287,7 +287,3 @@ def show_infiltration_analysis(
         fig.show()
     else:
         return axes
-
-
-if __name__ == '__main__':
-    pass

@@ -4,11 +4,11 @@ from . import pp
 from . import tl
 from . import pl
 
-__version__ = "v0.1.0"
+__version__ = "v0.1.5"
 
 """
 # Author: Lihong lab
-# File Name:SOAPy-st
+# File Name:SOAPy
 # github:https://github.com/LiHongCSBLab/SOAPy
 # Description:
 """

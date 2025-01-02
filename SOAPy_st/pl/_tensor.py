@@ -299,7 +299,3 @@ def _show_proportion(factor: np.ndarray,
     sns.barplot(x=x, y=y, ax=ax, **kwargs)
     ax.set_xticklabels(x, rotation=20, fontsize=10)
     ax.set_title(factor_name)
-
-
-if __name__ == '__main__':
-    pass

@@ -44,6 +44,8 @@ def _best_k(data, k, sdbw):
     from sklearn.cluster import KMeans
     from s_dbw import S_Dbw
 
+    data = data.astype(np.float32)
+
     if sdbw and k != 2:
         s_Dbw = {}
         for k_i in range(2, k+1):

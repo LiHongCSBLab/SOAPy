@@ -815,7 +815,3 @@ def show_ccc_embedding(
         plt.show()
     else:
         return ax
-
-
-if __name__ == '__main__':
-    pass

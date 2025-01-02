@@ -156,10 +156,10 @@ def _dotplot(
     ax.set_yticks([y_to_num[v] for v in np.unique(y_labels)])
     ax.set_yticklabels(np.unique(y_labels), fontsize=label_fontsize)
 
-    x_label = ax.get_xticklabels()
-    [x_label_temp.set_fontname('Times New Roman') for x_label_temp in x_label]
-    y_label = ax.get_yticklabels()
-    [y_label_temp.set_fontname('Times New Roman') for y_label_temp in y_label]
+    # x_label = ax.get_xticklabels()
+    # [x_label_temp.set_fontname('Times New Roman') for x_label_temp in x_label]
+    # y_label = ax.get_yticklabels()
+    # [y_label_temp.set_fontname('Times New Roman') for y_label_temp in y_label]
 
     return ax
 
@@ -194,7 +194,7 @@ def _consensus_list(mat, ax, metric='euclidean', method='average', axis=0):
         Matplotlib Axes object.
     metric : str, optional
         Distance metric.
-    method : Optional[Literal['z_score', 'normalization', 'proportion']], optional
+    method : str
         Hierarchical clustering method.
     axis : int, optional
         Clustering axis.
@@ -247,7 +247,7 @@ def _heatmap_with_dendrogram_and_bar(
         xbar_kwags: Mapping[str, Any] = MappingProxyType({}),
         ybar_kwags: Mapping[str, Any] = MappingProxyType({}),
         **kwargs
-) -> Tuple[Figure, list[Axes]]:
+) -> Tuple[Figure, dict]:
     """
     Display heatmap with two counting barplots.
 
@@ -300,7 +300,7 @@ def _heatmap_with_dendrogram_and_bar(
     import seaborn as sns
 
     norm_data = copy.deepcopy(data)
-    axes = []
+    axes = {}
 
     if norm_axis is not None:
         norm_data = _norm_mat(norm_data, norm_axis, method)
@@ -315,21 +315,21 @@ def _heatmap_with_dendrogram_and_bar(
 
     ax_heatmap = fig.add_subplot(gs[4:29, 4:29])
     ax_cbar = fig.add_subplot(gs[0:3, 2:3])
-    axes.append(ax_heatmap)
-    axes.append(ax_cbar)
+    axes['ax_heatmap'] = ax_heatmap
+    axes['ax_cbar'] = ax_cbar
 
     if x_dendrogram:
         ax_dendrogram_x = fig.add_subplot(gs[1:4, 4:29])
         new_xtick, linkage_x = _consensus_list(norm_data, ax_dendrogram_x,
                                                metric='euclidean', method='average', axis=1)
-        axes.append(ax_dendrogram_x)
+        axes['ax_dendrogram_x'] = ax_dendrogram_x
     else:
         new_xtick = range(norm_data.shape[1])
     if y_dendrogram:
         ax_dendrogram_y = fig.add_subplot(gs[4:29, 1:4])
         new_ytick, linkage_y = _consensus_list(norm_data, ax_dendrogram_y,
                                                metric='euclidean', method='average', axis=0)
-        axes.append(ax_dendrogram_y)
+        axes['ax_dendrogram_y'] = ax_dendrogram_y
     else:
         new_ytick = range(norm_data.shape[0])
 
