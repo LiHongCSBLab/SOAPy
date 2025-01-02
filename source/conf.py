@@ -12,19 +12,17 @@
 #
 import os
 import sys
-
-sys.path.insert(0, os.path.abspath(".."))
-import SOAPy_st
+sys.path.insert(0, os.path.abspath('../SOAPy'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'SOAPy_st'
+project = 'SOAPy'
 copyright = '2023, Heqi Wang'
 author = 'Cancer system biology lab'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.4'
+release = '0.1.5'
 
 
 # -- General configuration ---------------------------------------------------
@@ -36,7 +34,6 @@ extensions = [
     'sphinx.ext.autosummary',
     'nbsphinx',
     "sphinx.ext.autodoc",
-    'sphinx.ext.viewcode',
 ]
 
 nbsphinx_execute = 'never'

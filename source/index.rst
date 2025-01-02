@@ -7,7 +7,7 @@
 SOAPy - Spatial Omics Analysis in Python
 ====================================================
 
-|PyPI| |PyPIDownloads| |Docs|
+|PyPI| |PyPIDownloads|
 
 .. |PyPI| image:: https://img.shields.io/pypi/v/SOAPy_st?logo=PyPI
    :target: https://pypi.org/project/SOAPy_st
