@@ -40,6 +40,7 @@ Spatial tendency
 
     pl.show_tendency
     pl.show_curves_cluster
+    pl.show_box_plot
 
 
 Cell type proximity
@@ -81,6 +82,7 @@ Spatial communication
 
     pl.show_ccc_netplot
     pl.show_ccc_dotplot
+    pl.show_ccc_chordplot
     pl.show_ccc_embedding
 
 

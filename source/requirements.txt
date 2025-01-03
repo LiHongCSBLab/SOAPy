@@ -12,7 +12,9 @@ networkx==2.8.6
 numba==0.60.0
 numpy==1.24.3
 opencv-python==4.8.1.78
+pandas==1.5.2
 pyscenic==0.12.1
+rpy2==3.5.8
 s-dbw==0.4.0
 shapely==2.0.3
 scanpy==1.10.3
@@ -23,7 +25,6 @@ scipy==1.13.1
 seaborn==0.13.2
 statsmodels==0.13.2
 tensorly==0.8.1
-pandas
 matplotlib
+sklearn
 tqdm
-SOAPy_st
