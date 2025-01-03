@@ -26,3 +26,4 @@ tensorly==0.8.1
 pandas
 matplotlib
 tqdm
+SOAPy_st
