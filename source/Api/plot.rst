@@ -40,7 +40,6 @@ Spatial tendency
 
     pl.show_tendency
     pl.show_curves_cluster
-    pl.show_box_plot
 
 
 Cell type proximity
