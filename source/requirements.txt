@@ -1,5 +1,0 @@
-Sphinx
-jupyter_sphinx
-nbsphinx
-sphinx_rtd_theme
-recommonmark
