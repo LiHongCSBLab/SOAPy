@@ -9,7 +9,7 @@ with open("requirements.txt") as f:
 
 setuptools.setup(
     name='SOAPy-st',
-    version='0.1.5',
+    version='0.1.6',
     author='Cancer system biology lab',
     author_email='wangheqi2021@sinh.ac.cn',
     description='Spatial Omics Analysis in Python',
