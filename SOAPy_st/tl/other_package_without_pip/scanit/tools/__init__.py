@@ -1,2 +1,0 @@
-from ._scanit_representation import spatial_graph
-from ._scanit_representation import spatial_representation
