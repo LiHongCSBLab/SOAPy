@@ -14,7 +14,6 @@ numpy==1.24.3
 opencv-python==4.8.1.78
 pandas==1.5.2
 pyscenic==0.12.1
-rpy2==3.5.8
 s-dbw==0.4.0
 shapely==2.0.3
 scanpy==1.10.3
