@@ -63,7 +63,7 @@ Those will be installed automatically when using pip.
     tensorly==0.8.1
     torch==1.12.0
     torch-cluster==1.6.3
-    torch_geometric==1.6.1
+    torch_geometric==2.6.1
     torch-scatter==2.1.2
     torch-sparse==0.6.18
     torch-spline-conv==1.2.2
