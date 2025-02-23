@@ -22,7 +22,7 @@ copyright = '2023, Heqi Wang'
 author = 'Cancer system biology lab'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.9'
+release = '1.0.0'
 
 
 # -- General configuration ---------------------------------------------------
