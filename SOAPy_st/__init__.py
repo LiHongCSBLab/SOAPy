@@ -4,7 +4,7 @@ from . import pp
 from . import tl
 from . import pl
 
-__version__ = "v1.0.0"
+__version__ = "v1.0.1"
 
 """
 # Author: Lihong lab
