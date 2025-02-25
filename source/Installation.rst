@@ -62,17 +62,24 @@ Those will be installed automatically when using pip.
     statsmodels==0.13.2
     tensorly==0.8.1
     torch==1.12.0
-    torch-cluster==1.6.3
-    torch_geometric==2.6.1
-    torch-scatter==2.1.2
-    torch-sparse==0.6.18
-    torch-spline-conv==1.2.2
     torchaudio==0.12.0
     torchvision==0.13.0
     matplotlib
     numpy
     pandas
     tqdm
+
+
+If you want to use unsupervised spatial domain partitioning methods, please refer to the tutorial to install torch_geometric and its dependencies: https://pytorch-geometric.readthedocs.io/en/latest/install/installation.html .
+
+The versions used in our tests are as follows:
+::
+
+    torch_geometric==2.6.1
+    torch-cluster==1.6.0
+    torch-scatter==2.1.0
+    torch-sparse==0.6.16
+    torch-spline-conv==1.2.1
 
 
 Install rpy2 for spatial domain (optional)
